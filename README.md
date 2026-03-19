@@ -3,7 +3,7 @@
 # '시네톡 | Cinetalk' 사이트 제작
 
 <br>
-<p align=center><img src="https://github.com/hjinn0813/cinetalk/blob/devel/src/assets/logo.png" width="300"></p>
+<p align=center><img src="https://github.com/yjinn0813/cinetalk/blob/devel/src/assets/logo.png" width="300"></p>
 <br>
 토이 프로젝트로 만든 영화 리뷰 기록 및 공유 사이트 '시네톡'입니다.
 <br>
@@ -13,7 +13,7 @@
 
 https://cinetalk.vercel.app/
 
-https://github.com/hjinn0813/cinetalk
+https://github.com/yjinn0813/cinetalk
 <br>
 <br>
 
@@ -147,13 +147,13 @@ https://github.com/hjinn0813/cinetalk
 
 <br>
 
-## 🚀 [Trouble-shooting History (click to check)](https://github.com/hjinn0813/cinetalk/wiki/%F0%9F%9A%80-Trouble%E2%80%90shooting-History)
+## 🚀 [Trouble-shooting History (click to check)](https://github.com/yjinn0813/cinetalk/wiki/%F0%9F%9A%80-Trouble%E2%80%90shooting-History)
 
 <br>
 
 ## 📍 User Flow
 
-<p align=center><img src="https://github.com/hjinn0813/cinetalk/blob/devel/public/userflow.png" width="800"></p>
+<p align=center><img src="https://github.com/yjinn0813/cinetalk/blob/devel/public/userflow.png" width="800"></p>
 
 <br>
 
