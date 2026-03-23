@@ -17,7 +17,7 @@ export default function Footer() {
           </div>
           <div>
             <div className="foot-info">(주)시네톡</div>
-            <div className="foot-info">대표이사: 조혜진</div>
+            <div className="foot-info">대표이사: 조유진</div>
             <div className="foot-info">주소: 서울시 서초구 사평대로 52길</div>
             <div className="foot-info">사업자등록번호: 123-45-67890</div>
             <div className="foot-info">개인정보 관리 책임자: 홍길동</div>
