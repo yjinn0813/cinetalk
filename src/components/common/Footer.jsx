@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../../styles/Footer/Footer.scss';
+import '../../styles/common/Footer.scss';
 
 export default function Footer() {
   return (

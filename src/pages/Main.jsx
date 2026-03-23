@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/Main/Main.scss';
+import '../styles/pages/Main.scss';
 import ReviewBox from '../components/Main/ReviewBox';
 import EventBox from '../components/Main/EventBox';
 import RankBox from '../components/Main/RankBox';

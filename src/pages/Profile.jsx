@@ -4,7 +4,7 @@ import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '../redux/actions/authActions';
-import '../styles/Profile/Profile.scss';
+import '../styles/pages/Profile.scss';
 
 export default function Profile() {
   const dispatch = useDispatch();

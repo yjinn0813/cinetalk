@@ -3,7 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.png';
-import '../../styles/Header/Header.scss';
+import '../../styles/common/Header.scss';
 
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import LoginIcon from '@mui/icons-material/Login';

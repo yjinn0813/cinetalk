@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import WatchedPoster from '../components/Watched/WatchedPoster';
-import '../styles/Watched/Watched.scss';
+import '../styles/pages/Watched.scss';
 
 // Swiper
 import { Swiper, SwiperSlide } from 'swiper/react';

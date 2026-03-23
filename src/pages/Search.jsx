@@ -1,7 +1,7 @@
 // 검색하면 영화정보가 등장하는 페이지
 
 import React, { useState } from 'react';
-import '../styles/Search/Search.scss';
+import '../styles/pages/Search.scss';
 import SearchIcon from '@mui/icons-material/Search';
 
 const Search = () => {
