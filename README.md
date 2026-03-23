@@ -1,12 +1,11 @@
-<div align=left>
-
 # cinetalk 🎬
 
 <br>
 <p align=center><img src="https://github.com/yjinn0813/cinetalk/blob/main/src/assets/logo.png" width="300"></p>
 <br>
-토이 프로젝트로 만든 영화 리뷰 기록 및 공유 사이트 'cinetalk'입니다.
-<br>
+리뷰 중심의 영화 기록·공유 웹 애플리케이션 'cinetalk'입니다.
+<br> 사용자가 영화에 대한 감상을 기록하고, 개인의 감상 이력을 아카이빙할 수 있도록 구현했습니다.  
+<br> 또한 공유하기 기능을 통해 작성한 리뷰를 간편하게 공유할 수 있습니다.
 <br>
 
 ## 1. 배포 주소
@@ -18,9 +17,6 @@ https://github.com/yjinn0813/cinetalk
 <br>
 
 ## 2. 프로젝트 소개
-
-### 기획 배경
-  영화를 보고 리뷰를 기록하는 것을 즐기는 개인 취미에서 출발하여, 리뷰 중심의 영화 기록공유 웹 애플리케이션 ‘cinetalk’ 기획 및 개발
 
 ### 1차 개발 (Initial Release)
 
