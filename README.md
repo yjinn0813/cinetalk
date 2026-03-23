@@ -1,15 +1,15 @@
 <div align=left>
 
-# '시네톡 | Cinetalk' 사이트 제작
+# cinetalk 🎬
 
 <br>
-<p align=center><img src="https://github.com/yjinn0813/cinetalk/blob/devel/src/assets/logo.png" width="300"></p>
+<p align=center><img src="https://github.com/yjinn0813/cinetalk/blob/main/src/assets/logo.png" width="300"></p>
 <br>
-토이 프로젝트로 만든 영화 리뷰 기록 및 공유 사이트 '시네톡'입니다.
+토이 프로젝트로 만든 영화 리뷰 기록 및 공유 사이트 'cinetalk'입니다.
 <br>
 <br>
 
-## 💻 배포 주소
+## 1. 배포 주소
 
 https://cinetalk.vercel.app/
 
@@ -17,57 +17,73 @@ https://github.com/yjinn0813/cinetalk
 <br>
 <br>
 
-## 👨‍🏫 프로젝트 소개
+## 2. 프로젝트 소개
 
-- **기획 배경** :
+### 기획 배경
+  영화를 보고 리뷰를 기록하는 것을 즐기는 개인 취미에서 출발하여, 리뷰 중심의 영화 기록공유 웹 애플리케이션 ‘cinetalk’ 기획 및 개발
 
-  영화를 보고 리뷰를 기록하는게 취미여서, 영화 리뷰 기록 및 공유 사이트 '시네톡' 기획 및 제작
+### 1차 개발 (Initial Release)
 
-- **개발기간 및 과정**
+- **기간**: 2024.07.01 ~ 08.08
 
-  - 2024.07.01 ~ 07.04 : 기획
+- **주요 작업**
+  - Swiper를 활용한 메인 페이지 카드 슬라이드 및 박스오피스/광고 자동 슬라이드 구현
+  - Redux를 이용한 로그인/로그아웃 및 전역 사용자 상태 관리
+  - 회원가입 시 실시간 입력값 기반 유효성 검사 및 이용약관 동의 로직 구현
+  - 리뷰 조회/삭제 기능 및 라이브러리(개인 기록) 페이지 연동
+  - 영화진흥위원회 API를 활용한 영화 검색 기능 구현
+  - 모바일 환경 대응 (리뷰 리스트 Swiper 슬라이드 적용)
+  - Vercel 배포
 
-  - 2024.07.03 ~ 07.20 : 개발
+### 2차 개선 (Migration & Enhancement)
 
-  - 2024.07.25 ~ 08.08 : 리팩토링 및 보완
+- **기간**: 2026.03 ~ (진행 중)
 
-<br>
-
-## 🛠 기술 스택
-
-- **Frontend**
-
-  ![HTML](https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-  ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-  ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
-  ![Redux](https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=Redux&logoColor=white)
-  ![SASS](https://img.shields.io/badge/SASS-CC6699?style=for-the-badge&logo=Sass&logoColor=white)
-  ![babel](https://img.shields.io/badge/babel-F9DC3E?style=for-the-badge&logo=babel&logoColor=black)
-  ![Swiper](https://img.shields.io/badge/swiper-6332F6?style=for-the-badge&logo=swiper&logoColor=white)
-  ![MUI](https://img.shields.io/badge/MUI-007FFF?style=for-the-badge&logo=MUI&logoColor=white)
-
-- **Version Control**
-
-  ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
-  ![Github](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
-
-- **Development Tool**
-
-  ![VScode](https://img.shields.io/badge/Visual_Studio_Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)
-  ![eslint](https://img.shields.io/badge/eslint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white)
-  ![prettier](https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=black)
-
-- **Deploy Platform**
-
-  ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
-
-- **Design Tool**
-
-  ![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)
+- **주요 작업**
+  - CRA → Vite 마이그레이션 (빌드 환경 개선 및 성능 향상)
+  - Redux → Zustand 전환 (전역 상태 관리 단순화)
+  - 작성된 리뷰 데이터 저장 및 상세/라이브러리 페이지 연동 기능 구현
+  - JavaScript → TypeScript 전환 (타입 안정성 및 유지보수성 향상)
+  - React Query 도입을 통한 API 로직 리팩토링 (데이터 fetching 및 캐싱 최적화)
 
 <br>
 
-## 🎬 주요 기능
+## 3. 사용 기술
+
+### Frontend
+| 기술 | 사용 목적 |
+| ----- | ----- |
+| ![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black) | 컴포넌트 기반 SPA 구조 설계 |
+| ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black) | 코드베이스 및 점진적 TS 전환 (기존) |
+| ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=TypeScript&logoColor=white) | 타입 안정성 확보 및 유지보수성 개선 (전환 예정) |
+| ![Redux](https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=Redux&logoColor=white) | 로그인 및 전역 사용자 상태 관리 (기존) |
+| ![Zustand](https://img.shields.io/badge/Zustand-433E38?style=flat-square&logo=zustand&logoColor=white) | 간결한 전역 상태 관리 (전환 예정) |
+| ![React Query](https://img.shields.io/badge/React_Query-FF4154?style=flat-square&logo=reactquery&logoColor=white) | 서버 상태 관리 및 API 데이터 캐싱 |
+| ![SASS](https://img.shields.io/badge/SASS-CC6699?style=flat-square&logo=Sass&logoColor=white) | 스타일링 및 CSS 확장 문법 사용 |
+| ![Swiper](https://img.shields.io/badge/swiper-6332F6?style=flat-square&logo=swiper&logoColor=white) | 슬라이드 UI (배너, 카드 등) 구현 |
+| ![MUI](https://img.shields.io/badge/MUI-007FFF?style=flat-square&logo=MUI&logoColor=white) | 일관된 UI 컴포넌트 및 아이콘 활용 |
+
+### Tooling
+| 기술 | 사용 목적 |
+| ----- | -------------- |
+| ![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white) | 브랜치 전략 기반 버전 관리 (`main / develop`) |
+| ![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white) | 원격 저장소 및 배포 소스 관리 |
+| ![VScode](https://img.shields.io/badge/VS_Code-007ACC?style=flat-square&logo=visual-studio-code&logoColor=white) | 코드 작성 및 개발 환경  |
+| ![vite](https://img.shields.io/badge/vite-646CFF?style=flat-square&logo=vite&logoColor=white) | 빠른 개발 서버 및 빌드 환경 구성 |
+
+### Deployment
+| 플랫폼 | 사용 목적 |
+| ----- | ----- |
+| ![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white) | 애플리케이션 자동 빌드 및 배포 |
+
+### Design
+| 도구 | 사용 목적 |
+| ----- | -------------- |
+| ![Figma](https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=figma&logoColor=white) | UI 목업 및 디자인 설계 |
+
+<br>
+
+## 4. 주요 기능
 
 ### 메인 페이지
 
@@ -139,7 +155,7 @@ https://github.com/yjinn0813/cinetalk
 
 <br>
 
-## 📌 API
+## 5. API
 
 - **영화진흥위원회 - 영화목록 조회 OPEN API**
 
@@ -147,17 +163,17 @@ https://github.com/yjinn0813/cinetalk
 
 <br>
 
-## 🚀 [Trouble-shooting History (click to check)](https://github.com/yjinn0813/cinetalk/wiki/%F0%9F%9A%80-Trouble%E2%80%90shooting-History)
+## 🚀 [6. Trouble-shooting History (click to check)](https://github.com/yjinn0813/cinetalk/wiki/%F0%9F%9A%80-Trouble%E2%80%90shooting-History)
 
 <br>
 
-## 📍 User Flow
+## 7. User Flow
 
-<p align=center><img src="https://github.com/yjinn0813/cinetalk/blob/devel/public/userflow.png" width="800"></p>
+<p align=center><img src="https://github.com/yjinn0813/cinetalk/blob/main/public/userflow.png" width="800"></p>
 
 <br>
 
-## 📁 프로젝트 구조
+## 8. 디렉토리 구조
 
 ```bash
 📦cinetalk
@@ -165,19 +181,17 @@ https://github.com/yjinn0813/cinetalk
  ┃ ┣ 📂favicon
  ┃ ┃ ┣ 📜apple-touch-icon.png
  ┃ ┃ ┗ 📜favicon.png
- ┃ ┗ 📜index.html
+ ┃ ┣ 📂fonts
+ ┃ ┃ ┗ 📜PretendardVariable.woff2
+ ┃ ┣ 📂images
+ ┃ ┃ ┣ 📂Main
+ ┃ ┃ ┣ 📂Review
+ ┃ ┃ ┗ 📂Watched
+ ┃ ┗ 📜userflow.png
  ┣ 📂src
  ┃ ┣ 📂assets
  ┃ ┃ ┗ 📜logo.png
  ┃ ┣ 📂components
- ┃ ┃ ┣ 📂Footer
- ┃ ┃ ┃ ┗ 📜Footer.jsx
- ┃ ┃ ┣ 📂Header
- ┃ ┃ ┃ ┗ 📜Header.jsx
- ┃ ┃ ┣ 📂Login
- ┃ ┃ ┃ ┣ 📜Kakao.jsx
- ┃ ┃ ┃ ┣ 📜Naver.jsx
- ┃ ┃ ┃ ┗ 📜Oauth.js
  ┃ ┃ ┣ 📂Main
  ┃ ┃ ┃ ┣ 📜Boxoffice.json
  ┃ ┃ ┃ ┣ 📜EventBox.jsx
@@ -192,8 +206,11 @@ https://github.com/yjinn0813/cinetalk
  ┃ ┃ ┣ 📂Watched
  ┃ ┃ ┃ ┣ 📜LibraryLists.json
  ┃ ┃ ┃ ┗ 📜WatchedPoster.jsx
- ┃ ┃ ┗ 📂Write
+ ┃ ┃ ┣ 📂Write
  ┃ ┃ ┃ ┗ 📜Toggles.jsx
+ ┃ ┃ ┗ 📂common
+ ┃ ┃ ┃ ┣ 📜Footer.jsx
+ ┃ ┃ ┃ ┗ 📜Header.jsx
  ┃ ┣ 📂pages
  ┃ ┃ ┣ 📜Login.jsx
  ┃ ┃ ┣ 📜Main.jsx
@@ -216,42 +233,40 @@ https://github.com/yjinn0813/cinetalk
  ┃ ┃ ┃ ┗ 📜userReducer.js
  ┃ ┃ ┗ 📜store.js
  ┃ ┣ 📂styles
- ┃ ┃ ┣ 📂Footer
- ┃ ┃ ┃ ┗ 📜Footer.scss
- ┃ ┃ ┣ 📂Header
- ┃ ┃ ┃ ┗ 📜Header.scss
- ┃ ┃ ┣ 📂Login
- ┃ ┃ ┃ ┣ 📜Kakao.scss
- ┃ ┃ ┃ ┣ 📜Login.scss
- ┃ ┃ ┃ ┗ 📜Naver.scss
  ┃ ┃ ┣ 📂Main
  ┃ ┃ ┃ ┣ 📜EventBox.scss
- ┃ ┃ ┃ ┣ 📜Main.scss
  ┃ ┃ ┃ ┣ 📜RankBox.scss
  ┃ ┃ ┃ ┗ 📜ReviewBox.scss
- ┃ ┃ ┣ 📂Profile
- ┃ ┃ ┃ ┗ 📜Profile.scss
- ┃ ┃ ┣ 📂Register
- ┃ ┃ ┃ ┗ 📜Register.scss
  ┃ ┃ ┣ 📂Review
- ┃ ┃ ┃ ┣ 📜ReadPosts.scss
- ┃ ┃ ┃ ┗ 📜Review.scss
- ┃ ┃ ┣ 📂Search
- ┃ ┃ ┃ ┗ 📜Search.scss
+ ┃ ┃ ┃ ┗ 📜ReadPosts.scss
  ┃ ┃ ┣ 📂Watched
- ┃ ┃ ┃ ┣ 📜Watched.scss
  ┃ ┃ ┃ ┗ 📜WatchedPoster.scss
  ┃ ┃ ┣ 📂Write
- ┃ ┃ ┃ ┣ 📜Toggles.scss
+ ┃ ┃ ┃ ┗ 📜Toggles.scss
+ ┃ ┃ ┣ 📂common
+ ┃ ┃ ┃ ┣ 📜Footer.scss
+ ┃ ┃ ┃ ┗ 📜Header.scss
+ ┃ ┃ ┣ 📂pages
+ ┃ ┃ ┃ ┣ 📜Login.scss
+ ┃ ┃ ┃ ┣ 📜Main.scss
+ ┃ ┃ ┃ ┣ 📜Profile.scss
+ ┃ ┃ ┃ ┣ 📜Register.scss
+ ┃ ┃ ┃ ┣ 📜Review.scss
+ ┃ ┃ ┃ ┣ 📜Search.scss
+ ┃ ┃ ┃ ┣ 📜Watched.scss
  ┃ ┃ ┃ ┗ 📜Write.scss
  ┃ ┃ ┣ 📜NotFound.scss
  ┃ ┃ ┗ 📜root.scss
- ┃ ┣ 📜App.js
- ┃ ┗ 📜index.js
+ ┃ ┣ 📜App.jsx
+ ┃ ┗ 📜main.jsx
+ ┣ 📜.env
+ ┣ 📜.gitignore
+ ┣ 📜README.md
+ ┣ 📜index.html
  ┣ 📜package-lock.json
  ┣ 📜package.json
- ┣ 📜README.md
- ┗ 📜vercel.json
+ ┣ 📜vercel.json
+ ┗ 📜vite.config.js
 ```
 
 ---

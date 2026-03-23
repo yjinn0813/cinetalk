@@ -1,8 +1,8 @@
 // header
-@import '../root.scss';
+@use '../root.scss';
 
 .header {
-  border-bottom: 1.5px solid $main-blue;
+  border-bottom: 1.5px solid root.$main-blue;
   font-weight: 500;
   padding: 0.25rem 3.75rem;
   font-size: 0.875rem;
@@ -56,14 +56,14 @@
 
 .header-link {
   text-decoration: none;
-  color: $main-blue;
+  color: root.$main-blue;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
   &:hover {
-    color: $sub-gray;
+    color: root.$sub-gray;
   }
 }
 

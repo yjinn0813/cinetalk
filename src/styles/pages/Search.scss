@@ -1,8 +1,8 @@
 // 검색 페이지 디자인
-@import '../root.scss';
+@use '../root.scss';
 
 .search-container {
-  @include inner-size;
+  @include root.inner-size;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,7 +17,7 @@
 }
 
 .search-input {
-  border: 1.5px solid $sub-gray;
+  border: 1.5px solid root.$sub-gray;
   border-radius: 8px;
   padding: 6px 6px 6px 14px;
   display: flex;
@@ -34,8 +34,8 @@
   right: 0px;
   top: 50%;
   transform: translateY(-50%);
-  background: $main-blue;
-  color: $sub-white;
+  background: root.$main-blue;
+  color: root.$sub-white;
   border: none;
   border-radius: 0px 8px 8px 0px;
   padding: 4px;
@@ -48,7 +48,7 @@
 }
 
 .search-input:focus {
-  border-color: $main-blue;
+  border-color: root.$main-blue;
   outline: none;
   box-shadow: 0 0 14px rgb(130, 130, 130);
 }

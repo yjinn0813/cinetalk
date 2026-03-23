@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { deletePosts } from '../redux/reducers/postSlice';
 import ReadPosts from '../components/Review/ReadPosts';
-import '../styles/Review/Review.scss';
+import '../styles/pages/Review.scss';
 
 export default function Review() {
   const { id } = useParams();

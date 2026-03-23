@@ -1,5 +1,5 @@
 // 라이브러리 컴포넌트 (포스터만 보여주기)
-@import '../root.scss';
+@use '../root.scss';
 
 .w-container {
   display: flex;
@@ -12,7 +12,7 @@
 
 .w-box {
   width: 15.625rem;
-  border: 1.5px solid $main-blue;
+  border: 1.5px solid root.$main-blue;
   border-radius: 8px;
   padding: 1.25rem;
   margin: 16px 0;
@@ -46,6 +46,6 @@
 
 .w_date {
   font-size: 14px;
-  color: $sub-gray;
+  color: root.$sub-gray;
   margin: 0.25rem;
 }

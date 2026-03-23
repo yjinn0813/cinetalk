@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/Main/Main.scss';
+import '../styles/pages/Main.scss';
 import ReviewBox from '../components/Main/ReviewBox';
 import EventBox from '../components/Main/EventBox';
 import RankBox from '../components/Main/RankBox';
@@ -8,9 +8,9 @@ import Friends from '../components/Main/Friends.json';
 import Events from '../components/Main/Events.json';
 import Boxoffice from '../components/Main/Boxoffice.json';
 
-import banner1 from '../assets/Main/banner1.jpg';
-import banner2 from '../assets/Main/banner2.png';
-import banner3 from '../assets/Main/banner3.png';
+import banner1 from '/images/Main/banner1.jpg';
+import banner2 from '/images/Main/banner2.png';
+import banner3 from '/images/Main/banner3.png';
 
 // Swiper
 import { Swiper, SwiperSlide } from 'swiper/react';

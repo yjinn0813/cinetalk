@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUserInfo } from '../redux/actions/userActions';
-import '../styles/Register/Register.scss';
+import '../styles/pages/Register.scss';
 
 export default function Register() {
   const dispatch = useDispatch();

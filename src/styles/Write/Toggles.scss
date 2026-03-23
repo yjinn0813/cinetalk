@@ -1,11 +1,11 @@
 // 스포일러 포함, 비공개 여부 - 토글 스위치
 
-@import '../root.scss';
+@use '../root.scss';
 
 .toggle-switch {
   width: 50px;
   height: 25px;
-  background-color: $sub-gray;
+  background-color: root.$sub-gray;
   border-radius: 25px;
   position: relative;
   cursor: pointer;
@@ -25,7 +25,7 @@
 }
 
 .toggle-switch.on {
-  background-color: $main-blue;
+  background-color: root.$main-blue;
 }
 
 .toggle-switch.on .switch {

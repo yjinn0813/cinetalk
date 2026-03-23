@@ -1,5 +1,5 @@
 // 리뷰 상세보기 박스 컴포넌트 디자인
-@import '../root.scss';
+@use '../root.scss';
 
 .r-container {
   margin: 0.25rem 3.75rem;
@@ -10,7 +10,7 @@
 
 .r-box {
   height: auto;
-  border: 1.5px solid $main-blue;
+  border: 1.5px solid root.$main-blue;
   border-radius: 8px;
   padding: 20px;
 }
@@ -41,7 +41,7 @@
 }
 
 .r-date {
-  color: $sub-gray;
+  color: root.$sub-gray;
   text-align: right;
 }
 
@@ -62,8 +62,8 @@
   .r-delete-button {
     cursor: pointer;
     padding: 0.5rem 1rem;
-    color: $main-blue;
-    border: 1.2px solid $main-blue;
+    color: root.$main-blue;
+    border: 1.2px solid root.$main-blue;
     border-radius: 8px;
     background-color: transparent;
     transition: background-color 0.3s ease;
@@ -72,9 +72,9 @@
     align-items: center;
 
     &:hover {
-      background-color: $sub-gray;
-      color: $sub-white;
-      border: 1.2px solid $sub-gray;
+      background-color: root.$sub-gray;
+      color: root.$sub-white;
+      border: 1.2px solid root.$sub-gray;
     }
 
     svg {
@@ -84,9 +84,9 @@
   }
 
   .r-like-button.liked {
-    color: $sub-white;
-    background-color: $main-blue;
-    border: 1.2px solid $main-blue;
+    color: root.$sub-white;
+    background-color: root.$main-blue;
+    border: 1.2px solid root.$main-blue;
   }
 }
 

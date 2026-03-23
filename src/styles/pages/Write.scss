@@ -1,8 +1,8 @@
 // 리뷰 작성하기 페이지 디자인
-@import '../root.scss';
+@use '../root.scss';
 
 .write-container {
-  @include inner-size;
+  @include root.inner-size;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,7 +19,7 @@
 }
 
 .inputarea {
-  border: 1.5px solid $main-blue;
+  border: 1.5px solid root.$main-blue;
   border-radius: 8px;
   margin: 4px 0;
 }
@@ -58,15 +58,15 @@
 .choose-img {
   width: 50px;
   text-align: center;
-  border: 1.5px solid $main-blue;
+  border: 1.5px solid root.$main-blue;
   border-radius: 6px;
   padding: 6px;
   margin: 8px;
   cursor: pointer;
 }
 .choose-img:hover {
-  background-color: $main-blue;
-  color: $sub-white;
+  background-color: root.$main-blue;
+  color: root.$sub-white;
 }
 #ipt-img {
   display: none;
@@ -92,8 +92,8 @@
   background-color: rgb(197, 197, 197);
 }
 .img-delete:hover {
-  background-color: $sub-gray;
-  color: $sub-white;
+  background-color: root.$sub-gray;
+  color: root.$sub-white;
 }
 
 // toggle btn
@@ -113,8 +113,8 @@
 }
 .apply-btn {
   font-size: 1.125rem;
-  background-color: $main-blue;
-  color: $sub-white;
+  background-color: root.$main-blue;
+  color: root.$sub-white;
   border: none;
   border-radius: 8px;
   padding: 1.25rem;

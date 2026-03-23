@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 // import { useDispatch } from 'react-redux';
 // import { addPost } from '../redux/reducers/postSlice';
 import Toggles from '../components/Write/Toggles';
-import '../styles/Write/Write.scss';
+import '../styles/pages/Write.scss';
 
 export default function Write() {
   const [title, setTitle] = useState('');

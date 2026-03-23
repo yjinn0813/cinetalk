@@ -1,7 +1,7 @@
 // 검색하면 영화정보가 등장하는 페이지
 
 import React, { useState } from 'react';
-import '../styles/Search/Search.scss';
+import '../styles/pages/Search.scss';
 import SearchIcon from '@mui/icons-material/Search';
 
 const Search = () => {
@@ -9,7 +9,7 @@ const Search = () => {
   const [movies, setMovies] = useState([]);
   const [hasSearched, setHasSearched] = useState(false);
   const [loading, setLoading] = useState(false);
-  const MOVIE_API = process.env.REACT_APP_MOVIE_LIST_API;
+  const MOVIE_API = import.meta.env.VITE_MOVIE_LIST_API;
 
   const fetchMovies = async (searchQuery) => {
     setLoading(true); // 검색 시작 시 로딩 상태로 설정

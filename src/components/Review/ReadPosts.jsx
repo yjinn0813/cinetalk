@@ -6,7 +6,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShareIcon from '@mui/icons-material/Share';
 
 export default function ReadPosts({ poster, title, date, body, onDelete }) {
-  const posterImage = require(`../../assets/Watched/${poster}.jpg`);
+  const posterImage = `/images/Watched/${poster}.jpg`;
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
 
