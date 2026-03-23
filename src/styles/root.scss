@@ -6,10 +6,15 @@ $sub-gray: #a9a9a9;
 $KAKAO: #ffcd00;
 $NAVER: #03c75a;
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
-
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../../public/fonts/PretendardVariable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
 * {
-  font-family: 'Noto Sans KR';
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   margin: 0;
   padding: 0;
 }

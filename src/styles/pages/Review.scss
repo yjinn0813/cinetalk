@@ -1,8 +1,8 @@
 // 리뷰 상세보기 페이지 디자인
-@import '../root.scss';
+@use '../root.scss';
 
 .r-wrap {
-  @include inner-size;
+  @include root.inner-size;
 }
 
 .rp-title {

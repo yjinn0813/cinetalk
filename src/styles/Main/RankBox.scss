@@ -1,8 +1,8 @@
 // boxoffice rank box design
-@import '../root.scss';
+@use '../root.scss';
 
 .rank-box {
-  border: 1.5px solid $main-blue;
+  border: 1.5px solid root.$main-blue;
   border-radius: 8px;
   padding: 1rem;
   display: flex;

@@ -1,8 +1,8 @@
 // 로그인 페이지 디자인
-@import '../root.scss';
+@use '../root.scss';
 
 .lg-wrap {
-  @include inner-size;
+  @include root.inner-size;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,7 +31,7 @@
 }
 .userId,
 .password {
-  border: 1.5px solid $main-blue;
+  border: 1.5px solid root.$main-blue;
   border-radius: 8px;
   width: 40%;
   height: 40px;
@@ -46,7 +46,7 @@
 }
 
 .lg-focus:focus {
-  border-color: $main-blue;
+  border-color: root.$main-blue;
   outline: none;
   box-shadow: 0 0 14px rgb(130, 130, 130);
 }
@@ -61,8 +61,8 @@
 }
 .lg-apply-btn {
   font-size: 1.125rem;
-  background-color: $main-blue;
-  color: $sub-white;
+  background-color: root.$main-blue;
+  color: root.$sub-white;
   border: none;
   border-radius: 8px;
   padding: 1.25rem;
@@ -98,8 +98,8 @@
 .register {
   font-size: 1.125rem;
   background-color: transparent;
-  color: $main-blue;
-  border: 1.5px solid $main-blue;
+  color: root.$main-blue;
+  border: 1.5px solid root.$main-blue;
   border-radius: 8px;
   padding: 1.25rem;
   margin: 16px;

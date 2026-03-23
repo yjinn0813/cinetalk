@@ -1,6 +1,6 @@
 // event box style
 
-@import '../root.scss';
+@use '../root.scss';
 
 @mixin size {
   width: 300px;

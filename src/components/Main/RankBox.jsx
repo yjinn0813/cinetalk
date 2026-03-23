@@ -9,7 +9,7 @@ export default function RankBox({ Rank, Boxoffice, RankName }) {
       <span className="rank">{Rank}</span>
       <img
         className="rank-poster"
-        src={require(`../../assets/Main/${Boxoffice}`)}
+        src={`images/Main/${Boxoffice}`}
         alt={Boxoffice}
       />
       <span className="rank-name">{RankName}</span>

@@ -1,9 +1,9 @@
 // 리뷰 박스 디자인
 
-@import '../root.scss';
+@use '../root.scss';
 
 .main-box {
-  border: 1.5px solid $main-blue;
+  border: 1.5px solid root.$main-blue;
   border-radius: 8px;
   padding: 1rem;
   flex: 0 0 auto; // box 고정 너비 유지
@@ -44,7 +44,7 @@
   font-weight: 600;
 }
 .main-author {
-  color: $sub-gray;
+  color: root.$sub-gray;
   font-size: 14px;
   display: flex;
   align-items: center;

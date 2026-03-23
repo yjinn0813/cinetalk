@@ -42,7 +42,7 @@ export default function Watched() {
               <SwiperSlide key={card.id}>
                 <Link to={`/Review/${card.id}`} className="movingbtn">
                   <WatchedPoster
-                    poster={require(`../assets/Watched/${card.poster}.jpg`)}
+                    poster={`images/Watched/${card.poster}.jpg`}
                     title={card.title}
                     date={card.date}
                   />
@@ -54,7 +54,7 @@ export default function Watched() {
           posts.map((card) => (
             <Link key={card.id} to={`/Review/${card.id}`} className="movingbtn">
               <WatchedPoster
-                poster={require(`../assets/Watched/${card.poster}.jpg`)}
+                poster={`images/Watched/${card.poster}.jpg`}
                 title={card.title}
                 date={card.date}
               />

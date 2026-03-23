@@ -8,7 +8,7 @@ export default function EventBox({ EventPhoto, EventName, EventScript }) {
     <div className="event-box">
       <img
         className="event-photo"
-        src={require(`../../assets/Main/${EventPhoto}`)}
+        src={`/images/Main/${EventPhoto}`}
         alt={EventPhoto}
       />
       <div className="event-name">{EventName}</div>

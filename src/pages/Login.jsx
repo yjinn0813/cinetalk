@@ -4,8 +4,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccess, loginFailure } from '../redux/actions/authActions';
-import Kakao from '../components/Login/Kakao';
-import Naver from '../components/Login/Naver';
 import '../styles/pages/Login.scss';
 
 export default function Login() {
@@ -110,8 +108,6 @@ export default function Login() {
         <button className="register" onClick={toRegister}>
           아이디로 회원가입
         </button>
-        <Kakao />
-        <Naver />
       </div>
     </div>
   );

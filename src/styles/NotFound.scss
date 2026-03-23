@@ -1,6 +1,6 @@
 // Not Found 예외처리 페이지 디자인
 
-@import './root.scss';
+@use './root.scss';
 
 .notfound-container {
   text-align: center;
@@ -37,12 +37,12 @@
   }
 
   .primary-btn {
-    background-color: $sub-gray;
-    color: $sub-white;
+    background-color: root.$sub-gray;
+    color: root.$sub-white;
   }
 
   .to-home-btn {
-    background-color: $main-blue;
-    color: $sub-white;
+    background-color: root.$main-blue;
+    color: root.$sub-white;
   }
 }
