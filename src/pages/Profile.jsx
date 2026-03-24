@@ -8,8 +8,6 @@ import '../styles/pages/Profile.scss';
 const menuList = [
   { name: '라이브러리', path: '/Watched' },
   { name: '리뷰 작성하기', path: '/Write' },
-  { name: '본 작품 캘린더', path: '/NotFound' },
-  { name: '본 작품 통계', path: '/NotFound' },
 ];
 
 // ==============================
