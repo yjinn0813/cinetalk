@@ -4,7 +4,7 @@ import Footer from './components/common/Footer';
 import Main from './pages/Main';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
-import Watched from './pages/Watched';
+import ReviewLists from './pages/ReviewLists';
 import Review from './pages/Review';
 import Write from './pages/Write';
 import Search from './pages/Search';
@@ -22,7 +22,7 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="watched" element={<Watched />} />
+          <Route path="watched" element={<ReviewLists />} />
           <Route path="review/:id" element={<Review />} />
           <Route path="write" element={<Write />} />
           <Route path="*" element={<NotFound />} />

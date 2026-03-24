@@ -182,7 +182,6 @@ https://github.com/yjinn0813/cinetalk
  ┃ ┣ 📂images
  ┃ ┃ ┣ 📂Main
  ┃ ┃ ┣ 📂Review
- ┃ ┃ ┗ 📂Watched
  ┃ ┗ 📜userflow.png
  ┣ 📂src
  ┃ ┣ 📂assets
@@ -198,9 +197,7 @@ https://github.com/yjinn0813/cinetalk
  ┃ ┃ ┃ ┗ 📜Reviews.json
  ┃ ┃ ┣ 📂Review
  ┃ ┃ ┃ ┣ 📜Posts.json
- ┃ ┃ ┃ ┗ 📜ReadPosts.jsx
- ┃ ┃ ┣ 📂Watched
- ┃ ┃ ┃ ┣ 📜LibraryLists.json
+ ┃ ┃ ┃ ┣ 📜ReadPosts.jsx
  ┃ ┃ ┃ ┗ 📜WatchedPoster.jsx
  ┃ ┃ ┣ 📂Write
  ┃ ┃ ┃ ┗ 📜Toggles.jsx
@@ -214,20 +211,13 @@ https://github.com/yjinn0813/cinetalk
  ┃ ┃ ┣ 📜Profile.jsx
  ┃ ┃ ┣ 📜Register.jsx
  ┃ ┃ ┣ 📜Review.jsx
+ ┃ ┃ ┣ 📜ReviewLists.jsx
  ┃ ┃ ┣ 📜Search.jsx
- ┃ ┃ ┣ 📜Watched.jsx
  ┃ ┃ ┗ 📜Write.jsx
- ┃ ┣ 📂redux
- ┃ ┃ ┣ 📂actions
- ┃ ┃ ┃ ┣ 📜authActions.js
- ┃ ┃ ┃ ┗ 📜userActions.js
- ┃ ┃ ┣ 📂reducers
- ┃ ┃ ┃ ┣ 📜authReducer.js
- ┃ ┃ ┃ ┣ 📜headerSlice.js
- ┃ ┃ ┃ ┣ 📜index.js
- ┃ ┃ ┃ ┣ 📜postSlice.js
- ┃ ┃ ┃ ┗ 📜userReducer.js
- ┃ ┃ ┗ 📜store.js
+ ┃ ┣ 📂store
+ ┃ ┃ ┣ 📜useAuthStore.js
+ ┃ ┃ ┣ 📜usePostStore.js
+ ┃ ┃ ┗ 📜useUserStore.js
  ┃ ┣ 📂styles
  ┃ ┃ ┣ 📂Main
  ┃ ┃ ┃ ┣ 📜EventBox.scss
@@ -253,6 +243,9 @@ https://github.com/yjinn0813/cinetalk
  ┃ ┃ ┃ ┗ 📜Write.scss
  ┃ ┃ ┣ 📜NotFound.scss
  ┃ ┃ ┗ 📜root.scss
+ ┃ ┣ 📂utils
+ ┃ ┃ ┣ 📜auth.js
+ ┃ ┃ ┗ 📜validation.js
  ┃ ┣ 📜App.jsx
  ┃ ┗ 📜main.jsx
  ┣ 📜.env

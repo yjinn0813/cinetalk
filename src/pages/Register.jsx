@@ -1,18 +1,33 @@
-// 회원가입 페이지
-import React, { useState, useEffect } from 'react';
+/* 회원가입 페이지 */
+
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setUserInfo } from '../redux/actions/userActions';
+import { useUserStore } from '../store/useUserStore';
+import { useAuthStore } from '../store/useAuthStore';
+import { validateId, validatePw } from '../utils/validation';
 import '../styles/pages/Register.scss';
 
-export default function Register() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+const inputList = [
+  { name: 'userName', type: 'text', placeholder: '이름' },
+  { name: 'userId', type: 'text', placeholder: '아이디' },
+  { name: 'userPw', type: 'password', placeholder: '비밀번호' },
+  { name: 'userPw2', type: 'password', placeholder: '비밀번호 확인' },
+];
 
-  const [userName, setUserName] = useState('');
-  const [userId, setUserId] = useState('');
-  const [userPw, setUserPw] = useState('');
-  const [userPw2, setUserPw2] = useState('');
+// ==============================
+const Register = () => {
+  const navigate = useNavigate();
+  const { setUserInfo } = useUserStore(); // 회원가입
+  const { login } = useAuthStore(); // 로그인 처리
+
+  // 입력값 객체화
+  const [form, setForm] = useState({
+    userName: '',
+    userId: '',
+    userPw: '',
+    userPw2: '',
+  });
+
   const [idMsg, setIdMsg] = useState('');
   const [pwMsg, setPwMsg] = useState('');
   const [terms, setTerms] = useState({
@@ -22,77 +37,48 @@ export default function Register() {
     term3: false,
   });
 
-  // 아이디 검증 및 메시지 설정
-  const handleIdChange = (e) => {
-    const value = e.target.value;
-    setUserId(value);
+  // 공통 input handler
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
-    const testUserId = 'cinetalk';
-    let msg = '';
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
 
-    if (!value) {
-      msg = '아이디를 입력하세요';
-    } else if (!/^[a-zA-Z0-9]{4,10}$/.test(value)) {
-      msg = '아이디는 4 ~ 10자의 영문&숫자입니다';
-    } else if (value === testUserId) {
-      msg = '사용할 수 없는 아이디입니다';
-    } else {
-      msg = '사용 가능한 아이디입니다';
+    // 아이디 검증
+    if (name === 'userId') {
+      setIdMsg(validateId(value));
     }
 
-    setIdMsg(msg);
-  };
+    // 비밀번호 검증
+    if (name === 'userPw' || name === 'userPw2') {
+      const pw =
+        name === 'userPw' ? value : form.userPw;
+      const pw2 =
+        name === 'userPw2' ? value : form.userPw2;
 
-  // 아이디 입력 필드에서 포커스가 벗어날 때
-  const handleIdBlur = () => {
-    if (!userId) {
-      setIdMsg('');
+      setPwMsg(validatePw(pw, pw2));
     }
   };
 
-  // 비밀번호 검증
-  const handlePwChange = (e, isConfirmation = false) => {
-    const value = e.target.value;
-    if (!isConfirmation) {
-      setUserPw(value);
-    } else {
-      setUserPw2(value);
+  // 포커스 아웃되면 메시지 초기화
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+
+    if (name === 'userId' && !value) {
+      setIdMsg({ msg: '', type: '' });
+    }
+
+    if ((name === 'userPw' || name === 'userPw2') && !form.userPw && !form.userPw2) {
+      setPwMsg({ msg: '', type: '' });
     }
   };
 
-  useEffect(() => {
-    const message = checkPw(userPw, userPw2);
-    setPwMsg(message);
-  }, [userPw, userPw2]);
-
-  const handlePwBlur = () => {
-    if (!userPw && !userPw2) {
-      setPwMsg('');
-    }
-  };
-
-  const checkPw = (pw, pw2) => {
-    let msg = '';
-
-    if (pw === '') {
-      msg = '';
-    } else if (!pw && !pw2) {
-      msg = '비밀번호를 입력하세요';
-    } else if (
-      !/^(?=.*[!@#$%^&*(),.?":{}|<>])[a-zA-Z0-9!@#$%^&*(),.?":{}|<>]{8,15}$/.test(
-        pw
-      )
-    ) {
-      msg = '특수문자 포함 8~15자만 가능합니다';
-    } else if (pw !== pw2) {
-      msg = '비밀번호가 일치하지 않습니다';
-    }
-    return msg;
-  };
-
-  // 약관동의 검증
+  // 약관동의 확인
   const handleTermChange = (e) => {
     const { name, checked } = e.target;
+
     if (name === 'all') {
       setTerms({
         all: checked,
@@ -101,17 +87,19 @@ export default function Register() {
         term3: checked,
       });
     } else {
-      setTerms((prevTerms) => ({
-        ...prevTerms,
+      setTerms((prev) => ({
+        ...prev,
         [name]: checked,
-        all: checked && prevTerms.term1 && prevTerms.term2 && prevTerms.term3,
+        all: checked && prev.term1 && prev.term2 && prev.term3,
       }));
     }
   };
 
-  // 모든 입력값 검증
+  // 회원가입 완료
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const { userName, userId, userPw, userPw2 } = form;
 
     if (
       !userName ||
@@ -126,104 +114,62 @@ export default function Register() {
       return;
     }
 
-    const userInfo = {
-      userName,
-      userId,
-      userPw,
-      terms,
-    };
-
-    dispatch(setUserInfo(userInfo));
+    setUserInfo({ userName, userId, userPw, terms });
+    login({ userId });
     navigate('/Profile');
   };
 
   return (
     <form className="reg-wrap" onSubmit={handleSubmit}>
       <div className="reg-title">회원가입</div>
+
       <div className="reg-input-area">
-        <input
-          type="text"
-          className="userName reg-focus"
-          placeholder="이름"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
-        />
-        <input
-          type="text"
-          className="regId reg-focus"
-          placeholder="아이디"
-          value={userId}
-          onChange={(e) => handleIdChange(e)}
-          onBlur={handleIdBlur}
-        />
-        <div className="regIdMsg">{idMsg}</div>
-        <input
-          type="password"
-          className="regPw reg-focus"
-          placeholder="비밀번호"
-          value={userPw}
-          onChange={(e) => handlePwChange(e)}
-          onBlur={handlePwBlur}
-        />
-        <input
-          type="password"
-          className="regPw2 reg-focus"
-          placeholder="비밀번호 확인"
-          value={userPw2}
-          onChange={(e) => handlePwChange(e, true)}
-          onBlur={handlePwBlur}
-        />
-        <div className="regPwMsg">{pwMsg}</div>
+        {inputList.map((input) => (
+          <React.Fragment key={input.name}>
+            <input
+              className="reg-focus"
+              name={input.name}
+              type={input.type}
+              placeholder={input.placeholder}
+              value={form[input.name]}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+
+            {input.name === 'userId' && (
+              <div className={`regMsg ${idMsg.type}`}>{idMsg.msg}</div>
+            )}
+
+            {(input.name === 'userPw2') && (
+              <div className={`regMsg ${pwMsg.type}`}>{pwMsg.msg}</div>
+            )}
+          </React.Fragment>
+        ))}
       </div>
 
-      {/* 약관동의 */}
+      {/* 약관 */}
       <div className="terms">
-        <div className="checkAll">
-          <label>
+        {['all', 'term1', 'term2', 'term3'].map((term) => (
+          <label key={term}
+            className={ term === 'all' ? 'checkAll' : term }
+          >
             <input
               type="checkbox"
-              name="all"
-              checked={terms.all}
+              name={term}
+              checked={terms[term]}
               onChange={handleTermChange}
             />
-            &nbsp;&nbsp;모두 동의
+            {term === 'all' && ' 모두 동의'}
+            {term === 'term1' && ' 14세 이상입니다 (필수)'}
+            {term === 'term2' && ' 이용 약관 동의 (필수)'}
+            {term === 'term3' && ' 개인정보 수집 동의 (필수)'}
           </label>
-        </div>
-        <div className="term1">
-          <label>
-            <input
-              type="checkbox"
-              name="term1"
-              checked={terms.term1}
-              onChange={handleTermChange}
-            />
-            &nbsp;&nbsp;14세 이상입니다 (필수)
-          </label>
-        </div>
-        <div className="term2">
-          <label>
-            <input
-              type="checkbox"
-              name="term2"
-              checked={terms.term2}
-              onChange={handleTermChange}
-            />
-            &nbsp;&nbsp;이용 약관 동의 (필수)
-          </label>
-        </div>
-        <div className="term3">
-          <label>
-            <input
-              type="checkbox"
-              name="term3"
-              checked={terms.term3}
-              onChange={handleTermChange}
-            />
-            &nbsp;&nbsp;개인정보 수집 및 이용 동의 (필수)
-          </label>
-        </div>
+        ))}
       </div>
+
       <button className="regOk">회원가입 완료</button>
     </form>
   );
-}
+};
+
+export default Register;

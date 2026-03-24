@@ -77,10 +77,14 @@
     width: 86%;
   }
 }
-.lg-error {
-  font-size: 18px;
-  font-weight: 700;
+.lg-msg {
+  font-size: 16px;
   margin: 12px 0;
+
+  &.empty { color: root.$empty; }
+  &.warning { color: root.$warning; }
+  &.error { color: root.$error; }
+  &.success { color: root.$NAVER;}
 }
 
 // btn area
