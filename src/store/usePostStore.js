@@ -14,17 +14,15 @@ export const usePostStore = create((set, get) => ({
   addPost: (newPost) => {
     const { posts } = get();
 
-    const newId =
-      posts.length > 0
-        ? Math.max(...posts.map((p) => p.id)) + 1
-        : 1;
-
+    const newId = posts.length > 0 ? Math.max(...posts.map((p) => p.id)) + 1 : 1;
     const postWithId = { id: newId, ...newPost };
-    const updatedPosts = [...posts, postWithId];
 
-    localStorage.setItem('posts', JSON.stringify(updatedPosts));
+    // 맨 앞에 추가
+    const updatedPosts = [postWithId, ...posts];
 
+    // Zustand state + localStorage 동기화
     set({ posts: updatedPosts });
+    localStorage.setItem('posts', JSON.stringify(updatedPosts));
 
     return newId;
   },
