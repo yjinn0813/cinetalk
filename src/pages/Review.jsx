@@ -1,35 +1,40 @@
-// 리뷰 상세보기 페이지
+/* 리뷰 상세보기 페이지 */
 
-import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { deletePosts } from '../redux/reducers/postSlice';
+import { usePostStore } from '../store/usePostStore';
 import ReadPosts from '../components/Review/ReadPosts';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import '../styles/pages/Review.scss';
 
-export default function Review() {
+const Review = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
+  const posts = usePostStore((state) => state.posts);
+  const deletePost = usePostStore((state) => state.deletePost);
 
   // 포스트 데이터 찾기
-  const post = useSelector((state) =>
-    state.posts.posts.find((post) => post.id === parseInt(id))
-  );
+  const post = posts.find((post) => post.id === Number(id));
 
   if (!post) {
     return <div className="NotFound">해당 글을 찾을 수 없습니다!😭</div>;
   }
 
   const handleDelete = () => {
-    dispatch(deletePosts(Number(id)));
+    deletePost(Number(id));
     alert('리뷰가 삭제되었습니다.');
     navigate('/watched');
   };
 
   return (
-    <div class="r-wrap">
-      <div class="rp-title">리뷰 상세보기</div>
+    <div className="r-wrap">
+      <div className='r-head'>
+        <ArrowBackIosIcon className='r-back' 
+          onClick={() => navigate('/watched')}
+        />
+        <div className="rp-title">리뷰 상세보기</div>
+      </div>
+
       <ReadPosts
         poster={post.poster}
         title={post.title}
@@ -39,4 +44,6 @@ export default function Review() {
       />
     </div>
   );
-}
+};
+
+export default Review;

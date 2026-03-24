@@ -1,8 +1,9 @@
-// 라이브러리 (개인의 리뷰 목록) 페이지
+/* 리뷰 리스트 (라이브러리) 페이지 */
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import WatchedPoster from '../components/Watched/WatchedPoster';
+import { usePostStore } from '../store/usePostStore';
+import WatchedPoster from '../components/Review/WatchedPoster';
 import '../styles/pages/Watched.scss';
 
 // Swiper
@@ -11,18 +12,15 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-export default function Watched() {
-  const posts = useSelector((state) => state.posts.posts);
+// ==============================
+const ReviewLists = () => {
+  const posts = usePostStore((state) => state.posts); // 데이터 가져오기
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    window.addEventListener('resize', handleResize); // 크기 변경시 함수 호출
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-    // 필요 없는 이벤트 리스너 정리
   }, []);
 
   return (
@@ -42,7 +40,7 @@ export default function Watched() {
               <SwiperSlide key={card.id}>
                 <Link to={`/Review/${card.id}`} className="movingbtn">
                   <WatchedPoster
-                    poster={`images/Watched/${card.poster}.jpg`}
+                    poster={`images/Review/${card.poster}.jpg`}
                     title={card.title}
                     date={card.date}
                   />
@@ -54,7 +52,7 @@ export default function Watched() {
           posts.map((card) => (
             <Link key={card.id} to={`/Review/${card.id}`} className="movingbtn">
               <WatchedPoster
-                poster={`images/Watched/${card.poster}.jpg`}
+                poster={`images/Review/${card.poster}.jpg`}
                 title={card.title}
                 date={card.date}
               />
@@ -64,4 +62,6 @@ export default function Watched() {
       </div>
     </div>
   );
-}
+};
+
+export default ReviewLists;

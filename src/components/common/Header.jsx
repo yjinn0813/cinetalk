@@ -1,7 +1,7 @@
-// header
-import React from 'react';
-import { useSelector } from 'react-redux';
+/* header */
+
 import { Link } from 'react-router-dom';
+import { useAuthStore } from '../../store/useAuthStore';
 import logo from '../../assets/logo.png';
 import '../../styles/common/Header.scss';
 
@@ -11,8 +11,28 @@ import SearchIcon from '@mui/icons-material/Search';
 import PeopleIcon from '@mui/icons-material/People';
 import DescriptionIcon from '@mui/icons-material/Description';
 
-export default function Header() {
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+// 공통 메뉴
+const menuList = [
+  {
+    name: 'Search',
+    path: '/Search',
+    icon: SearchIcon,
+  },
+  {
+    name: 'New',
+    path: '/NotFound',
+    icon: DescriptionIcon,
+  },
+  {
+    name: 'Friends',
+    path: '/NotFound',
+    icon: PeopleIcon,
+  },
+];
+
+// ==============================
+const Header = () => {
+  const { isLoggedIn } = useAuthStore();
 
   return (
     <header className="header">
@@ -20,36 +40,31 @@ export default function Header() {
         <div className="main-logo">
           <Link to="/">
             <img src={logo} alt="Logo" className="logo" />
-            {/* 로고 이미지 클릭시 홈으로 이동 */}
           </Link>
         </div>
+
         <div className="icon-container">
-          <div className="header-btns">
-            <Link to="/Search" className="header-link">
-              <SearchIcon className="icon" />
-              <div className="header-txt">Search</div>
-            </Link>
-          </div>
-          <div className="header-btns">
-            <Link to="/NotFound" className="header-link">
-              <DescriptionIcon className="icon" />
-              <div className="header-txt">New</div>
-            </Link>
-          </div>
-          <div className="header-btns">
-            <Link to="/NotFound" className="header-link">
-              <PeopleIcon className="icon" />
-              <div className="header-txt">Friends</div>
-            </Link>
-          </div>
+          {/* 공통 메뉴 */}
+          {menuList.map((menu) => {
+            const Icon = menu.icon;
+
+            return (
+              <div className="header-btns" key={menu.name}>
+                <Link to={menu.path} className="header-link">
+                  <Icon className="icon" />
+                  <div className="header-txt">{menu.name}</div>
+                </Link>
+              </div>
+            );
+          })}
+
+          {/* 로그인 상태에 따른 버튼 */}
           <div className="header-btns">
             {isLoggedIn ? (
-              <>
-                <Link to="/Profile" className="header-link">
-                  <AccountBoxIcon className="icon" />
-                  <div className="header-txt">Profile</div>
-                </Link>
-              </>
+              <Link to="/Profile" className="header-link">
+                <AccountBoxIcon className="icon" />
+                <div className="header-txt">Profile</div>
+              </Link>
             ) : (
               <Link to="/Login" className="header-link">
                 <LoginIcon className="icon" />
@@ -61,4 +76,6 @@ export default function Header() {
       </div>
     </header>
   );
-}
+};
+
+export default Header;
