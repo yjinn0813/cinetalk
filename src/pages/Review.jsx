@@ -3,6 +3,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { usePostStore } from '../store/usePostStore';
 import ReadPosts from '../components/Review/ReadPosts';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import '../styles/pages/Review.scss';
 
 const Review = () => {
@@ -27,7 +28,13 @@ const Review = () => {
 
   return (
     <div className="r-wrap">
-      <div className="rp-title">리뷰 상세보기</div>
+      <div className='r-head'>
+        <ArrowBackIosIcon className='r-back' 
+          onClick={() => navigate('/watched')}
+        />
+        <div className="rp-title">리뷰 상세보기</div>
+      </div>
+
       <ReadPosts
         poster={post.poster}
         title={post.title}
