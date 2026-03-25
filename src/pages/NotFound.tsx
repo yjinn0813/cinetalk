@@ -4,7 +4,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/NotFound.scss';
 
-export default function NotFound() {
+const NotFound = () => {
   const navigate = useNavigate();
 
   return (
@@ -35,3 +35,5 @@ export default function NotFound() {
     </div>
   );
 }
+
+export default NotFound;

@@ -3,7 +3,13 @@
 import React from 'react';
 import '../../styles/Main/RankBox.scss';
 
-export default function RankBox({ Rank, Boxoffice, RankName }) {
+type RankProps = {
+  Rank: number;
+  Boxoffice: string;
+  RankName: string;
+}
+
+const RankBox =({ Rank, Boxoffice, RankName }: RankProps) => {
   return (
     <div className="rank-box">
       <span className="rank">{Rank}</span>
@@ -16,3 +22,5 @@ export default function RankBox({ Rank, Boxoffice, RankName }) {
     </div>
   );
 }
+
+export default RankBox;

@@ -3,7 +3,12 @@
 const testUserId = 'cinetalk';
 const testUserPw = 'cinetalk1!';
 
-export const validateLoginId = (userId) => {
+type ValidateResult = {
+  msg: string;
+  type: 'empty' | 'warning' | 'error' | 'success';
+};
+
+export const validateLoginId = (userId: string): ValidateResult => {
   if (!userId) {
     return {
       msg: '아이디를 입력해주세요.',
@@ -35,7 +40,7 @@ export const validateLoginId = (userId) => {
   };
 };
 
-export const validateLoginPw = (userPw) => {
+export const validateLoginPw = (userPw: string): ValidateResult => {
   if (!userPw) {
     return {
       msg: '비밀번호를 입력해주세요.',

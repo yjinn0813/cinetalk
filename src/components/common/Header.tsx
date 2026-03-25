@@ -8,29 +8,7 @@ import '../../styles/common/Header.scss';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import LoginIcon from '@mui/icons-material/Login';
 import SearchIcon from '@mui/icons-material/Search';
-import PeopleIcon from '@mui/icons-material/People';
-import DescriptionIcon from '@mui/icons-material/Description';
 
-// 공통 메뉴
-const menuList = [
-  {
-    name: 'Search',
-    path: '/Search',
-    icon: SearchIcon,
-  },
-  {
-    name: 'New',
-    path: '/NotFound',
-    icon: DescriptionIcon,
-  },
-  {
-    name: 'Friends',
-    path: '/NotFound',
-    icon: PeopleIcon,
-  },
-];
-
-// ==============================
 const Header = () => {
   const { isLoggedIn } = useAuthStore();
 
@@ -44,19 +22,12 @@ const Header = () => {
         </div>
 
         <div className="icon-container">
-          {/* 공통 메뉴 */}
-          {menuList.map((menu) => {
-            const Icon = menu.icon;
-
-            return (
-              <div className="header-btns" key={menu.name}>
-                <Link to={menu.path} className="header-link">
-                  <Icon className="icon" />
-                  <div className="header-txt">{menu.name}</div>
-                </Link>
-              </div>
-            );
-          })}
+          <div className="header-btns">
+            <Link to="/search" className="header-link">
+              <SearchIcon className="icon" />
+              <div className="header-txt">Search</div>
+            </Link>
+          </div>
 
           {/* 로그인 상태에 따른 버튼 */}
           <div className="header-btns">

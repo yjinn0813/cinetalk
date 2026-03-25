@@ -4,7 +4,6 @@ import ReviewBox from '../components/Main/ReviewBox';
 import EventBox from '../components/Main/EventBox';
 import RankBox from '../components/Main/RankBox';
 import Reviews from '../components/Main/Reviews.json';
-import Friends from '../components/Main/Friends.json';
 import Events from '../components/Main/Events.json';
 import Boxoffice from '../components/Main/Boxoffice.json';
 
@@ -18,7 +17,8 @@ import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-export default function Main() {
+// ====================
+const Main = () => {
   return (
     <section className="main-container">
       <div className="main-item boxoffice-area">
@@ -44,6 +44,7 @@ export default function Main() {
           ))}
         </Swiper>
       </div>
+
       <div className="main-item new-posts">
         <div className="new">지금 뜨는 최신 글</div>
         <Swiper
@@ -53,7 +54,7 @@ export default function Main() {
           modules={[Pagination]}
           breakpoints={{
             0: {
-              slidesPerView: 1.4,
+              slidesPerView: 1.2,
               spaceBetween: 10,
             },
             576: {
@@ -87,49 +88,7 @@ export default function Main() {
           ))}
         </Swiper>
       </div>
-      <div className="main-item friends-posts">
-        <div className="friends">내 친구는 지금</div>
-        <Swiper
-          spaceBetween={10}
-          slidesPerView="auto"
-          pagination={{ clickable: true }}
-          modules={[Pagination]}
-          breakpoints={{
-            0: {
-              slidesPerView: 1.4,
-              spaceBetween: 10,
-            },
-            576: {
-              slidesPerView: 2.2,
-              spaceBetween: 10,
-            },
-            768: {
-              slidesPerView: 2.5,
-              spaceBetween: 15,
-            },
-            992: {
-              slidesPerView: 3.2,
-              spaceBetween: 20,
-            },
-            1200: {
-              slidesPerView: 3.5,
-              spaceBetween: 25,
-            },
-          }}
-          className="mySwiper"
-        >
-          {Friends.map((review) => (
-            <SwiperSlide key={review.id}>
-              <ReviewBox
-                MovieName={review.Movie_Name}
-                PostTitle={review.Post_Title}
-                author={review.author}
-                trafficLight={review.trafficLight}
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
+
       <div className="main-item event">
         <div className="event-title">이벤트</div>
         <Swiper
@@ -139,7 +98,7 @@ export default function Main() {
           modules={[Pagination]}
           breakpoints={{
             0: {
-              slidesPerView: 1.3,
+              slidesPerView: 1.2,
               spaceBetween: 10,
             },
             576: {
@@ -172,6 +131,7 @@ export default function Main() {
           ))}
         </Swiper>
       </div>
+
       <div className="main-item banner-area">
         <Swiper
           spaceBetween={30}
@@ -198,3 +158,5 @@ export default function Main() {
     </section>
   );
 }
+
+export default Main;

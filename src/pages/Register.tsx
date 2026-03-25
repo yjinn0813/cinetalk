@@ -14,10 +14,15 @@ const inputList = [
   { name: 'userPw2', type: 'password', placeholder: '비밀번호 확인' },
 ];
 
+type ValidateResult = {
+  msg: string;
+  type: string;
+}
+
 // ==============================
 const Register = () => {
   const navigate = useNavigate();
-  const { setUserInfo } = useUserStore(); // 회원가입
+  const { setUserInfo, user } = useUserStore(); // 회원가입
   const { login } = useAuthStore(); // 로그인 처리
 
   // 입력값 객체화
@@ -28,8 +33,15 @@ const Register = () => {
     userPw2: '',
   });
 
-  const [idMsg, setIdMsg] = useState('');
-  const [pwMsg, setPwMsg] = useState('');
+  const [idMsg, setIdMsg] = useState<ValidateResult>({
+    msg: '',
+    type: '',
+  });
+  const [pwMsg, setPwMsg] = useState<ValidateResult>({
+    msg: '',
+    type: '',
+  });
+
   const [terms, setTerms] = useState({
     all: false,
     term1: false,
@@ -38,7 +50,7 @@ const Register = () => {
   });
 
   // 공통 input handler
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
     setForm((prev) => ({
@@ -63,7 +75,7 @@ const Register = () => {
   };
 
   // 포커스 아웃되면 메시지 초기화
-  const handleBlur = (e) => {
+  const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
     if (name === 'userId' && !value) {
@@ -76,7 +88,7 @@ const Register = () => {
   };
 
   // 약관동의 확인
-  const handleTermChange = (e) => {
+  const handleTermChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
 
     if (name === 'all') {
@@ -96,7 +108,7 @@ const Register = () => {
   };
 
   // 회원가입 완료
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const { userName, userId, userPw, userPw2 } = form;
@@ -115,7 +127,8 @@ const Register = () => {
     }
 
     setUserInfo({ userName, userId, userPw, terms });
-    login({ userId });
+    login({ userId, userName });
+
     navigate('/Profile');
   };
 

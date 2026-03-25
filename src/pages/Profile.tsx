@@ -8,13 +8,11 @@ import '../styles/pages/Profile.scss';
 const menuList = [
   { name: '라이브러리', path: '/Watched' },
   { name: '리뷰 작성하기', path: '/Write' },
-  { name: '본 작품 캘린더', path: '/NotFound' },
-  { name: '본 작품 통계', path: '/NotFound' },
 ];
 
 // ==============================
 const Profile = () => {
-  const { logout } = useAuthStore();
+  const { logout, user } = useAuthStore();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -27,7 +25,7 @@ const Profile = () => {
       <div className="page-title">MY PAGE</div>
 
       <div className="profile">
-        <div className="nickname">홍길동</div>
+        <div className="nickname">{user?.userName || '홍길동'}</div>
       </div>
 
       <div className="profile-btns">
