@@ -24,6 +24,7 @@ const Main = () => {
       <div className="main-item boxoffice-area">
         <div className="boxoffice-title">이번주 박스오피스 순위</div>
         <Swiper
+          slidesPerView={1}
           spaceBetween={30}
           centeredSlides={true}
           autoplay={{
@@ -54,7 +55,11 @@ const Main = () => {
           modules={[Pagination]}
           breakpoints={{
             0: {
-              slidesPerView: 1.2,
+              slidesPerView: 1.3,
+              spaceBetween: 10,
+            },
+            480: {
+              slidesPerView: 1.8,
               spaceBetween: 10,
             },
             576: {
@@ -79,8 +84,9 @@ const Main = () => {
           {Reviews.map((review) => (
             <SwiperSlide key={review.id}>
               <ReviewBox
-                MovieName={review.Movie_Name}
-                PostTitle={review.Post_Title}
+                poster={review.poster}
+                movieName={review.movieName}
+                postTitle={review.postTitle}
                 author={review.author}
                 trafficLight={review.trafficLight}
               />

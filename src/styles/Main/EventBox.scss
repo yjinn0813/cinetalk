@@ -2,47 +2,17 @@
 
 @use '../root.scss';
 
-@mixin size {
-  width: 300px;
-  height: calc((300px * 2) / 3);
-
-  @media (max-width: 1200px) {
-    width: 270px;
-    height: calc((270px * 2) / 3);
-  }
-
-  @media (max-width: 992px) {
-    width: 250px;
-    height: calc((250px * 2) / 3);
-  }
-
-  @media (max-width: 768px) {
-    width: 220px;
-    height: calc((220px * 2) / 3);
-  }
-
-  @media (max-width: 576px) {
-    width: 250px;
-    height: calc((250px * 2) / 3);
-  }
-}
-
 .event-box {
   flex: 0 0 auto; // box 고정 너비 유지
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: width 0.3s, height 0.3s;
-  @include size;
 }
 
 .event-photo {
-  border-radius: 8px;
-  position: absolute;
   background-color: rgba(30, 30, 30, 0.3);
-  opacity: 0.3;
-  @include size;
+  @include root.size;
 }
 
 .event-name {
