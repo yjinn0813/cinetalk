@@ -50,10 +50,8 @@ https://github.com/yjinn0813/cinetalk
 | 기술 | 사용 목적 |
 | ----- | ----- |
 | ![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black) | 컴포넌트 기반 SPA 구조 설계 |
-| ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black) | 코드베이스 및 점진적 TS 전환 (기존) |
-| ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=TypeScript&logoColor=white) | 타입 안정성 확보 및 유지보수성 개선 (전환 예정) |
-| ![Redux](https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=Redux&logoColor=white) | 로그인 및 전역 사용자 상태 관리 (기존) |
-| ![Zustand](https://img.shields.io/badge/Zustand-433E38?style=flat-square&logo=zustand&logoColor=white) | 간결한 전역 상태 관리 (전환 예정) |
+| ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=TypeScript&logoColor=white) | 타입 안정성 확보 및 유지보수성 개선 |
+| ![Zustand](https://img.shields.io/badge/Zustand-433E38?style=flat-square&logo=zustand&logoColor=white) | 간결한 전역 상태 관리 |
 | ![React Query](https://img.shields.io/badge/React_Query-FF4154?style=flat-square&logo=reactquery&logoColor=white) | 서버 상태 관리 및 API 데이터 캐싱 |
 | ![SASS](https://img.shields.io/badge/SASS-CC6699?style=flat-square&logo=Sass&logoColor=white) | 스타일링 및 CSS 확장 문법 사용 |
 | ![Swiper](https://img.shields.io/badge/swiper-6332F6?style=flat-square&logo=swiper&logoColor=white) | 슬라이드 UI (배너, 카드 등) 구현 |
@@ -83,9 +81,7 @@ https://github.com/yjinn0813/cinetalk
 
 ### 메인 페이지
 
-- Header에 호버시 컬러 변경 이벤트, 로그인 여부 검증하여 다른 아이콘 출력 (Redux 상태관리)
-
-  → friends, new 메뉴 예외처리 설정 (Not Found 페이지)
+- Header에 호버시 컬러 변경 이벤트, 로그인 여부 검증하여 다른 아이콘 출력 (Zustand 상태관리)
 
 - 최신 리뷰, 친구들의 리뷰, 이벤트 카드 (swiper slide)
 
@@ -95,7 +91,7 @@ https://github.com/yjinn0813/cinetalk
 
 ### 로그인
 
-- 테스트용 아이디, 비번 검증하여 로그인 (Redux 상태관리)
+- 테스트용 아이디, 비번 검증하여 로그인 (Zustand 상태관리)
 
   - 아이디와 비번이 일치하지 않으면 input창 아래에 메시지 등장
 
@@ -107,7 +103,7 @@ https://github.com/yjinn0813/cinetalk
 
 - 이용약관 '모두 동의하기' 체크박스 기능
 
-- 입력한 정보가 모두 저장되어 `프로필`에서 보여지도록 설정 (Redux 상태관리)
+- 입력한 정보가 모두 저장되어 `프로필`에서 보여지도록 설정 (Zustand 상태관리)
 
 ### 프로필 (마이 페이지)
 
@@ -115,7 +111,7 @@ https://github.com/yjinn0813/cinetalk
 
 - `라이브러리`, `리뷰 작성하기` 클릭하면 페이지 이동
 
-- `로그아웃` 버튼 기능 구현 (Redux 상태관리)
+- `로그아웃` 버튼 기능 구현 (Zustand 상태관리)
 
 ### 라이브러리 (개인의 기록)
 
@@ -133,7 +129,7 @@ https://github.com/yjinn0813/cinetalk
 
 - `공유하기` 버튼 클릭시 URL 주소 자동 복사
 
-- `삭제하기` 버튼 클릭시 리뷰 삭제 가능 (Redux 상태관리, 삭제시 라이브러리에서도 내역 삭제됨)
+- `삭제하기` 버튼 클릭시 리뷰 삭제 가능 (Zustand 상태관리)
 
 ### 리뷰 작성하기
 
@@ -189,35 +185,35 @@ https://github.com/yjinn0813/cinetalk
  ┃ ┣ 📂components
  ┃ ┃ ┣ 📂Main
  ┃ ┃ ┃ ┣ 📜Boxoffice.json
- ┃ ┃ ┃ ┣ 📜EventBox.jsx
+ ┃ ┃ ┃ ┣ 📜EventBox.tsx
  ┃ ┃ ┃ ┣ 📜Events.json
  ┃ ┃ ┃ ┣ 📜Friends.json
- ┃ ┃ ┃ ┣ 📜RankBox.jsx
- ┃ ┃ ┃ ┣ 📜ReviewBox.jsx
+ ┃ ┃ ┃ ┣ 📜RankBox.tsx
+ ┃ ┃ ┃ ┣ 📜ReviewBox.tsx
  ┃ ┃ ┃ ┗ 📜Reviews.json
  ┃ ┃ ┣ 📂Review
  ┃ ┃ ┃ ┣ 📜Posts.json
- ┃ ┃ ┃ ┣ 📜ReadPosts.jsx
- ┃ ┃ ┃ ┗ 📜WatchedPoster.jsx
+ ┃ ┃ ┃ ┣ 📜ReadPosts.tsx
+ ┃ ┃ ┃ ┗ 📜WatchedPoster.tsx
  ┃ ┃ ┣ 📂Write
- ┃ ┃ ┃ ┗ 📜Toggles.jsx
+ ┃ ┃ ┃ ┗ 📜Toggles.tsx
  ┃ ┃ ┗ 📂common
- ┃ ┃ ┃ ┣ 📜Footer.jsx
- ┃ ┃ ┃ ┗ 📜Header.jsx
+ ┃ ┃ ┃ ┣ 📜Footer.tsx
+ ┃ ┃ ┃ ┗ 📜Header.tsx
  ┃ ┣ 📂pages
- ┃ ┃ ┣ 📜Login.jsx
- ┃ ┃ ┣ 📜Main.jsx
- ┃ ┃ ┣ 📜NotFound.jsx
- ┃ ┃ ┣ 📜Profile.jsx
- ┃ ┃ ┣ 📜Register.jsx
- ┃ ┃ ┣ 📜Review.jsx
- ┃ ┃ ┣ 📜ReviewLists.jsx
- ┃ ┃ ┣ 📜Search.jsx
- ┃ ┃ ┗ 📜Write.jsx
+ ┃ ┃ ┣ 📜Login.tsx
+ ┃ ┃ ┣ 📜Main.tsx
+ ┃ ┃ ┣ 📜NotFound.tsx
+ ┃ ┃ ┣ 📜Profile.tsx
+ ┃ ┃ ┣ 📜Register.tsx
+ ┃ ┃ ┣ 📜Review.tsx
+ ┃ ┃ ┣ 📜ReviewLists.tsx
+ ┃ ┃ ┣ 📜Search.tsx
+ ┃ ┃ ┗ 📜Write.tsx
  ┃ ┣ 📂store
- ┃ ┃ ┣ 📜useAuthStore.js
- ┃ ┃ ┣ 📜usePostStore.js
- ┃ ┃ ┗ 📜useUserStore.js
+ ┃ ┃ ┣ 📜useAuthStore.ts
+ ┃ ┃ ┣ 📜usePostStore.ts
+ ┃ ┃ ┗ 📜useUserStore.ts
  ┃ ┣ 📂styles
  ┃ ┃ ┣ 📂Main
  ┃ ┃ ┃ ┣ 📜EventBox.scss
@@ -244,16 +240,17 @@ https://github.com/yjinn0813/cinetalk
  ┃ ┃ ┣ 📜NotFound.scss
  ┃ ┃ ┗ 📜root.scss
  ┃ ┣ 📂utils
- ┃ ┃ ┣ 📜auth.js
- ┃ ┃ ┗ 📜validation.js
- ┃ ┣ 📜App.jsx
- ┃ ┗ 📜main.jsx
+ ┃ ┃ ┣ 📜auth.ts
+ ┃ ┃ ┗ 📜validation.ts
+ ┃ ┣ 📜App.tsx
+ ┃ ┗ 📜main.tsx
  ┣ 📜.env
  ┣ 📜.gitignore
  ┣ 📜README.md
  ┣ 📜index.html
  ┣ 📜package-lock.json
  ┣ 📜package.json
+ ┣ 📜tsconfig.json
  ┣ 📜vercel.json
  ┗ 📜vite.config.js
 ```

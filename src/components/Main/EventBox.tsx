@@ -3,7 +3,13 @@
 import React from 'react';
 import '../../styles/Main/EventBox.scss';
 
-export default function EventBox({ EventPhoto, EventName, EventScript }) {
+type EventProps = {
+  EventPhoto: string;
+  EventName: string;
+  EventScript: string;
+}
+
+const EventBox = ({ EventPhoto, EventName, EventScript }: EventProps) => {
   return (
     <div className="event-box">
       <img
@@ -16,3 +22,5 @@ export default function EventBox({ EventPhoto, EventName, EventScript }) {
     </div>
   );
 }
+
+export default EventBox;

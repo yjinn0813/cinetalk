@@ -2,12 +2,14 @@
 import React from 'react';
 import '../../styles/Main/ReviewBox.scss';
 
-export default function ReviewBox({
-  MovieName,
-  PostTitle,
-  trafficLight,
-  author,
-}) {
+type ReviewProps = {
+  MovieName: string;
+  PostTitle: string;
+  trafficLight: string;
+  author: string;
+}
+
+const ReviewBox = ({ MovieName, PostTitle, trafficLight, author }: ReviewProps) => {
   return (
     <div className="main-box">
       <div className="main-movie-title">{MovieName}</div>
@@ -19,3 +21,5 @@ export default function ReviewBox({
     </div>
   );
 }
+
+export default ReviewBox;

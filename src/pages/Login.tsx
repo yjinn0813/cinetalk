@@ -3,11 +3,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/useAuthStore';
+import { useUserStore } from '../store/useUserStore';
 import { validateLoginId, validateLoginPw } from '../utils/auth';
 import '../styles/pages/Login.scss';
 
 const Login = () => {
   const { login } = useAuthStore();
+  const { user } = useUserStore();
   const navigate = useNavigate();
 
   const [userId, setUserId] = useState('');
@@ -27,7 +29,11 @@ const Login = () => {
       return;
     }
 
-    login({ userId });
+    login({
+      userId: user.userId,
+      userName: user.userName,
+    });
+    
     navigate('/Profile');
   };
 

@@ -17,7 +17,8 @@ import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-export default function Main() {
+// ====================
+const Main = () => {
   return (
     <section className="main-container">
       <div className="main-item boxoffice-area">
@@ -130,6 +131,7 @@ export default function Main() {
           ))}
         </Swiper>
       </div>
+
       <div className="main-item banner-area">
         <Swiper
           spaceBetween={30}
@@ -156,3 +158,5 @@ export default function Main() {
     </section>
   );
 }
+
+export default Main;

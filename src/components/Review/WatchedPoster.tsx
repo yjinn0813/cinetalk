@@ -2,7 +2,13 @@
 import React from 'react';
 import '../../styles/Watched/WatchedPoster.scss';
 
-export default function WatchedPoster({ poster, title, date }) {
+type LibraryProps = {
+  poster: string;
+  title: string;
+  date: string;
+}
+
+const WatchedPoster = ({ poster, title, date }: LibraryProps) => {
   return (
     <div className="w-container">
       <div className="w-box">
@@ -15,3 +21,5 @@ export default function WatchedPoster({ poster, title, date }) {
     </div>
   );
 }
+
+export default WatchedPoster;

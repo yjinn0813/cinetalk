@@ -12,7 +12,7 @@ const menuList = [
 
 // ==============================
 const Profile = () => {
-  const { logout } = useAuthStore();
+  const { logout, user } = useAuthStore();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -25,7 +25,7 @@ const Profile = () => {
       <div className="page-title">MY PAGE</div>
 
       <div className="profile">
-        <div className="nickname">홍길동</div>
+        <div className="nickname">{user?.userName || '홍길동'}</div>
       </div>
 
       <div className="profile-btns">

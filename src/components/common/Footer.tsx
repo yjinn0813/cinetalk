@@ -4,7 +4,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../styles/common/Footer.scss';
 
-export default function Footer() {
+const Footer = () => {
   return (
     <footer className="footer">
       <div className="foot-container">
@@ -40,3 +40,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+export default Footer;

@@ -5,7 +5,15 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShareIcon from '@mui/icons-material/Share';
 
-export default function ReadPosts({ poster, title, date, body, onDelete }) {
+type PostProps = {
+  poster: string;
+  title: string;
+  date: string;
+  body: string;
+  onDelete: () => void;
+}
+
+const ReadPosts = ({ poster, title, date, body, onDelete }: PostProps) => {
   const posterImage = `/images/Review/${poster}.jpg`;
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
@@ -61,3 +69,5 @@ export default function ReadPosts({ poster, title, date, body, onDelete }) {
     </div>
   );
 }
+
+export default ReadPosts;

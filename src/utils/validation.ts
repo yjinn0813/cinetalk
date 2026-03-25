@@ -7,8 +7,13 @@ const PW_REGEX = /^(?=.*[!@#$%^&*(),.?":{}|<>])[a-zA-Z0-9!@#$%^&*(),.?":{}|<>]{8
 // 테스트용 아이디
 const BLOCKED_USER_ID = 'cinetalk';
 
+type ValidateResult = {
+  msg: string;
+  type: 'empty' | 'warning' | 'error' | 'success';
+};
+
 // 아이디 검증
-export const validateId = (value) => {
+export const validateId = (value: string): ValidateResult => {
   if (!value) {
     return {
       msg: '아이디를 입력하세요.',
@@ -37,7 +42,7 @@ export const validateId = (value) => {
 };
 
 // 비밀번호 검증
-export const validatePw = (pw, pw2) => {
+export const validatePw = (pw: string, pw2: string): ValidateResult => {
   if (!pw) {
     return {
       msg: '비밀번호를 입력해주세요.',

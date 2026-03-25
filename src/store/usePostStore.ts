@@ -3,12 +3,34 @@
 import { create } from 'zustand';
 import PostsData from '../components/Review/Posts.json';
 
-const getInitialPosts = () => {
+// 본문에 대한 타입
+type Post = {
+  id: number;
+  title: string;
+  body: string;
+  date: string;
+  poster: string;
+  url?: string;
+  spoiler?: boolean;
+  isPrivate?: boolean;
+};
+
+// 글 상태
+type PostState = {
+  posts: Post[];
+  addPost: (newPost: Omit<Post, 'id'>) => number;
+  deletePost: (id: number) => void;
+  updatePost: (id: number, updatedPost: Omit<Post, 'id'>) => void;
+};
+
+// 데이터 불러오기
+const getInitialPosts = (): Post[] => {
   const stored = localStorage.getItem('posts');
   return stored ? JSON.parse(stored) : PostsData;
 };
 
-export const usePostStore = create((set, get) => ({
+// ==============================
+export const usePostStore = create<PostState>((set, get) => ({
   posts: getInitialPosts(),
 
   addPost: (newPost) => {
@@ -29,8 +51,17 @@ export const usePostStore = create((set, get) => ({
 
   deletePost: (id) => {
     const updatedPosts = get().posts.filter((p) => p.id !== id);
-    localStorage.setItem('posts', JSON.stringify(updatedPosts));
 
     set({ posts: updatedPosts });
+    localStorage.setItem('posts', JSON.stringify(updatedPosts));
+  },
+
+  updatePost: (id, updatedPost) => {
+    const updatedPosts = get().posts.map((post) =>
+      post.id === id ? { ...post, ...updatedPost } : post
+    );
+
+    set({ posts: updatedPosts });
+    localStorage.setItem('posts', JSON.stringify(updatedPosts));
   },
 }));
