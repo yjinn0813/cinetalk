@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useUserStore } from '../store/useUserStore';
 import { useAuthStore } from '../store/useAuthStore';
 import { validateId, validatePw } from '../utils/validation';
+import { Box, TextField, Button } from '@mui/material';
 import '../styles/pages/Register.scss';
 
 const inputList = [
@@ -42,13 +43,6 @@ const Register = () => {
     type: '',
   });
 
-  const [terms, setTerms] = useState({
-    all: false,
-    term1: false,
-    term2: false,
-    term3: false,
-  });
-
   // 공통 input handler
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -75,7 +69,7 @@ const Register = () => {
   };
 
   // 포커스 아웃되면 메시지 초기화
-  const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
     if (name === 'userId' && !value) {
@@ -84,26 +78,6 @@ const Register = () => {
 
     if ((name === 'userPw' || name === 'userPw2') && !form.userPw && !form.userPw2) {
       setPwMsg({ msg: '', type: '' });
-    }
-  };
-
-  // 약관동의 확인
-  const handleTermChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target;
-
-    if (name === 'all') {
-      setTerms({
-        all: checked,
-        term1: checked,
-        term2: checked,
-        term3: checked,
-      });
-    } else {
-      setTerms((prev) => ({
-        ...prev,
-        [name]: checked,
-        all: checked && prev.term1 && prev.term2 && prev.term3,
-      }));
     }
   };
 
@@ -117,71 +91,89 @@ const Register = () => {
       !userName ||
       !userId ||
       !userPw ||
-      !userPw2 ||
-      !terms.term1 ||
-      !terms.term2 ||
-      !terms.term3
+      !userPw2
     ) {
-      alert('모든 항목을 입력하고 약관에 동의해주세요.');
       return;
     }
 
-    setUserInfo({ userName, userId, userPw, terms });
+    setUserInfo({ userName, userId, userPw });
     login({ userId, userName });
 
     navigate('/Profile');
   };
 
   return (
-    <form className="reg-wrap" onSubmit={handleSubmit}>
+    <Box component="form" 
+      autoComplete="off" noValidate
+      className="reg-wrap" 
+      onSubmit={handleSubmit}
+    >
       <div className="reg-title">회원가입</div>
 
       <div className="reg-input-area">
-        {inputList.map((input) => (
-          <React.Fragment key={input.name}>
-            <input
-              className="reg-focus"
-              name={input.name}
-              type={input.type}
-              placeholder={input.placeholder}
-              value={form[input.name]}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
+        {inputList.map((input) => {
+          const isId = input.name === 'userId';
+          const isPw2 = input.name === 'userPw2';
 
-            {input.name === 'userId' && (
-              <div className={`regMsg ${idMsg.type}`}>{idMsg.msg}</div>
-            )}
+          let currentMsg: ValidateResult | null = null;
+          if (isId) currentMsg = idMsg;
+          else if (isPw2) currentMsg = pwMsg;
 
-            {(input.name === 'userPw2') && (
-              <div className={`regMsg ${pwMsg.type}`}>{pwMsg.msg}</div>
-            )}
-          </React.Fragment>
-        ))}
+          return (
+            <React.Fragment key={input.name}>
+              <TextField
+                name={input.name}
+                type={input.type}
+                label={input.placeholder}
+                value={form[input.name]}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                fullWidth
+                variant="outlined"
+
+                error={
+                  isId
+                    ? idMsg.type === 'error' || idMsg.type === 'warning'
+                    : isPw2
+                    ? pwMsg.type === 'error' || pwMsg.type === 'warning'
+                    : false
+                }
+
+                helperText={null}
+
+                sx={{
+                  my: 1.5,
+
+                  '& .MuiOutlinedInput-root': {
+                    borderRadius: '8px',
+
+                    '& fieldset': {
+                      borderColor: '#6b6b6b',
+                    },
+
+                    '&:hover fieldset': {
+                      borderColor: '#1e90ff',
+                    },
+
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#1e90ff',
+                    },
+                  },
+                }}
+              />
+
+              {currentMsg?.msg && (
+                <div className={`regMsg ${currentMsg.type}`}>
+                  {currentMsg.msg}
+                </div>
+              )}
+            </React.Fragment>
+          );
+        })}
       </div>
 
-      {/* 약관 */}
-      <div className="terms">
-        {['all', 'term1', 'term2', 'term3'].map((term) => (
-          <label key={term}
-            className={ term === 'all' ? 'checkAll' : term }
-          >
-            <input
-              type="checkbox"
-              name={term}
-              checked={terms[term]}
-              onChange={handleTermChange}
-            />
-            {term === 'all' && ' 모두 동의'}
-            {term === 'term1' && ' 14세 이상입니다 (필수)'}
-            {term === 'term2' && ' 이용 약관 동의 (필수)'}
-            {term === 'term3' && ' 개인정보 수집 동의 (필수)'}
-          </label>
-        ))}
-      </div>
-
-      <button className="regOk">회원가입 완료</button>
-    </form>
+      <Button className="regOk" variant="contained">가입하기</Button>
+    </Box>
   );
 };
 

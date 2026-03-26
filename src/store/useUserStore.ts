@@ -7,11 +7,6 @@ type UserInfo = {
   userName: string;
   userId: string;
   userPw: string;
-  terms: {
-    term1: boolean;
-    term2: boolean;
-    term3: boolean;
-  };
 };
 
 // 가입 상태
@@ -25,11 +20,6 @@ export const useUserStore = create<UserState>((set) => ({
     userName: '',
     userId: '',
     userPw: '',
-    terms: {
-      term1: false,
-      term2: false,
-      term3: false,
-    },
   },
 
   setUserInfo: (userInfo) =>
