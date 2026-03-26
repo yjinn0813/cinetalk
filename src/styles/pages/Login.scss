@@ -29,7 +29,9 @@
 }
 .lg-msg {
   font-size: 16px;
-  margin: 12px 0;
+  font-weight: 500;
+  margin-bottom: 16px;
+  padding-left: 10px;
 
   &.empty { color: root.$main-blue; }
   &.warning { color: root.$warning; }

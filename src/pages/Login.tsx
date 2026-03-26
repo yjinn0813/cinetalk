@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/useAuthStore';
 import { useUserStore } from '../store/useUserStore';
 import { validateLoginId, validateLoginPw } from '../utils/auth';
-import { Box, TextField, Button, FormHelperText } from '@mui/material';
+import { Box, TextField, Button } from '@mui/material';
 import '../styles/pages/Login.scss';
 
 const inputList = [
@@ -17,6 +17,9 @@ type ValidateResult = {
   msg: string;
   type: string;
 };
+
+const testUserId = 'cinetalk';
+const testUserPw = 'cinetalk1!';
 
 // ==============================
 const Login = () => {
@@ -80,6 +83,17 @@ const Login = () => {
 
     if (idResult.type !== 'success' || pwResult.type !== 'success') return;
 
+    if (form.userId !== testUserId || form.userPw !== testUserPw) {
+      setPwMsg({
+        msg: '아이디 또는 비밀번호가 올바르지 않습니다.',
+        type: 'error',
+      });
+      return;
+    }
+
+    setIdMsg({ msg: '', type: '' });
+    setPwMsg({ msg: '', type: '' });
+
     login({
       userId: user.userId,
       userName: user.userName,
@@ -113,6 +127,8 @@ const Login = () => {
                   currentMsg.type === 'warning'
                 }
                 sx={{
+                  mb: 1.5,
+
                   '& .MuiOutlinedInput-root': {
                     borderRadius: '8px',
 
@@ -132,9 +148,9 @@ const Login = () => {
               />
 
               {currentMsg.msg && (
-                <FormHelperText className={`lg-msg ${currentMsg.type}`}>
+                <div className={`lg-msg ${currentMsg.type}`}>
                   {currentMsg.msg}
-                </FormHelperText>
+                </div>
               )}
             </Box>
           );
@@ -146,7 +162,7 @@ const Login = () => {
           onClick={handleLogin}
           className='login'
         >
-          확인
+          로그인
         </Button>
       </Box>
 
