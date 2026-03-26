@@ -2,15 +2,65 @@
 
 import React from 'react';
 import { Card, CardContent, Typography, Box, CardMedia } from '@mui/material';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import FiberNewOutlinedIcon from '@mui/icons-material/FiberNewOutlined';
+import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 import '../../styles/Main/RankBox.scss';
 
+type RankChangeType = "up" | "down" | "new" | "equal";
 type RankProps = {
-  Rank: number;
-  Boxoffice: string;
-  RankName: string;
+  rank: number;
+  poster: string;
+  name: string;
+  rankChange: RankChangeType,
+  rankDiff: number;
 }
 
-const RankBox =({ Rank, Boxoffice, RankName }: RankProps) => {
+const getRankColor = (rankChange: RankChangeType) => {
+  switch (rankChange) {
+    case 'up': return '#ff4d4f';
+    case 'down': return '#1261ff';
+    case 'new': return '#ffaa00';
+    default: return '#6b6b6b'; // 'equal'
+  }
+};
+
+const renderRankIcon = (rankChange: RankChangeType, rankDiff: number) => {
+  switch (rankChange) {
+    case 'up':
+      return (
+        <Box component="div" 
+          sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}
+        >
+          <ArrowDropUpIcon sx={{ fontSize: 32, fontWeight: 700 }} />
+          <Typography component="div" 
+            fontWeight="bold" 
+            className='rank-change'
+          >{rankDiff}</Typography>
+        </Box>
+      );
+    case 'down':
+      return (
+        <Box component="div"
+          sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}
+        >
+          <ArrowDropDownIcon sx={{ fontSize: 32, fontWeight: 700 }} />
+          <Typography component="div" 
+            fontWeight="bold" 
+            className='rank-change'
+          >{rankDiff}</Typography>
+        </Box>
+      );
+    case 'equal':
+      return <RemoveRoundedIcon sx={{ fontSize: 40, fontWeight: 900 }} />;
+    case 'new':
+      return <FiberNewOutlinedIcon sx={{ fontSize: 40, fontWeight: 700 }} />;
+  }
+};
+
+// ====================
+const RankBox =({ rank, poster, name, rankChange, rankDiff }: RankProps) => {
   return (
     <Card className="rank-box"
       sx={{
@@ -33,8 +83,8 @@ const RankBox =({ Rank, Boxoffice, RankName }: RankProps) => {
       <CardMedia
         className="rank-poster"
         component="img"
-        image={`images/Main/${Boxoffice}`}
-        alt={Boxoffice}
+        image={`images/Main/rank/${poster}`}
+        alt={poster}
         sx={{
           width: 80,
           height: '100%',
@@ -43,17 +93,35 @@ const RankBox =({ Rank, Boxoffice, RankName }: RankProps) => {
       />
 
       {/* 텍스트 */}
-      <CardContent className='rank-text' 
-        sx={{ display:'flex', flexDirection:'row', alignItems:'center', flex:1 }}
+      <CardContent
+        className='rank-text'
+        sx={{ 
+          display: 'flex', 
+          flexDirection: 'row', 
+          alignItems: 'center', 
+          justifyContent: 'space-between',
+          flex: 1
+        }}
       >
-        <Typography variant="subtitle1"
-          fontWeight="bold"
-          className="rank"
-          sx={{ pr:3 }}
+        {/* 왼쪽: 순위 + 영화제목 */}
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Typography variant="subtitle1" fontWeight="bold" sx={{ pr: 1 }} className='rank'>
+            {rank}
+          </Typography>
+          <Typography variant="body1" className='rank-name'>{name}</Typography>
+        </Box>
+
+        {/* 오른쪽: 등락 */}
+        <Typography
+          component="div"
+          variant="body2"
+          sx={{
+            fontWeight: 'bold',
+            color: getRankColor(rankChange)
+          }}
         >
-          {Rank}
+          {renderRankIcon(rankChange, rankDiff)}
         </Typography>
-        <Typography variant="body1" className="rank-name">{RankName}</Typography>
       </CardContent>
     </Card>
   );

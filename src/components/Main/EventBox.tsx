@@ -29,7 +29,7 @@ const EventBox = ({ EventPhoto, EventName, EventScript }: EventProps) => {
       <CardMedia
         className="event-photo"
         component="img"
-        image={`/images/Main/${EventPhoto}`}
+        image={`/images/Main/event/${EventPhoto}`}
         alt={EventPhoto}
       />
 

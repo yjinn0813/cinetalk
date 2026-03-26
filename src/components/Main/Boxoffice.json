@@ -1,62 +1,82 @@
 [
   {
     "id": 1,
-    "Rank": 1,
-    "Boxoffice": "boxoffice1.jfif",
-    "RankName": "데드풀과 울버린"
+    "rank": 1,
+    "poster": "poster1.jpeg",
+    "name": "파일럿",
+    "rankChange": "up",
+    "rankDiff": 7
   },
   {
     "id": 2,
-    "Rank": 2,
-    "Boxoffice": "boxoffice2.jfif",
-    "RankName": "슈퍼배드 4"
+    "rank": 2,
+    "poster": "poster2.jpeg",
+    "name": "데드풀과 울버린",
+    "rankChange": "down",
+    "rankDiff": 1
   },
   {
     "id": 3,
-    "Rank": 3,
-    "Boxoffice": "boxoffice3.jfif",
-    "RankName": "파일럿"
+    "rank": 3,
+    "poster": "poster3.jpeg",
+    "name": "슈퍼배드 4",
+    "rankChange": "down",
+    "rankDiff": 1
   },
   {
     "id": 4,
-    "Rank": 4,
-    "Boxoffice": "boxoffice4.jfif",
-    "RankName": "탈주"
+    "rank": 4,
+    "poster": "poster4.jpeg",
+    "name": "인사이드 아웃 2",
+    "rankChange": "equal",
+    "rankDiff": 0
   },
   {
     "id": 5,
-    "Rank": 5,
-    "Boxoffice": "boxoffice5.jfif",
-    "RankName": "인사이드 아웃 2"
+    "rank": 5,
+    "poster": "poster5.jpeg",
+    "name": "탈주",
+    "rankChange": "down",
+    "rankDiff": 2
   },
   {
     "id": 6,
-    "Rank": 6,
-    "Boxoffice": "boxoffice6.jfif",
-    "RankName": "명탐정 코난: 100만 달러의 펜타그램"
+    "rank": 6,
+    "poster": "poster6.jpeg",
+    "name": "명탐정 코난: 100만 달러의 펜타그램",
+    "rankChange": "down",
+    "rankDiff": 1
   },
   {
     "id": 7,
-    "Rank": 7,
-    "Boxoffice": "boxoffice7.jfif",
-    "RankName": "핸섬가이즈"
+    "rank": 7,
+    "poster": "poster7.jpeg",
+    "name": "핸섬가이즈",
+    "rankChange": "down",
+    "rankDiff": 1
   },
   {
     "id": 8,
-    "Rank": 8,
-    "Boxoffice": "boxoffice8.jfif",
-    "RankName": "탈출: 프로젝트 사일런스"
+    "rank": 8,
+    "poster": "poster8.jpeg",
+    "name": "사랑의 하츄핑",
+    "rankChange": "up",
+    "rankDiff": 6
   },
   {
     "id": 9,
-    "Rank": 9,
-    "Boxoffice": "boxoffice9.jfif",
-    "RankName": "퍼펙트 데이즈"
+    "rank": 9,
+    "poster": "poster9.jpeg",
+    "name": "헬로카봇 올스타 스페셜",
+    "rankChange": "new",
+    "rankDiff": 0
   },
   {
     "id": 10,
-    "Rank": 10,
-    "Boxoffice": "boxoffice10.jfif",
-    "RankName": "하이재킹"
+    "rank": 10,
+    "poster": "poster10.jpeg",
+    "name": "퍼펙트 데이즈",
+    "rankChange": "equal",
+    "rankDiff": 0
   }
 ]
