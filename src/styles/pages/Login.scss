@@ -22,10 +22,8 @@
 
 // input area
 .lg-input {
-  display: flex;
-  flex-direction: column;
-  position: relative;
   width: 100%;
+  max-width: 360px;
 }
 .lg-msg {
   font-size: 16px;
@@ -45,13 +43,13 @@
   font-weight: 600 !important;
   border-radius: 8px !important;
   background-color: root.$main-blue !important;
-  width: 100%;
 }
 
 // btn area
 .lg-btns {
   margin: 80px 50px;
   width: 100%;
+  max-width: 360px;
   
   // 회원가입 이동 버튼
   .register {
@@ -60,7 +58,6 @@
     padding: 16px 0 !important;
     font-weight: 600 !important;
     border-radius: 8px !important;
-    width: 100%;
   }
 }
 
