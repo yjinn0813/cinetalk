@@ -88,7 +88,6 @@ const Main = () => {
               <ReviewBox
                 poster={review.poster}
                 movieName={review.movieName}
-                postTitle={review.postTitle}
                 author={review.author}
                 trafficLight={review.trafficLight}
               />

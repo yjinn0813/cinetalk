@@ -3,7 +3,6 @@
     "id": 1,
     "poster": "poster1.jpeg",
     "movieName": "기생충",
-    "postTitle": "사회적 논평의 걸작",
     "author": "김지수",
     "trafficLight": "good"
   },
@@ -11,7 +10,6 @@
     "id": 2,
     "poster": "poster2.jpeg",
     "movieName": "서울의 봄",
-    "postTitle": "배우들 연기 대박!",
     "author": "박준호",
     "trafficLight": "good"
   },
@@ -19,7 +17,6 @@
     "id": 3,
     "poster": "poster3.jpeg",
     "movieName": "반도",
-    "postTitle": "좀비가 무서워요",
     "author": "이서연",
     "trafficLight": "bad"
   },
@@ -27,7 +24,6 @@
     "id": 4,
     "poster": "poster4.jpeg",
     "movieName": "콘크리트 유토피아",
-    "postTitle": "생각보다 무거움",
     "author": "최민수",
     "trafficLight": "neutral"
   },
@@ -35,7 +31,6 @@
     "id": 5,
     "poster": "poster5.jpeg",
     "movieName": "밀수",
-    "postTitle": "배우들 케미 좋다",
     "author": "정유진",
     "trafficLight": "good"
   },
@@ -43,7 +38,6 @@
     "id": 6,
     "poster": "poster6.jpeg",
     "movieName": "헤어질 결심",
-    "postTitle": "호불호 갈릴 작품",
     "author": "한지훈",
     "trafficLight": "neutral"
   },
@@ -51,7 +45,6 @@
     "id": 7,
     "poster": "poster7.jpeg",
     "movieName": "더 퍼스트 슬램덩크",
-    "postTitle": "추억 제대로 자극됐다",
     "author": "김태윤",
     "trafficLight": "good"
   },
@@ -59,7 +52,6 @@
     "id": 8,
     "poster": "poster8.jpeg",
     "movieName": "듄",
-    "postTitle": "영상미는 인정",
     "author": "박소연",
     "trafficLight": "neutral"
   },
@@ -67,7 +59,6 @@
     "id": 9,
     "poster": "poster9.jpeg",
     "movieName": "오펜하이머",
-    "postTitle": "몰입감 압도적",
     "author": "송지훈",
     "trafficLight": "neutral"
   },
@@ -75,7 +66,6 @@
     "id": 10,
     "poster": "poster10.jpeg",
     "movieName": "스즈메의 문단속",
-    "postTitle": "감성은 좋은데 아쉬움",
     "author": "이하린",
     "trafficLight": "bad"
   }

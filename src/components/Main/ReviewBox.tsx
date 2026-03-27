@@ -5,13 +5,12 @@ import '../../styles/Main/ReviewBox.scss';
 
 type ReviewProps = {
   movieName: string;
-  postTitle: string;
   trafficLight: string;
   poster: string;
   author: string;
 }
 
-const ReviewBox = ({ movieName, postTitle, trafficLight, poster, author }: ReviewProps) => {
+const ReviewBox = ({ movieName, trafficLight, poster, author }: ReviewProps) => {
   return (
     <Card className='main-box' 
       sx={{ 
@@ -40,12 +39,8 @@ const ReviewBox = ({ movieName, postTitle, trafficLight, poster, author }: Revie
       />
       
       <CardContent className='main-wrap'>
-        <Typography variant="subtitle2" className="main-movie-title">
+        <Typography variant="h6" className="main-movie-title">
           {movieName}
-        </Typography>
-
-        <Typography variant="h6" className="main-post-title">
-          {postTitle}
         </Typography>
 
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}
