@@ -13,7 +13,7 @@ const UserInfo = ({ userName }: Props) => {
       <Typography
         sx={{
           fontWeight: 'bold',
-          fontSize: 26,
+          fontSize: 28,
         }}
       >
         {userName || '홍길동'}

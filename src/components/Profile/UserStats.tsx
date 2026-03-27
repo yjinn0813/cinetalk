@@ -33,7 +33,7 @@ const UserStats = () => {
       <Box sx={{ flex: 1, textAlign: 'center' }}>
         <Typography variant="body2">총 리뷰</Typography>
         <Typography sx={{
-          fontSize: 24,
+          fontSize: 22,
           fontWeight: 600
         }}>{posts.length}</Typography>
       </Box>
@@ -43,7 +43,7 @@ const UserStats = () => {
       <Box sx={{ flex: 1, textAlign: 'center' }}>
         <Typography variant="body2">평균 평점</Typography>
         <Typography sx={{
-          fontSize: 24,
+          fontSize: 22,
           fontWeight: 600
         }}>{avgRating}</Typography>
       </Box>
@@ -53,7 +53,7 @@ const UserStats = () => {
       <Box sx={{ flex: 1, textAlign: 'center' }}>
         <Typography variant="body2">총 활동일</Typography>
         <Typography sx={{
-          fontSize: 24,
+          fontSize: 22,
           fontWeight: 600
         }}>{activeDays}일</Typography>
       </Box>      

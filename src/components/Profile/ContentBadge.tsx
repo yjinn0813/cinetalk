@@ -28,7 +28,7 @@ const ContentBadges = ({ movieCount, dramaCount, aniCount }: Props) => {
           width: '100%',
         }}
       >
-        <Typography sx={{ fontSize: 24, fontWeight: 600 }}>
+        <Typography sx={{ fontSize: 22, fontWeight: 600 }}>
           {movieCount}
         </Typography>
         <Typography variant="body2" sx={{ color: '#666' }}>
@@ -46,7 +46,7 @@ const ContentBadges = ({ movieCount, dramaCount, aniCount }: Props) => {
           width: '100%',
         }}
       >
-        <Typography sx={{ fontSize: 24, fontWeight: 600 }}>
+        <Typography sx={{ fontSize: 22, fontWeight: 600 }}>
           {dramaCount}
         </Typography>
         <Typography variant="body2" sx={{ color: '#666' }}>
@@ -64,7 +64,7 @@ const ContentBadges = ({ movieCount, dramaCount, aniCount }: Props) => {
           width: '100%',
         }}
       >
-        <Typography sx={{ fontSize: 24, fontWeight: 600 }}>
+        <Typography sx={{ fontSize: 22, fontWeight: 600 }}>
           {aniCount}
         </Typography>
         <Typography variant="body2" sx={{ color: '#666' }}>

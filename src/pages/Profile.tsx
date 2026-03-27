@@ -43,11 +43,15 @@ const Profile = () => {
       {/* 중앙 카드 */}
       <Card
         sx={{
+          width: '100%',
           maxWidth: 420,
-          minWidth: 320,
           borderRadius: '8px',
           boxShadow: 4,
           p: '10px',
+          
+          '@media (max-width:420px)': {
+            maxWidth: '90%',
+          },
         }}
       >
         <CardContent>
