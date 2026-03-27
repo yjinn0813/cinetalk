@@ -6,6 +6,7 @@ import PostsData from '../components/Review/Posts.json';
 // 본문에 대한 타입
 type Post = {
   id: number;
+  type: string;
   title: string;
   body: string;
   date: string;
@@ -13,6 +14,7 @@ type Post = {
   url?: string;
   spoiler?: boolean;
   isPrivate?: boolean;
+  rating: number;
 };
 
 // 글 상태
