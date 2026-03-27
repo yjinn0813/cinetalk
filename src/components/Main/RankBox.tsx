@@ -35,8 +35,14 @@ const renderRankIcon = (rankChange: RankChangeType, rankDiff: number) => {
         >
           <ArrowDropUpIcon sx={{ fontSize: 32, fontWeight: 700 }} />
           <Typography component="div" 
-            fontWeight="bold" 
-            className='rank-change'
+            fontWeight="bold"
+            sx={{
+              fontSize: 20,
+
+              '@media (max-width:420px)': {
+                fontSize: 16,
+              }
+            }}
           >{rankDiff}</Typography>
         </Box>
       );
@@ -47,15 +53,39 @@ const renderRankIcon = (rankChange: RankChangeType, rankDiff: number) => {
         >
           <ArrowDropDownIcon sx={{ fontSize: 32, fontWeight: 700 }} />
           <Typography component="div" 
-            fontWeight="bold" 
-            className='rank-change'
+            fontWeight="bold"
+            sx={{
+              fontSize: 20,
+
+              '@media (max-width:420px)': {
+                fontSize: 16,
+              }
+            }}
           >{rankDiff}</Typography>
         </Box>
       );
     case 'equal':
-      return <RemoveRoundedIcon sx={{ fontSize: 40, fontWeight: 900 }} />;
-    case 'new':
-      return <FiberNewOutlinedIcon sx={{ fontSize: 40, fontWeight: 700 }} />;
+      return <RemoveRoundedIcon 
+        sx={{ 
+          fontSize: 40,
+          fontWeight: 900,
+          
+          '@media (max-width:420px)': {
+            fontSize: 32
+          }
+        }}
+        />;
+        case 'new':
+          return <FiberNewOutlinedIcon 
+          sx={{
+            fontSize: 40,
+            fontWeight: 700,
+
+            '@media (max-width:420px)': {
+              fontSize: 32
+            }
+        }} 
+      />;
   }
 };
 
@@ -68,15 +98,21 @@ const RankBox =({ rank, poster, name, rankChange, rankDiff }: RankProps) => {
         alignItems: 'center',
         width: 'auto', // 원하는 카드 폭
         height: 110, // 직사각형 높이
-        borderRadius: 3,
+        borderRadius: 2,
         boxShadow: 3,
+        padding: 2,
         overflow: 'hidden',
         background: 'linear-gradient(145deg, #ffffff, #e3f0ff)',
         transition: '0.3s',
+
         '&:hover': {
           transform: 'translateY(-4px)',
           boxShadow: 6,
         },
+
+        '@media (max-width:420px)': {
+          padding: '0 0 0 12px',
+        }
       }}
     >
       {/* 포스터 */}
@@ -89,12 +125,16 @@ const RankBox =({ rank, poster, name, rankChange, rankDiff }: RankProps) => {
           width: 80,
           height: '100%',
           objectFit: 'cover',
+          
+          '@media (max-width:420px)': {
+            width: 50,
+            height: 'auto',
+          }
         }}
       />
 
       {/* 텍스트 */}
       <CardContent
-        className='rank-text'
         sx={{ 
           display: 'flex', 
           flexDirection: 'row', 
@@ -105,10 +145,30 @@ const RankBox =({ rank, poster, name, rankChange, rankDiff }: RankProps) => {
       >
         {/* 왼쪽: 순위 + 영화제목 */}
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography variant="subtitle1" fontWeight="bold" sx={{ pr: 1 }} className='rank'>
+          <Typography variant="subtitle1" fontWeight="bold" 
+            sx={{
+              fontSize: 20,
+              fontWeight: 700,
+              margin: '0 12px',
+
+              '@media (max-width:420px)': {
+                fontSize: 16
+              }
+            }}
+          >
             {rank}
           </Typography>
-          <Typography variant="body1" className='rank-name'>{name}</Typography>
+          <Typography variant="body1"
+            className='rank-name'
+            sx={{
+              fontSize: 20,
+              margin: '0 8px',
+
+              '@media (max-width:420px)': {
+                fontSize: 16,
+              }
+            }}
+          >{name}</Typography>
         </Box>
 
         {/* 오른쪽: 등락 */}
