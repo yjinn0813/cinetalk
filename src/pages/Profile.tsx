@@ -35,7 +35,7 @@ const Profile = () => {
       sx={{
         display: 'flex',
         justifyContent: 'center',
-        p: '60px 0',
+        p: { xs: '40px 16px', sm: '60px 24px' },
         height: 'auto',
         backgroundColor: '#dadada'
       }}
@@ -44,13 +44,12 @@ const Profile = () => {
       <Card
         sx={{
           width: '100%',
-          maxWidth: 420,
           borderRadius: '8px',
           boxShadow: 4,
           p: '10px',
-          
-          '@media (max-width:420px)': {
-            maxWidth: '90%',
+          maxWidth: {
+            xs: '90%',  // 모바일
+            sm: 420,    // 태블릿 이상
           },
         }}
       >
