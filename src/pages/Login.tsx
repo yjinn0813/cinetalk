@@ -104,6 +104,7 @@ const Login = () => {
 
   const toRegister = () => navigate('/register');
 
+  // ====================
   return (
     <Box component="form" autoComplete="off" noValidate className="lg-wrap">
       <div className="lg-title">로그인</div>
@@ -161,16 +162,41 @@ const Login = () => {
           variant="contained"
           onClick={handleLogin}
           className='login'
+          sx={{
+            fontSize: 20,
+            fontWeight: 600,
+            padding: '16px 0',
+            borderRadius: 2,
+            backgroundColor: '#1e90ff',
+          }}
         >
           로그인
         </Button>
       </Box>
 
-      <Box className="lg-btns">
+      <Box className="lg-btns"
+        sx={{
+          margin: '80px 50px',
+          width: '100%',
+          maxWidth: '360px',
+        }}
+      >
         <Button fullWidth
           variant="outlined" 
           onClick={toRegister} 
           className='register'
+          sx={{
+            border: '1px solid #1e90ff',
+            borderRadius: 2,
+            fontSize: 20,
+            fontWeight: 600,
+            padding: '16px 0',
+
+            '&.MuiButton-outlined:hover': {
+              backgroundColor: '#1e90ff',
+              color: '#fff',
+            },
+          }}
         >
           회원가입
         </Button>
