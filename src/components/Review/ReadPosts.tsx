@@ -158,6 +158,11 @@ const ReadPosts = ({ id, poster, title, date, body, signal, rating, onDelete }: 
               sx={{ 
                 minWidth: '82px',
                 p: '8px 0',
+
+                '&.MuiButton-outlined:hover': {
+                  backgroundColor: '#1e90ff',
+                  color: '#fff',
+                },
               }}
             >
               {btn.label}
@@ -172,7 +177,12 @@ const ReadPosts = ({ id, poster, title, date, body, signal, rating, onDelete }: 
             onClick={onDelete}
             sx={{ 
               minWidth: '82px',
-              p: '8px 0'
+              p: '8px 0',
+
+              '&.MuiButton-outlined:hover': {
+                backgroundColor: '#c62828',
+                color: '#fff',
+              },
             }}
           >
             삭제
