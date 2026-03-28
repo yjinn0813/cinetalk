@@ -12,14 +12,16 @@ type ReviewProps = {
 
 const ReviewBox = ({ movieName, trafficLight, poster, author }: ReviewProps) => {
   return (
-    <Card className='main-box' 
-      sx={{ 
+    <Card sx={{ 
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        border: '1px solid #1e90ff',
         borderRadius: 3,
         boxShadow: 5,
+        p: '16px',
         transition: '0.3s',
+
         '&:hover': {
           transform: 'translateY(-6px)',
           boxShadow: 6,
@@ -38,14 +40,26 @@ const ReviewBox = ({ movieName, trafficLight, poster, author }: ReviewProps) => 
         }}
       />
       
-      <CardContent className='main-wrap'>
-        <Typography variant="h6" className="main-movie-title">
+      <CardContent sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          pb: '16px !important'
+        }}
+      >
+        <Typography variant="h6" sx={{ fontSize:'18px' }}>
           {movieName}
         </Typography>
 
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}
-          className="main-author"
-        >
+        <Box sx={{ 
+          display: 'flex', 
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 1,
+          mt: '4px',
+          fontSize: '14px',
+          color: '#6b6b6b'
+        }}>
           <div className={`traffic-light ${trafficLight}`}></div>
           <Typography variant="body2">
             {author} 님의 리뷰

@@ -6,7 +6,6 @@ import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import FiberNewOutlinedIcon from '@mui/icons-material/FiberNewOutlined';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
-import '../../styles/Main/RankBox.scss';
 
 type RankChangeType = "up" | "down" | "new" | "equal";
 type RankProps = {
@@ -92,12 +91,12 @@ const renderRankIcon = (rankChange: RankChangeType, rankDiff: number) => {
 // ====================
 const RankBox =({ rank, poster, name, rankChange, rankDiff }: RankProps) => {
   return (
-    <Card className="rank-box"
-      sx={{
+    <Card sx={{
         display: 'flex',
         alignItems: 'center',
-        width: 'auto', // 원하는 카드 폭
-        height: 110, // 직사각형 높이
+        width: 'auto',
+        height: 110,
+        border: '1px solid #1e90ff',
         borderRadius: 2,
         boxShadow: 3,
         padding: 2,

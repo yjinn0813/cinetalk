@@ -2,27 +2,7 @@
 
 @use '../root.scss';
 
-.event-box {
-  flex: 0 0 auto; // box 고정 너비 유지
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
 .event-photo {
   background-color: rgba(30, 30, 30, 0.3);
   @include root.size;
-}
-
-.event-name {
-  font-size: 18px;
-  font-weight: 600;
-  margin: 6px 0;
-  position: relative;
-}
-
-.event-script {
-  font-size: 14px;
-  position: relative;
 }
