@@ -39,14 +39,3 @@
   &.error { color: root.$error; }
   &.success { color: root.$NAVER;}
 }
-
-// 회원가입 완료 버튼
-.regOk {
-  font-size: 20px !important;
-  background-color: root.$main-blue !important;
-  padding: 16px 0 !important;
-  font-weight: 600 !important;
-  border-radius: 8px !important;
-  max-width: 360px;
-  width: 100%;
-}

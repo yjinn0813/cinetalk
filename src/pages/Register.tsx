@@ -172,7 +172,17 @@ const Register = () => {
         })}
       </div>
 
-      <Button className="regOk" variant="contained">가입하기</Button>
+      <Button variant="contained"
+        sx={{
+          fontSize: '20px',
+          backgroundColor: '#1e90ff',
+          padding: '16px 0',
+          fontWeight: 600,
+          borderRadius: 2,
+          maxWidth: '360px',
+          width: '100%',
+        }}
+      >가입하기</Button>
     </Box>
   );
 };
