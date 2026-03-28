@@ -16,6 +16,7 @@ const WatchedPoster = ({ poster, title, signal, rating }: LibraryProps) => {
       <Box className="w-box" 
         sx={{ 
           minHeight: 506,
+          border: '1px solid #ddd;',
           borderRadius: 2,
           m: '16px 0',
           display: 'flex',
