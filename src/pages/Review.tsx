@@ -91,10 +91,10 @@ const Review = () => {
         open={openToast}
         autoHideDuration={1500}
         onClose={() => setOpenToast(false)}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
         <Alert severity="success" variant="filled">
-          리뷰가 삭제되었습니다.
+          리뷰가 삭제되었습니다!
         </Alert>
       </Snackbar>
 

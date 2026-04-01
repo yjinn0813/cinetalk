@@ -82,7 +82,7 @@ const ReadPosts = ({ id, poster, title, date, body, signal, rating, onDelete }: 
       }}>
 
         {/* 상단 */}
-        <Box sx={{ display: 'flex', gap: 2 }}>
+        <Box sx={{ display: 'flex', gap: '24px' }}>
           <Box
             component="img"
             src={posterImage}
@@ -195,7 +195,7 @@ const ReadPosts = ({ id, poster, title, date, body, signal, rating, onDelete }: 
         open={openToast}
         autoHideDuration={2000}
         onClose={() => setOpenToast(false)}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
         <Alert severity="success" variant="filled">
           URL이 복사되었습니다!

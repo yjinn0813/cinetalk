@@ -254,9 +254,10 @@ const Write = () => {
         open={open}
         autoHideDuration={1200}
         onClose={() => setOpen(false)}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
-        <Alert severity="success" sx={{ width: '100%' }}>
-          리뷰가 등록되었습니다! 🙌
+        <Alert severity="success" variant='filled'>
+          리뷰가 등록되었습니다!
         </Alert>
       </Snackbar>
     </Box>
