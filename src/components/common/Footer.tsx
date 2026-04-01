@@ -90,7 +90,7 @@ const Footer = () => {
             <Typography variant="body2">고객센터 : 1588-0000 (유료)</Typography>
             <Typography variant="body2">이메일 :
               <Box component="a"
-                href='mailto:hjc3790@gmail.com'
+                href='mailto:yjinn0813@gmail.com'
                 target='_blank'
                 sx={{
                   ml: 0.5,
@@ -98,7 +98,7 @@ const Footer = () => {
                   textDecoration: 'underline',
                   rel: 'noopener noreferrer'
                 }}
-              >hjc3790@gmail.com</Box>
+              >yjinn0813@gmail.com</Box>
             </Typography>
           </Box>
           
