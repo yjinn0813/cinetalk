@@ -1,0 +1,11 @@
+// header
+@use '../root.scss';
+
+.header-link {
+  text-decoration: none;
+  color: root.$main-blue;
+
+  &:hover {
+    color: root.$sub-gray;
+  }
+}

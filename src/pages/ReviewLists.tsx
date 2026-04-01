@@ -1,13 +1,16 @@
 /* 리뷰 리스트 (라이브러리) 페이지 */
 
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { usePostStore } from '../store/usePostStore';
 import WatchedPoster from '../components/Review/WatchedPoster';
-import '../styles/pages/Watched.scss';
+import '../styles/pages/ReviewLists.scss';
 
 const ReviewLists = () => {
-  const posts = usePostStore((state) => state.posts); // 데이터 가져오기
+  // 데이터 가져와서 최신순 정렬
+  const posts = usePostStore((state) => state.posts);
+  const sortedPosts = [...posts].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
 
   return (
     <div className="library-container">
@@ -16,12 +19,13 @@ const ReviewLists = () => {
         {posts.length === 0 ? (
           <div>해당 리뷰가 없습니다!😭</div>
         ) : (
-          posts.map((card) => (
+          sortedPosts.map((card) => (
             <Link key={card.id} to={`/Review/${card.id}`} className="movingbtn">
               <WatchedPoster
-                poster={`/images/Review/${card.poster}.jpg`}
+                poster={card.poster}
                 title={card.title}
-                date={card.date}
+                signal={card.signal}
+                rating={card.rating}
               />
             </Link>
           ))

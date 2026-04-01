@@ -6,6 +6,7 @@ import PostsData from '../components/Review/Posts.json';
 // 본문에 대한 타입
 type Post = {
   id: number;
+  type: string;
   title: string;
   body: string;
   date: string;
@@ -13,6 +14,8 @@ type Post = {
   url?: string;
   spoiler?: boolean;
   isPrivate?: boolean;
+  rating: number;
+  signal?: "good" | "neutral" | "bad";
 };
 
 // 글 상태
@@ -26,7 +29,12 @@ type PostState = {
 // 데이터 불러오기
 const getInitialPosts = (): Post[] => {
   const stored = localStorage.getItem('posts');
-  return stored ? JSON.parse(stored) : PostsData;
+  const parsed = stored ? JSON.parse(stored) : PostsData;
+
+  return parsed.map((post: any) => ({
+    ...post,
+    signal: post.signal as "good" | "neutral" | "bad",
+  }));
 };
 
 // ==============================

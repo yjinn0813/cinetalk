@@ -1,8 +1,5 @@
 /* 로그인 유틸함수 */
 
-const testUserId = 'cinetalk';
-const testUserPw = 'cinetalk1!';
-
 type ValidateResult = {
   msg: string;
   type: 'empty' | 'warning' | 'error' | 'success';
@@ -27,15 +24,8 @@ export const validateLoginId = (userId: string): ValidateResult => {
     };
   }
   
-  if (userId !== testUserId) {
-    return {
-      msg: '아이디가 일치하지 않습니다.',
-      type: 'error'
-    };
-  }
-  
   return {
-    msg: '유효한 아이디입니다.', 
+    msg: '', 
     type: 'success'
   };
 };
@@ -59,15 +49,8 @@ export const validateLoginPw = (userPw: string): ValidateResult => {
     };
   }
   
-  if (userPw !== testUserPw) {
-    return {
-      msg: '비밀번호가 일치하지 않습니다.',
-      type: 'error'
-    };
-  }
-  
   return {
-    msg: '비밀번호가 일치합니다.',
+    msg: '',
     type: 'success'
   };
 };

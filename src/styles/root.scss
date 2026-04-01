@@ -1,11 +1,10 @@
 // root.scss
 
 $main-blue: #1e90ff;
-$sub-white: #ffffff;
-$sub-gray: #a9a9a9;
+$sub-white: #f0f0f0;
+$sub-gray: #6b6b6b;
 
-$empty: #1261ff;
-$warning: #e49800;
+$warning: #feab24;
 $error: #ff4d4f;
 
 $KAKAO: #ffcd00;
@@ -19,13 +18,9 @@ $NAVER: #03c75a;
   font-display: swap;
 }
 * {
-  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
   margin: 0;
   padding: 0;
-}
-
-a {
-  text-decoration: none !important;
 }
 
 html,
@@ -46,6 +41,41 @@ body {
 }
 
 @mixin inner-size {
-  margin: 5.625rem 2.5rem;
+  margin: 90px 40px 240px;
   height: auto;
+}
+
+@mixin size {
+  width: 300px;
+  height: calc((300px * 2) / 3);
+
+  @media (max-width: 1200px) {
+    width: 270px;
+    height: calc((270px * 2) / 3);
+  }
+
+  @media (max-width: 992px) {
+    width: 250px;
+    height: calc((250px * 2) / 3);
+  }
+
+  @media (max-width: 768px) {
+    width: 220px;
+    height: calc((220px * 2) / 3);
+  }
+
+  @media (max-width: 576px) {
+    width: 250px;
+    height: calc((250px * 2) / 3);
+  }
+}
+
+.mySwiper {
+  padding: 10px 0px;
+  margin: 0px 6px;
+
+  &.swiper-slide {
+    display: flex;
+    justify-content: center;
+  }
 }

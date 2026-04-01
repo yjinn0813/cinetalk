@@ -2,18 +2,28 @@
 
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/useAuthStore';
-import '../styles/pages/Profile.scss';
+import { usePostStore } from '../store/usePostStore';
+import { Box, Card, CardContent, Divider} from '@mui/material';
+import UserInfo from '../components/Profile/UserInfo';
+import MenuButtons from '../components/Profile/MenuButtons';
+import LogoutButton from '../components/Profile/LogoutButton';
+import ContentBadges from '../components/Profile/ContentBadge';
 
-// 버튼 목록 객체화
+// 버튼 목록
 const menuList = [
   { name: '라이브러리', path: '/Watched' },
   { name: '리뷰 작성하기', path: '/Write' },
 ];
 
-// ==============================
+// ====================
 const Profile = () => {
   const { logout, user } = useAuthStore();
   const navigate = useNavigate();
+
+  const posts = usePostStore((state) => state.posts);
+  const movieCount = posts.filter(p => p.type === 'movie').length;
+  const dramaCount = posts.filter(p => p.type === 'drama').length;
+  const aniCount = posts.filter(p => p.type === 'animation').length;
 
   const handleLogout = () => {
     logout();
@@ -21,29 +31,48 @@ const Profile = () => {
   };
 
   return (
-    <div className="mypage-container">
-      <div className="page-title">MY PAGE</div>
+    <Box className="mypage-container"
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        p: { xs: '40px 16px', sm: '60px 24px' },
+        height: 'auto',
+        backgroundColor: '#dadada'
+      }}
+    >
+      {/* 중앙 카드 */}
+      <Card
+        sx={{
+          width: '100%',
+          borderRadius: '8px',
+          boxShadow: 4,
+          p: '10px',
+          maxWidth: {
+            xs: '90%',  // 모바일
+            sm: 420,    // 태블릿 이상
+          },
+        }}
+      >
+        <CardContent>
+          {/* 유저 정보 */}
+          <UserInfo userName={user?.userName} />
+          <ContentBadges 
+            movieCount={movieCount}
+            dramaCount={dramaCount}
+            aniCount={aniCount}
+          />
 
-      <div className="profile">
-        <div className="nickname">{user?.userName || '홍길동'}</div>
-      </div>
+          <Divider sx={{ my: 2 }} />
 
-      <div className="profile-btns">
-        {menuList.map((menu) => (
-          <button
-            key={menu.name}
-            className="m-btn"
-            onClick={() => navigate(menu.path)}
-          >
-            {menu.name}
-          </button>
-        ))}
+          {/* 메뉴 */}
+          <MenuButtons menuList={menuList} />
 
-        <button className="m-btn logout" onClick={handleLogout}>
-          로그아웃
-        </button>
-      </div>
-    </div>
+          <Divider sx={{ my: 2 }} />
+
+          <LogoutButton onLogout={handleLogout}/>
+        </CardContent>
+      </Card>
+    </Box>
   );
 };
 

@@ -41,6 +41,7 @@ https://github.com/yjinn0813/cinetalk
   - 작성된 리뷰 데이터 저장 및 상세/라이브러리 페이지 연동 기능 구현
   - JavaScript → TypeScript 전환 (타입 안정성 및 유지보수성 향상)
   - React Query 도입을 통한 API 로직 리팩토링 (데이터 fetching 및 캐싱 최적화)
+  - Mui를 활용한 UI 디자인 개선 및 컴포넌트 리팩토링
 
 <br>
 
@@ -77,73 +78,7 @@ https://github.com/yjinn0813/cinetalk
 
 <br>
 
-## 4. 주요 기능
-
-### 메인 페이지
-
-- Header에 호버시 컬러 변경 이벤트, 로그인 여부 검증하여 다른 아이콘 출력 (Zustand 상태관리)
-
-- 최신 리뷰, 친구들의 리뷰, 이벤트 카드 (swiper slide)
-
-  → 리뷰에 신호등 표시로 사용자의 평가를 시각적으로 확인 가능
-
-- 최상단 박스오피스 순위, 최하단 광고 배너 자동 슬라이드 (swiper slide)
-
-### 로그인
-
-- 테스트용 아이디, 비번 검증하여 로그인 (Zustand 상태관리)
-
-  - 아이디와 비번이 일치하지 않으면 input창 아래에 메시지 등장
-
-- `회원가입` 버튼 라우팅 설정
-
-### 회원가입
-
-- 아이디, 비번 유효성검사가 실시간으로 값을 받아와서 진행
-
-- 이용약관 '모두 동의하기' 체크박스 기능
-
-- 입력한 정보가 모두 저장되어 `프로필`에서 보여지도록 설정 (Zustand 상태관리)
-
-### 프로필 (마이 페이지)
-
-- 유저명, 라이브러리 등 개인화 서비스 제공
-
-- `라이브러리`, `리뷰 작성하기` 클릭하면 페이지 이동
-
-- `로그아웃` 버튼 기능 구현 (Zustand 상태관리)
-
-### 라이브러리 (개인의 기록)
-
-- 개인이 작성한 리뷰 내역 확인 가능
-
-- 모바일에서만 슬라이드로 넘겨보도록 설정 (swiper)
-
-- 특정 리뷰 클릭하면 해당하는 `리뷰 상세보기`로 이동
-
-### 리뷰 상세보기
-
-- 포스터, 영화제목, 작성일, 본문 등 확인 가능
-
-- `좋아요` 버튼 클릭시 디자인 변경 및 개수 카운트
-
-- `공유하기` 버튼 클릭시 URL 주소 자동 복사
-
-- `삭제하기` 버튼 클릭시 리뷰 삭제 가능 (Zustand 상태관리)
-
-### 리뷰 작성하기
-
-- 제목, 본문, URL 주소, 작성일 등 입력 가능
-
-- 사진 첨부 및 미리보기 기능 (1장)
-
-- 스포일러 여부, 비공개 여부 toggle 버튼
-
-### 검색 페이지
-
-- 영화진흥위원회의 영화목록 API를 이용해 작품 검색 가능
-
-  (input에 값을 입력하고 Enter를 누르면 해당하는 검색값 등장)
+## [4. 페이지별 주요 기능 (click to check)](https://github.com/yjinn0813/cinetalk/wiki/%ED%8E%98%EC%9D%B4%EC%A7%80%EB%B3%84-%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5)
 
 <br>
 
@@ -155,7 +90,7 @@ https://github.com/yjinn0813/cinetalk
 
 <br>
 
-## 🚀 [6. Trouble-shooting History (click to check)](https://github.com/yjinn0813/cinetalk/wiki/%F0%9F%9A%80-Trouble%E2%80%90shooting-History)
+## [6. Trouble-shooting History (click to check)](https://github.com/yjinn0813/cinetalk/wiki/%F0%9F%9A%80-Trouble%E2%80%90shooting-History)
 
 <br>
 
@@ -177,6 +112,10 @@ https://github.com/yjinn0813/cinetalk
  ┃ ┃ ┗ 📜PretendardVariable.woff2
  ┃ ┣ 📂images
  ┃ ┃ ┣ 📂Main
+ ┃ ┃ ┃ ┣ 📂AD
+ ┃ ┃ ┃ ┣ 📂event
+ ┃ ┃ ┃ ┣ 📂rank
+ ┃ ┃ ┣ 📂Poster
  ┃ ┃ ┣ 📂Review
  ┃ ┗ 📜userflow.png
  ┣ 📂src
@@ -187,10 +126,15 @@ https://github.com/yjinn0813/cinetalk
  ┃ ┃ ┃ ┣ 📜Boxoffice.json
  ┃ ┃ ┃ ┣ 📜EventBox.tsx
  ┃ ┃ ┃ ┣ 📜Events.json
- ┃ ┃ ┃ ┣ 📜Friends.json
  ┃ ┃ ┃ ┣ 📜RankBox.tsx
  ┃ ┃ ┃ ┣ 📜ReviewBox.tsx
  ┃ ┃ ┃ ┗ 📜Reviews.json
+ ┃ ┃ ┣ 📂Profile
+ ┃ ┃ ┃ ┣ 📜ContentBadge.tsx
+ ┃ ┃ ┃ ┣ 📜LogoutButton.tsx
+ ┃ ┃ ┃ ┣ 📜MenuButtons.tsx
+ ┃ ┃ ┃ ┣ 📜UserInfo.tsx
+ ┃ ┃ ┃ ┗ 📜UserStats.tsx
  ┃ ┃ ┣ 📂Review
  ┃ ┃ ┃ ┣ 📜Posts.json
  ┃ ┃ ┃ ┣ 📜ReadPosts.tsx
@@ -215,32 +159,23 @@ https://github.com/yjinn0813/cinetalk
  ┃ ┃ ┣ 📜usePostStore.ts
  ┃ ┃ ┗ 📜useUserStore.ts
  ┃ ┣ 📂styles
- ┃ ┃ ┣ 📂Main
+ ┃ ┃ ┣ 📂components
  ┃ ┃ ┃ ┣ 📜EventBox.scss
- ┃ ┃ ┃ ┣ 📜RankBox.scss
- ┃ ┃ ┃ ┗ 📜ReviewBox.scss
- ┃ ┃ ┣ 📂Review
- ┃ ┃ ┃ ┗ 📜ReadPosts.scss
- ┃ ┃ ┣ 📂Watched
+ ┃ ┃ ┃ ┣ 📜Header.scss
+ ┃ ┃ ┃ ┣ 📜ReviewBox.scss
  ┃ ┃ ┃ ┗ 📜WatchedPoster.scss
- ┃ ┃ ┣ 📂Write
- ┃ ┃ ┃ ┗ 📜Toggles.scss
- ┃ ┃ ┣ 📂common
- ┃ ┃ ┃ ┣ 📜Footer.scss
- ┃ ┃ ┃ ┗ 📜Header.scss
  ┃ ┃ ┣ 📂pages
  ┃ ┃ ┃ ┣ 📜Login.scss
  ┃ ┃ ┃ ┣ 📜Main.scss
- ┃ ┃ ┃ ┣ 📜Profile.scss
  ┃ ┃ ┃ ┣ 📜Register.scss
  ┃ ┃ ┃ ┣ 📜Review.scss
+ ┃ ┃ ┃ ┣ 📜ReviewLists.scss
  ┃ ┃ ┃ ┣ 📜Search.scss
- ┃ ┃ ┃ ┣ 📜Watched.scss
  ┃ ┃ ┃ ┗ 📜Write.scss
- ┃ ┃ ┣ 📜NotFound.scss
  ┃ ┃ ┗ 📜root.scss
  ┃ ┣ 📂utils
  ┃ ┃ ┣ 📜auth.ts
+ ┃ ┃ ┣ 📜clipboard.ts
  ┃ ┃ ┗ 📜validation.ts
  ┃ ┣ 📜App.tsx
  ┃ ┗ 📜main.tsx

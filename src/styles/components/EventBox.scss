@@ -1,0 +1,8 @@
+// event box style
+
+@use '../root.scss';
+
+.event-photo {
+  background-color: rgba(30, 30, 30, 0.3);
+  @include root.size;
+}

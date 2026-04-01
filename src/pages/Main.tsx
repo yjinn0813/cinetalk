@@ -7,9 +7,9 @@ import Reviews from '../components/Main/Reviews.json';
 import Events from '../components/Main/Events.json';
 import Boxoffice from '../components/Main/Boxoffice.json';
 
-import banner1 from '/images/Main/banner1.jpg';
-import banner2 from '/images/Main/banner2.png';
-import banner3 from '/images/Main/banner3.png';
+import banner1 from '/images/Main/AD/banner1.jpg';
+import banner2 from '/images/Main/AD/banner2.png';
+import banner3 from '/images/Main/AD/banner3.png';
 
 // Swiper
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -24,6 +24,7 @@ const Main = () => {
       <div className="main-item boxoffice-area">
         <div className="boxoffice-title">이번주 박스오피스 순위</div>
         <Swiper
+          slidesPerView={1}
           spaceBetween={30}
           centeredSlides={true}
           autoplay={{
@@ -36,9 +37,11 @@ const Main = () => {
           {Boxoffice.map((box) => (
             <SwiperSlide key={box.id}>
               <RankBox
-                Rank={box.Rank}
-                Boxoffice={box.Boxoffice}
-                RankName={box.RankName}
+                rank={box.rank}
+                poster={box.poster}
+                name={box.name}
+                rankChange={box.rankChange as "up" | "down" | "equal" | "new"}
+                rankDiff={box.rankDiff}
               />
             </SwiperSlide>
           ))}
@@ -54,7 +57,11 @@ const Main = () => {
           modules={[Pagination]}
           breakpoints={{
             0: {
-              slidesPerView: 1.2,
+              slidesPerView: 1.3,
+              spaceBetween: 10,
+            },
+            480: {
+              slidesPerView: 1.8,
               spaceBetween: 10,
             },
             576: {
@@ -79,8 +86,8 @@ const Main = () => {
           {Reviews.map((review) => (
             <SwiperSlide key={review.id}>
               <ReviewBox
-                MovieName={review.Movie_Name}
-                PostTitle={review.Post_Title}
+                poster={review.poster}
+                movieName={review.movieName}
                 author={review.author}
                 trafficLight={review.trafficLight}
               />

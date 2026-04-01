@@ -1,72 +1,72 @@
 [
   {
     "id": 1,
-    "Movie_Name": "기생충",
-    "Post_Title": "사회적 논평의 걸작",
+    "poster": "poster1.jpeg",
+    "movieName": "기생충",
     "author": "김지수",
     "trafficLight": "good"
   },
   {
     "id": 2,
-    "Movie_Name": "올드보이",
-    "Post_Title": "예측 불허의 이야기",
-    "author": "박현우",
+    "poster": "poster2.jpeg",
+    "movieName": "서울의 봄",
+    "author": "박준호",
     "trafficLight": "good"
   },
   {
     "id": 3,
-    "Movie_Name": "부산행",
-    "Post_Title": "이기주의가 역겨웠다",
-    "author": "이민지",
+    "poster": "poster3.jpeg",
+    "movieName": "반도",
+    "author": "이서연",
     "trafficLight": "bad"
   },
   {
     "id": 4,
-    "Movie_Name": "어벤져스: 엔드게임",
-    "Post_Title": "마블의 대서사시 완결",
-    "author": "최영준",
-    "trafficLight": "good"
+    "poster": "poster4.jpeg",
+    "movieName": "콘크리트 유토피아",
+    "author": "최민수",
+    "trafficLight": "neutral"
   },
   {
     "id": 5,
-    "Movie_Name": "살인의 추억",
-    "Post_Title": "몰입감 넘치는 실화 영화",
-    "author": "정은서",
+    "poster": "poster5.jpeg",
+    "movieName": "밀수",
+    "author": "정유진",
     "trafficLight": "good"
   },
   {
     "id": 6,
-    "Movie_Name": "버닝",
-    "Post_Title": "내 취향 아니었던 미스터리 영화",
-    "author": "한대현",
+    "poster": "poster6.jpeg",
+    "movieName": "헤어질 결심",
+    "author": "한지훈",
     "trafficLight": "neutral"
   },
   {
     "id": 7,
-    "Movie_Name": "매드 맥스: 분노의 도로",
-    "Post_Title": "비주얼과 액션이 압도적",
-    "author": "김혜진",
+    "poster": "poster7.jpeg",
+    "movieName": "더 퍼스트 슬램덩크",
+    "author": "김태윤",
     "trafficLight": "good"
   },
   {
     "id": 8,
-    "Movie_Name": "신과함께: 죄와 벌",
-    "Post_Title": "감동적인 판타지 드라마",
-    "author": "박준형",
-    "trafficLight": "good"
+    "poster": "poster8.jpeg",
+    "movieName": "듄",
+    "author": "박소연",
+    "trafficLight": "neutral"
   },
   {
     "id": 9,
-    "Movie_Name": "포레스트 검프",
-    "Post_Title": "인생영화 찾았습니다",
-    "author": "송민호",
-    "trafficLight": "good"
+    "poster": "poster9.jpeg",
+    "movieName": "오펜하이머",
+    "author": "송지훈",
+    "trafficLight": "neutral"
   },
   {
     "id": 10,
-    "Movie_Name": "설국열차",
-    "Post_Title": "계급 투쟁을 그린 SF 대작",
-    "author": "이하늘",
-    "trafficLight": "good"
+    "poster": "poster10.jpeg",
+    "movieName": "스즈메의 문단속",
+    "author": "이하린",
+    "trafficLight": "bad"
   }
 ]

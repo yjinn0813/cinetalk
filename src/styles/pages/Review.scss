@@ -5,22 +5,8 @@
   @include root.inner-size;
 }
 
-.r-head {
-  position: relative;
-  padding: 1.75rem 0;
-  margin: 1.75rem 3.75rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .r-back {
-  position: absolute;
   left: 0;
-  cursor: pointer;
-}
-.rp-title {
-  font-size: 2rem;
-  font-weight: 700;
 }
 
 .NotFound {

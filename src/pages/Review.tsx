@@ -1,48 +1,104 @@
 /* 리뷰 상세보기 페이지 */
 
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { usePostStore } from '../store/usePostStore';
-import ReadPosts from '../components/Review/ReadPosts';
+import { Box, Typography, IconButton, Snackbar, Alert } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ReadPosts from '../components/Review/ReadPosts';
 import '../styles/pages/Review.scss';
 
+// ====================
 const Review = () => {
+  const [openToast, setOpenToast] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
 
   const posts = usePostStore((state) => state.posts);
   const deletePost = usePostStore((state) => state.deletePost);
-
-  // 포스트 데이터 찾기
+  
   const post = posts.find((post) => post.id === Number(id));
 
   if (!post) {
-    return <div className="NotFound">해당 글을 찾을 수 없습니다!😭</div>;
+    return (
+      <Box className="NotFound" sx={{ textAlign: 'center', mt: 5 }}>
+        해당 글을 찾을 수 없습니다!😭
+      </Box>
+    );
   }
 
   const handleDelete = () => {
     deletePost(Number(id));
-    alert('리뷰가 삭제되었습니다.');
-    navigate('/watched');
+    setOpenToast(true);
+
+    setTimeout(() => {
+      navigate('/watched');
+    }, 1500);
   };
 
   return (
-    <div className="r-wrap">
-      <div className='r-head'>
-        <ArrowBackIosIcon className='r-back' 
+    <Box className="r-wrap" sx={{ 
+      maxWidth: 900, mx: 'auto', px: 2,
+    }}>
+      
+      {/* 헤더 */}
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 1,
+          margin: '60px 0',
+          position: 'relative'
+        }}
+      >
+        <IconButton
+          className="r-back"
           onClick={() => navigate('/watched')}
-        />
-        <div className="rp-title">리뷰 상세보기</div>
-      </div>
+          sx={{
+            position: 'absolute',
+            left: 0
+          }}
+        >
+          <ArrowBackIosIcon sx={{ color: '#000', fontSize: '26px' }}/>
+        </IconButton>
 
+        <Typography
+          className="rp-title"
+          variant="h6"
+          sx={{ 
+            fontWeight: 600,
+            fontSize: '32px',
+          }}
+        >
+          리뷰 상세보기
+        </Typography>
+      </Box>
+
+      {/* 본문 컴포넌트 */}
       <ReadPosts
         poster={post.poster}
         title={post.title}
         date={post.date}
         body={post.body}
+        signal={post.signal}
+        rating={post.rating}
         onDelete={handleDelete}
       />
-    </div>
+
+      {/* 삭제 토스트 */}
+      <Snackbar
+        open={openToast}
+        autoHideDuration={1500}
+        onClose={() => setOpenToast(false)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert severity="success" variant="filled">
+          리뷰가 삭제되었습니다.
+        </Alert>
+      </Snackbar>
+
+    </Box>
   );
 };
 
