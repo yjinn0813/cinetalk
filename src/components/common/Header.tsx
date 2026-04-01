@@ -7,7 +7,7 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import LoginIcon from '@mui/icons-material/Login';
 import SearchIcon from '@mui/icons-material/Search';
 import logo from '../../assets/logo.png';
-import '../../styles/common/Header.scss';
+import '../../styles/components/Header.scss';
 
 const Header = () => {
   const { isLoggedIn } = useAuthStore();

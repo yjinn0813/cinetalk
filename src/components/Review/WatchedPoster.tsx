@@ -1,7 +1,7 @@
 // 라이브러리 카드
 
 import { Box, Typography } from '@mui/material';
-import '../../styles/Watched/WatchedPoster.scss';
+import '../../styles/components/WatchedPoster.scss';
 
 type LibraryProps = {
   poster: string;

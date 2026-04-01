@@ -1,7 +1,7 @@
 // 리뷰 박스
 import React from 'react';
 import { Card, CardMedia, CardContent, Typography, Box } from '@mui/material';
-import '../../styles/Main/ReviewBox.scss';
+import '../../styles/components/ReviewBox.scss';
 
 type ReviewProps = {
   movieName: string;

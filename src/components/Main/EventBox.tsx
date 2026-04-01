@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Card, CardMedia, CardContent, Typography } from '@mui/material';
-import '../../styles/Main/EventBox.scss';
+import '../../styles/components/EventBox.scss';
 
 type EventProps = {
   EventPhoto: string;

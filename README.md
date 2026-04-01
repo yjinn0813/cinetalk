@@ -112,6 +112,10 @@ https://github.com/yjinn0813/cinetalk
  ┃ ┃ ┗ 📜PretendardVariable.woff2
  ┃ ┣ 📂images
  ┃ ┃ ┣ 📂Main
+ ┃ ┃ ┃ ┣ 📂AD
+ ┃ ┃ ┃ ┣ 📂event
+ ┃ ┃ ┃ ┣ 📂rank
+ ┃ ┃ ┣ 📂Poster
  ┃ ┃ ┣ 📂Review
  ┃ ┗ 📜userflow.png
  ┣ 📂src
@@ -122,10 +126,15 @@ https://github.com/yjinn0813/cinetalk
  ┃ ┃ ┃ ┣ 📜Boxoffice.json
  ┃ ┃ ┃ ┣ 📜EventBox.tsx
  ┃ ┃ ┃ ┣ 📜Events.json
- ┃ ┃ ┃ ┣ 📜Friends.json
  ┃ ┃ ┃ ┣ 📜RankBox.tsx
  ┃ ┃ ┃ ┣ 📜ReviewBox.tsx
  ┃ ┃ ┃ ┗ 📜Reviews.json
+ ┃ ┃ ┣ 📂Profile
+ ┃ ┃ ┃ ┣ 📜ContentBadge.tsx
+ ┃ ┃ ┃ ┣ 📜LogoutButton.tsx
+ ┃ ┃ ┃ ┣ 📜MenuButtons.tsx
+ ┃ ┃ ┃ ┣ 📜UserInfo.tsx
+ ┃ ┃ ┃ ┗ 📜UserStats.tsx
  ┃ ┃ ┣ 📂Review
  ┃ ┃ ┃ ┣ 📜Posts.json
  ┃ ┃ ┃ ┣ 📜ReadPosts.tsx
@@ -150,32 +159,23 @@ https://github.com/yjinn0813/cinetalk
  ┃ ┃ ┣ 📜usePostStore.ts
  ┃ ┃ ┗ 📜useUserStore.ts
  ┃ ┣ 📂styles
- ┃ ┃ ┣ 📂Main
+ ┃ ┃ ┣ 📂components
  ┃ ┃ ┃ ┣ 📜EventBox.scss
- ┃ ┃ ┃ ┣ 📜RankBox.scss
- ┃ ┃ ┃ ┗ 📜ReviewBox.scss
- ┃ ┃ ┣ 📂Review
- ┃ ┃ ┃ ┗ 📜ReadPosts.scss
- ┃ ┃ ┣ 📂Watched
+ ┃ ┃ ┃ ┣ 📜Header.scss
+ ┃ ┃ ┃ ┣ 📜ReviewBox.scss
  ┃ ┃ ┃ ┗ 📜WatchedPoster.scss
- ┃ ┃ ┣ 📂Write
- ┃ ┃ ┃ ┗ 📜Toggles.scss
- ┃ ┃ ┣ 📂common
- ┃ ┃ ┃ ┣ 📜Footer.scss
- ┃ ┃ ┃ ┗ 📜Header.scss
  ┃ ┃ ┣ 📂pages
  ┃ ┃ ┃ ┣ 📜Login.scss
  ┃ ┃ ┃ ┣ 📜Main.scss
- ┃ ┃ ┃ ┣ 📜Profile.scss
  ┃ ┃ ┃ ┣ 📜Register.scss
  ┃ ┃ ┃ ┣ 📜Review.scss
+ ┃ ┃ ┃ ┣ 📜ReviewLists.scss
  ┃ ┃ ┃ ┣ 📜Search.scss
- ┃ ┃ ┃ ┣ 📜Watched.scss
  ┃ ┃ ┃ ┗ 📜Write.scss
- ┃ ┃ ┣ 📜NotFound.scss
  ┃ ┃ ┗ 📜root.scss
  ┃ ┣ 📂utils
  ┃ ┃ ┣ 📜auth.ts
+ ┃ ┃ ┣ 📜clipboard.ts
  ┃ ┃ ┗ 📜validation.ts
  ┃ ┣ 📜App.tsx
  ┃ ┗ 📜main.tsx
