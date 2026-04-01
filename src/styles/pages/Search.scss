@@ -3,71 +3,10 @@
 
 .search-container {
   @include root.inner-size;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.input-wrapper {
-  display: flex;
-  align-items: center;
-  position: relative;
-  width: 50%;
 }
 
 .search-input {
-  border: 1.5px solid root.$sub-gray;
-  border-radius: 8px;
-  padding: 6px 6px 6px 14px;
-  display: flex;
   justify-content: center;
   align-items: center;
   height: 40px;
-  width: 100%;
-  flex: 1; // flexbox 내에서 남은 공간 모두 차지
-  min-width: 0; // flexbox로 자식 요소가 줄어들도록
-}
-
-.search-btn {
-  position: absolute;
-  right: 0px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: root.$main-blue;
-  color: root.$sub-white;
-  border: none;
-  border-radius: 0px 8px 8px 0px;
-  padding: 4px;
-  cursor: pointer;
-  width: 54px;
-  height: 54px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.search-input:focus {
-  border-color: root.$main-blue;
-  outline: none;
-  box-shadow: 0 0 14px rgb(130, 130, 130);
-}
-
-// 검색결과 디자인
-.movie-list {
-  margin: 20px 0;
-}
-.movie-item {
-  margin: 16px 0;
-}
-
-// mediaquery
-@media screen and (max-width: 768px) {
-  .input-wrapper {
-    width: 340px;
-  }
-
-  .search-input {
-    width: 100%;
-  }
 }
