@@ -24,7 +24,8 @@ function App() {
           <Route path="profile" element={<Profile />} />
           <Route path="watched" element={<ReviewLists />} />
           <Route path="review/:id" element={<Review />} />
-          <Route path="write/:id" element={<Write />} />
+          <Route path="write/:id" element={<Write />} />   {/* 수정 */}
+          <Route path="write" element={<Write />} />       {/* 신규 */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
