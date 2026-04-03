@@ -3,13 +3,15 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { usePostStore } from '../store/usePostStore';
+import useTitle from '../hooks/useTitle';
+import ReadPosts from '../components/Review/ReadPosts';
 import { Box, Typography, IconButton, Snackbar, Alert } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ReadPosts from '../components/Review/ReadPosts';
 import '../styles/pages/Review.scss';
 
 // ====================
 const Review = () => {
+  useTitle('Review');
   const [openToast, setOpenToast] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();

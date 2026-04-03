@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { usePostStore } from '../store/usePostStore';
+import useTitle from '../hooks/useTitle';
 import { Box, TextField, Typography, Button, Snackbar, Alert, Rating } from '@mui/material';
 import '../styles/pages/Write.scss';
 
@@ -17,6 +18,7 @@ type newPostProps = {
 
 // ====================
 const Write = () => {
+  useTitle('Write');
   const navigate = useNavigate();
   const { addPost } = usePostStore();
   const [open, setOpen] = useState(false);

@@ -139,11 +139,11 @@ https://github.com/yjinn0813/cinetalk
  ┃ ┃ ┃ ┣ 📜Posts.json
  ┃ ┃ ┃ ┣ 📜ReadPosts.tsx
  ┃ ┃ ┃ ┗ 📜WatchedPoster.tsx
- ┃ ┃ ┣ 📂Write
- ┃ ┃ ┃ ┗ 📜Toggles.tsx
  ┃ ┃ ┗ 📂common
  ┃ ┃ ┃ ┣ 📜Footer.tsx
  ┃ ┃ ┃ ┗ 📜Header.tsx
+ ┃ ┣ 📂hooks
+ ┃ ┃ ┗ 📜useTitle.ts
  ┃ ┣ 📂pages
  ┃ ┃ ┣ 📜Login.tsx
  ┃ ┃ ┣ 📜Main.tsx

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/useAuthStore';
 import { useUserStore } from '../store/useUserStore';
 import { validateLoginId, validateLoginPw } from '../utils/auth';
+import useTitle from '../hooks/useTitle';
 import { Box, TextField, Button } from '@mui/material';
 import '../styles/pages/Login.scss';
 
@@ -23,6 +24,7 @@ const testUserPw = 'cinetalk1!';
 
 // ==============================
 const Login = () => {
+  useTitle('Login');
   const { login } = useAuthStore();
   const { user } = useUserStore();
   const navigate = useNavigate();
