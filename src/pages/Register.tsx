@@ -104,6 +104,14 @@ const Register = () => {
     navigate('/Profile');
   };
 
+  // 필드 검증
+  const isValid = form.userName && 
+    form.userId && 
+    form.userPw && 
+    form.userPw2 &&
+    idMsg.type !== 'error' &&
+    pwMsg.type !== 'error';
+
   return (
     <Box component="form" 
       autoComplete="off" noValidate
@@ -174,7 +182,9 @@ const Register = () => {
         })}
       </div>
 
-      <Button variant="contained"
+      <Button type='submit'
+        variant="contained"
+        disabled={!isValid}
         sx={{
           fontSize: '20px',
           backgroundColor: '#1e90ff',
