@@ -51,6 +51,10 @@ const Write = () => {
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (!form.title || !form.body || !form.date || form.rating === 0){
+      return;
+    }
+
     const newPost = {
       ...form,
       poster: 'default_poster', // 디폴트 포스터
@@ -235,6 +239,12 @@ const Write = () => {
           <Button
             type="submit"
             variant="contained"
+            disabled={
+              !form.title ||
+              !form.body ||
+              !form.date ||
+              form.rating === 0
+            }
             sx={{
               backgroundColor: '#1e90ff',
               borderRadius: 2,
