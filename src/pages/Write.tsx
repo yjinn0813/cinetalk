@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { usePostStore } from '../store/usePostStore';
+import useTitle from '../hooks/useTitle';
 import { Box, TextField, Typography, Button, Snackbar, Alert, Rating } from '@mui/material';
 import '../styles/pages/Write.scss';
 
@@ -17,6 +18,7 @@ type newPostProps = {
 
 // ====================
 const Write = () => {
+  useTitle('Write');
   const navigate = useNavigate();
   const { addPost } = usePostStore();
   const [open, setOpen] = useState(false);
@@ -50,6 +52,10 @@ const Write = () => {
   // 작성완료 핸들러
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!form.title || !form.body || !form.date || form.rating === 0){
+      return;
+    }
 
     const newPost = {
       ...form,
@@ -235,6 +241,12 @@ const Write = () => {
           <Button
             type="submit"
             variant="contained"
+            disabled={
+              !form.title ||
+              !form.body ||
+              !form.date ||
+              form.rating === 0
+            }
             sx={{
               backgroundColor: '#1e90ff',
               borderRadius: 2,

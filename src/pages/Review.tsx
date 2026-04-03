@@ -3,13 +3,15 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { usePostStore } from '../store/usePostStore';
+import useTitle from '../hooks/useTitle';
+import ReadPosts from '../components/Review/ReadPosts';
 import { Box, Typography, IconButton, Snackbar, Alert } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ReadPosts from '../components/Review/ReadPosts';
 import '../styles/pages/Review.scss';
 
 // ====================
 const Review = () => {
+  useTitle('Review');
   const [openToast, setOpenToast] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -27,11 +29,12 @@ const Review = () => {
     );
   }
 
+  // 삭제 핸들러
   const handleDelete = () => {
-    deletePost(Number(id));
     setOpenToast(true);
-
+    
     setTimeout(() => {
+      deletePost(Number(id));
       navigate('/watched');
     }, 1500);
   };
@@ -97,7 +100,6 @@ const Review = () => {
           리뷰가 삭제되었습니다!
         </Alert>
       </Snackbar>
-
     </Box>
   );
 };

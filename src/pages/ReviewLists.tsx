@@ -2,10 +2,13 @@
 
 import { Link } from 'react-router-dom';
 import { usePostStore } from '../store/usePostStore';
+import useTitle from '../hooks/useTitle';
 import WatchedPoster from '../components/Review/WatchedPoster';
 import '../styles/pages/ReviewLists.scss';
 
 const ReviewLists = () => {
+  useTitle('Library');
+
   // 데이터 가져와서 최신순 정렬
   const posts = usePostStore((state) => state.posts);
   const sortedPosts = [...posts].sort(

@@ -3,6 +3,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/useAuthStore';
 import { usePostStore } from '../store/usePostStore';
+import useTitle from '../hooks/useTitle';
 import { Box, Card, CardContent, Divider} from '@mui/material';
 import UserInfo from '../components/Profile/UserInfo';
 import MenuButtons from '../components/Profile/MenuButtons';
@@ -17,6 +18,7 @@ const menuList = [
 
 // ====================
 const Profile = () => {
+  useTitle('Profile');
   const { logout, user } = useAuthStore();
   const navigate = useNavigate();
 

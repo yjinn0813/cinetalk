@@ -1,11 +1,13 @@
 /* 검색 페이지 */
 
 import React, { useState } from 'react';
+import useTitle from '../hooks/useTitle';
 import { Box, TextField, IconButton, Typography, CircularProgress, Paper } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import '../styles/pages/Search.scss';
 
 const Search = () => {
+  useTitle('Search');
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useState<any[]>([]);
   const [hasSearched, setHasSearched] = useState(false);

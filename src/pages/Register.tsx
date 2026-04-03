@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useUserStore } from '../store/useUserStore';
 import { useAuthStore } from '../store/useAuthStore';
 import { validateId, validatePw } from '../utils/validation';
+import useTitle from '../hooks/useTitle';
 import { Box, TextField, Button } from '@mui/material';
 import '../styles/pages/Register.scss';
 
@@ -22,6 +23,7 @@ type ValidateResult = {
 
 // ==============================
 const Register = () => {
+  useTitle('Register');
   const navigate = useNavigate();
   const { setUserInfo, user } = useUserStore(); // 회원가입
   const { login } = useAuthStore(); // 로그인 처리
