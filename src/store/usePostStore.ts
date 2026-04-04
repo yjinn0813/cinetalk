@@ -15,7 +15,7 @@ type Post = {
   spoiler?: boolean;
   isPrivate?: boolean;
   rating: number;
-  signal?: "good" | "neutral" | "bad";
+  signal: "good" | "neutral" | "bad";
 };
 
 // 글 상태
@@ -31,7 +31,7 @@ const getInitialPosts = (): Post[] => {
   const stored = localStorage.getItem('posts');
   const parsed = stored ? JSON.parse(stored) : PostsData;
 
-  return parsed.map((post: any) => ({
+  return (parsed as Post[]).map((post) => ({
     ...post,
     signal: post.signal as "good" | "neutral" | "bad",
   }));
