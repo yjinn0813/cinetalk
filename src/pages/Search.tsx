@@ -9,7 +9,7 @@ import '../styles/pages/Search.scss';
 const Search = () => {
   useTitle('Search');
   const [query, setQuery] = useState('');
-  const [movies, setMovies] = useState<any[]>([]);
+  const [movies, setMovies] = useState([]);
   const [hasSearched, setHasSearched] = useState(false);
   const [loading, setLoading] = useState(false);
 

@@ -12,12 +12,6 @@ type Props = {
   menuList: Menu[];
 };
 
-// 버튼 목록
-const menuList = [
-  { name: '라이브러리', path: '/Watched' },
-  { name: '리뷰 작성하기', path: '/Write' },
-];
-
 const MenuButtons = ({ menuList }: Props) => {
   const navigate = useNavigate();
 

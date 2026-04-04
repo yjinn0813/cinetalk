@@ -25,7 +25,7 @@ type ValidateResult = {
 const Register = () => {
   useTitle('Register');
   const navigate = useNavigate();
-  const { setUserInfo, user } = useUserStore(); // 회원가입
+  const { setUserInfo } = useUserStore(); // 회원가입
   const { login } = useAuthStore(); // 로그인 처리
 
   // 입력값 객체화
