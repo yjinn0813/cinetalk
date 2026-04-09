@@ -76,7 +76,9 @@ const Login = () => {
   };
 
   // 로그인 처리
-  const handleLogin = () => {
+  const handleLogin = (e: React.SubmitEvent) => {
+    e.preventDefault();
+
     const idResult = validateLoginId(form.userId);
     const pwResult = validateLoginPw(form.userPw);
 
@@ -108,7 +110,7 @@ const Login = () => {
 
   // ====================
   return (
-    <Box component="form" autoComplete="off" noValidate className="lg-wrap">
+    <Box component="form" autoComplete="off" noValidate className="lg-wrap" onSubmit={handleLogin}>
       <div className="lg-title">로그인</div>
 
       <Box className="lg-input">
@@ -161,8 +163,8 @@ const Login = () => {
 
         <Button
           fullWidth
+          type="submit"
           variant="contained"
-          onClick={handleLogin}
           className='login'
           sx={{
             fontSize: 20,
