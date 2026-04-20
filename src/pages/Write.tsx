@@ -1,7 +1,7 @@
 /* 리뷰 작성하기 페이지 */
 
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { usePostStore } from '../store/usePostStore';
 import useTitle from '../hooks/useTitle';
 import { Box, TextField, Typography, Button, Snackbar, Alert, Rating } from '@mui/material';
@@ -18,9 +18,14 @@ type newPostProps = {
 
 // ====================
 const Write = () => {
-  useTitle('Write');
   const navigate = useNavigate();
-  const { addPost } = usePostStore();
+  const { id } = useParams();
+  
+  const isEdit = Boolean(id);
+  const pageTitle = isEdit ? '리뷰 수정하기' : '리뷰 작성하기';
+  useTitle(isEdit ? 'Edit' : 'Write');
+
+  const { addPost, updatePost, posts } = usePostStore();
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState<newPostProps>({
     title: '',
@@ -30,6 +35,25 @@ const Write = () => {
     signal: 'good',
     type: 'movie'
   });
+
+  // 수정하기 모드
+  useEffect(() => {
+    if (!id) return;
+
+    const numericId = Number(id);
+    const post = posts.find((p) => p.id === numericId);
+
+    if (post) {
+      setForm({
+        title: post.title,
+        body: post.body,
+        date: post.date,
+        rating: post.rating,
+        signal: post.signal || 'good',
+        type: post.type as 'movie' | 'drama' | 'animation',
+      })
+    }
+  }, [id, posts]);
 
   // 인풋 핸들러
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -57,18 +81,38 @@ const Write = () => {
       return;
     }
 
-    const newPost = {
-      ...form,
-      poster: 'default_poster', // 디폴트 포스터
-    };
+    if (id){
+      // 수정하기
+      const numericId = Number(id);
+      const existingPost = posts.find(p => p.id === numericId);
 
-    const newId = addPost(newPost);
+      if (!existingPost) return;
 
-    setOpen(true); // 토스트 오픈
+      updatePost(numericId, {
+        ...existingPost,
+        ...form,
+      });
 
-    setTimeout(() => {
-      navigate(`/Review/${newId}`);
-    }, 1200);
+      setOpen(true);
+      setTimeout(() => {
+        navigate(`/Review/${numericId}`);
+      }, 1200);
+
+    } else {
+      // 신규 작성
+      const newPost = {
+        ...form,
+        poster: 'default_poster', // 디폴트 포스터
+      };
+
+      const newId = addPost(newPost);
+
+      setOpen(true); // 토스트 오픈
+
+      setTimeout(() => {
+        navigate(`/Review/${newId}`);
+      }, 1200);
+    }
   };
 
   return (
@@ -79,7 +123,7 @@ const Write = () => {
           fontSize: '32px',
           m: '28px 0 54px',
         }}>
-        리뷰 작성하기
+        {pageTitle}
       </Typography>
 
       <Box component="form" onSubmit={handleSubmit}

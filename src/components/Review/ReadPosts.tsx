@@ -1,7 +1,7 @@
 // 리뷰 상세보기 컴포넌트 구조
 
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { copyToClipboard } from '../../utils/clipboard';
 import { Box, Typography, Button, Snackbar, Alert } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -22,10 +22,11 @@ type PostProps = {
 };
 
 
-const ReadPosts = ({ id, poster, title, date, body, signal, rating, onDelete }: PostProps) => {
+const ReadPosts = ({ poster, title, date, body, signal, rating, onDelete }: PostProps) => {
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [openToast, setOpenToast] = useState(false);
+  const { id } = useParams();
   const navigate = useNavigate();
   const posterImage = `/images/Review/${poster}.jpeg`;
 
