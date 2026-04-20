@@ -21,7 +21,7 @@ const Review = () => {
   
   const post = posts.find((post) => post.id === Number(id));
 
-  if (!post) {
+  if (!post && !openToast) {
     return (
       <Box className="NotFound" sx={{ textAlign: 'center', mt: 5 }}>
         해당 글을 찾을 수 없습니다!😭
@@ -34,8 +34,8 @@ const Review = () => {
     setOpenToast(true);
     
     setTimeout(() => {
-      deletePost(Number(id));
       navigate('/watched');
+      deletePost(Number(id));
     }, 1500);
   };
 
