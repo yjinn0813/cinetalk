@@ -33,7 +33,7 @@ https://github.com/yjinn0813/cinetalk
 
 ### 2차 개선 (Migration & Enhancement)
 
-- **기간**: 2026.03 ~ (진행 중)
+- **기간**: 2026.03.22 ~ 04.21
 
 - **주요 작업**
   - CRA → Vite 마이그레이션 (빌드 환경 개선 및 성능 향상)
@@ -65,6 +65,8 @@ https://github.com/yjinn0813/cinetalk
 | ![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white) | 원격 저장소 및 배포 소스 관리 |
 | ![VScode](https://img.shields.io/badge/VS_Code-007ACC?style=flat-square&logo=visual-studio-code&logoColor=white) | 코드 작성 및 개발 환경  |
 | ![vite](https://img.shields.io/badge/vite-646CFF?style=flat-square&logo=vite&logoColor=white) | 빠른 개발 서버 및 빌드 환경 구성 |
+| ![eslint](https://img.shields.io/badge/eslint-4B32C3?style=flat-square&logo=eslint&logoColor=white) | 코드 품질 및 규칙 일관성 유지 |
+| ![GitHub Actions](https://img.shields.io/badge/Github_Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white) | TypeScript 검사 및 ESLint 자동 실행 CI 환경 구축 |
 
 ### Deployment
 | 플랫폼 | 사용 목적 |
@@ -114,9 +116,9 @@ https://github.com/yjinn0813/cinetalk
  ┃ ┃ ┣ 📂Main
  ┃ ┃ ┃ ┣ 📂AD
  ┃ ┃ ┃ ┣ 📂event
- ┃ ┃ ┃ ┣ 📂rank
+ ┃ ┃ ┃ ┗ 📂rank
  ┃ ┃ ┣ 📂Poster
- ┃ ┃ ┣ 📂Review
+ ┃ ┃ ┗ 📂Review
  ┃ ┗ 📜userflow.png
  ┣ 📂src
  ┃ ┣ 📂assets
@@ -143,6 +145,7 @@ https://github.com/yjinn0813/cinetalk
  ┃ ┃ ┃ ┣ 📜Footer.tsx
  ┃ ┃ ┃ ┗ 📜Header.tsx
  ┃ ┣ 📂hooks
+ ┃ ┃ ┣ 📜useSearch.ts
  ┃ ┃ ┗ 📜useTitle.ts
  ┃ ┣ 📂pages
  ┃ ┃ ┣ 📜Login.tsx
@@ -178,10 +181,12 @@ https://github.com/yjinn0813/cinetalk
  ┃ ┃ ┣ 📜clipboard.ts
  ┃ ┃ ┗ 📜validation.ts
  ┃ ┣ 📜App.tsx
- ┃ ┗ 📜main.tsx
+ ┃ ┣ 📜main.tsx
+ ┃ ┗ 📜queryClient.ts
  ┣ 📜.env
  ┣ 📜.gitignore
  ┣ 📜README.md
+ ┣ 📜eslint.config.js
  ┣ 📜index.html
  ┣ 📜package-lock.json
  ┣ 📜package.json
