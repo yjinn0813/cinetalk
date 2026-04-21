@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import useTitle from '../hooks/useTitle';
+import useSearch from '../hooks/useSearch';
 import { Box, TextField, IconButton, Typography, CircularProgress, Paper } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import '../styles/pages/Search.scss';
@@ -9,40 +10,17 @@ import '../styles/pages/Search.scss';
 const Search = () => {
   useTitle('Search');
   const [query, setQuery] = useState('');
-  const [movies, setMovies] = useState([]);
   const [hasSearched, setHasSearched] = useState(false);
-  const [loading, setLoading] = useState(false);
 
-  const MOVIE_API = import.meta.env.VITE_MOVIE_LIST_API;
+  // 검색 기능
+  const {data: movies = [], isLoading } = useSearch(
+    query.trim(),
+    !!query && hasSearched
+  )
 
-  // 영화 검색 API
-  const fetchMovies = async (searchQuery: string) => {
-    setLoading(true);
-
-    const kobis = `https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json`;
-    const URL = `${kobis}?key=${MOVIE_API}&movieNm=${searchQuery}`;
-
-    try {
-      const response = await fetch(URL);
-      const data = await response.json();
-      if (data.movieListResult.movieList) {
-        setMovies(data.movieListResult.movieList);
-      } else {
-        setMovies([]);
-      }
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      setMovies([]);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // 검색 버튼
   const handleSearch = () => {
     if (query.trim()) {
       setHasSearched(true);
-      fetchMovies(query.trim());
     }
   };
 
@@ -72,7 +50,10 @@ const Search = () => {
           className="search-input"
           placeholder="작품, 키워드를 검색해보세요"
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(e) => {
+            setQuery(e.target.value);
+            setHasSearched(false);
+          }}
           onKeyDown={handleKeyPress}
           sx={{
             '& .MuiOutlinedInput-root': {
@@ -132,10 +113,9 @@ const Search = () => {
         }}
       >
         {/* 로딩 */}
-        {loading ? (
+        {isLoading ? (
           <Box sx={{ textAlign: 'center', mt: 4 }}>
             <CircularProgress />
-            <Typography sx={{ mt: 2, fontSize: 18 }}>검색 중입니다..⏳</Typography>
           </Box>
         ) : hasSearched && movies.length === 0 ? (
           <Typography sx={{ textAlign: 'center', mt: 4, fontSize: 18, fontWeight: 500 }}>
