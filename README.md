@@ -33,7 +33,7 @@ https://github.com/yjinn0813/cinetalk
 
 ### 2차 개선 (Migration & Enhancement)
 
-- **기간**: 2026.03.22 ~ 04.21
+- **기간**: 2026.03.22 ~
 
 - **주요 작업**
   - CRA → Vite 마이그레이션 (빌드 환경 개선 및 성능 향상)
