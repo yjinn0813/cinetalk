@@ -38,7 +38,8 @@ https://github.com/yjinn0813/cinetalk
 - **주요 작업**
   - CRA → Vite 마이그레이션 (빌드 환경 개선 및 성능 향상)
   - Redux → Zustand 전환 (전역 상태 관리 단순화)
-  - 작성된 리뷰 데이터 저장 및 상세/라이브러리 페이지 연동 기능 구현
+  - Supabase 도입을 통한 데이터 관리 구조 개선 (JSON → DB)
+  - Supabase의 인증(Auth) 및 API 자동 생성 기능을 활용하여 CRUD 기능 구현
   - JavaScript → TypeScript 전환 (타입 안정성 및 유지보수성 향상)
   - React Query 도입을 통한 API 로직 리팩토링 (데이터 fetching 및 캐싱 최적화)
   - Mui를 활용한 UI 디자인 개선 및 컴포넌트 리팩토링
@@ -57,6 +58,11 @@ https://github.com/yjinn0813/cinetalk
 | ![SASS](https://img.shields.io/badge/SASS-CC6699?style=flat-square&logo=Sass&logoColor=white) | 스타일링 및 CSS 확장 문법 사용 |
 | ![Swiper](https://img.shields.io/badge/swiper-6332F6?style=flat-square&logo=swiper&logoColor=white) | 슬라이드 UI (배너, 카드 등) 구현 |
 | ![MUI](https://img.shields.io/badge/MUI-007FFF?style=flat-square&logo=MUI&logoColor=white) | 일관된 UI 컴포넌트 및 아이콘 활용 |
+
+### Backend (BaaS)
+| 기술 | 사용 목적 |
+| ----- | ----- |
+| ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white) | 인증(Auth), 데이터베이스(PostgreSQL), API 자동 생성 기반 CRUD 기능 구현 |
 
 ### Tooling
 | 기술 | 사용 목적 |
