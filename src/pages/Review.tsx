@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { usePostStore } from '../store/usePostStore';
+// import { usePostStore } from '../store/usePostStore';
+import { useReview } from '../hooks/useReview';
 import useTitle from '../hooks/useTitle';
 import ReadPosts from '../components/Review/ReadPosts';
 import { Box, Typography, IconButton, Snackbar, Alert } from '@mui/material';
@@ -16,10 +17,15 @@ const Review = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const posts = usePostStore((state) => state.posts);
-  const deletePost = usePostStore((state) => state.deletePost);
+  // React Query - fetch
+  const { data: post, isLoading, isError } = useReview(id);
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error!😢</div>;
+
+  // const posts = usePostStore((state) => state.posts);
+  // const deletePost = usePostStore((state) => state.deletePost);
   
-  const post = posts.find((post) => post.id === Number(id));
+  // const post = posts.find((post) => post.id === Number(id));
 
   if (!post && !openToast) {
     return (
@@ -35,7 +41,7 @@ const Review = () => {
     
     setTimeout(() => {
       navigate('/watched');
-      deletePost(Number(id));
+      // deletePost(Number(id));
     }, 1500);
   };
 
