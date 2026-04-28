@@ -127,6 +127,8 @@ https://github.com/yjinn0813/cinetalk
  ┃ ┃ ┗ 📂Review
  ┃ ┗ 📜userflow.png
  ┣ 📂src
+ ┃ ┣ 📂api
+ ┃ ┃ ┗ 📜reviews.ts
  ┃ ┣ 📂assets
  ┃ ┃ ┗ 📜logo.png
  ┃ ┣ 📂components
@@ -147,12 +149,18 @@ https://github.com/yjinn0813/cinetalk
  ┃ ┃ ┃ ┣ 📜Posts.json
  ┃ ┃ ┃ ┣ 📜ReadPosts.tsx
  ┃ ┃ ┃ ┗ 📜WatchedPoster.tsx
- ┃ ┃ ┗ 📂common
+ ┃ ┃ ┣ 📂common
+ ┃ ┃ ┃ ┣ 📜Error.tsx
  ┃ ┃ ┃ ┣ 📜Footer.tsx
- ┃ ┃ ┃ ┗ 📜Header.tsx
+ ┃ ┃ ┃ ┣ 📜Header.tsx
+ ┃ ┃ ┃ ┗ 📜Loading.tsx
  ┃ ┣ 📂hooks
+ ┃ ┃ ┣ 📜useReview.ts
+ ┃ ┃ ┣ 📜useReviewLists.ts
  ┃ ┃ ┣ 📜useSearch.ts
  ┃ ┃ ┗ 📜useTitle.ts
+ ┃ ┣ 📂lib
+ ┃ ┃ ┗ 📜supabase.ts
  ┃ ┣ 📂pages
  ┃ ┃ ┣ 📜Login.tsx
  ┃ ┃ ┣ 📜Main.tsx
