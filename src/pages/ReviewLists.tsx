@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { useReviewLists } from '../hooks/useReviewLists';
 import useTitle from '../hooks/useTitle';
 import WatchedPoster from '../components/Review/WatchedPoster';
+import Loading from '../components/common/Loading';
+import Error from '../components/common/Error';
 import '../styles/pages/ReviewLists.scss';
 
 const ReviewLists = () => {
@@ -11,8 +13,8 @@ const ReviewLists = () => {
 
   // React Query - fetch
   const { data: postList, isLoading, isError } = useReviewLists();
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error!😢</div>;
+  if (isLoading) return <Loading />;
+  if (isError) return <Error />;
 
   // 데이터 가져와서 최신순 정렬
   const sortedPosts = [...(postList || [])].sort(

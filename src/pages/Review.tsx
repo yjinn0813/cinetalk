@@ -6,6 +6,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useReview } from '../hooks/useReview';
 import useTitle from '../hooks/useTitle';
 import ReadPosts from '../components/Review/ReadPosts';
+import Loading from '../components/common/Loading';
+import Error from '../components/common/Error';
 import { Box, Typography, IconButton, Snackbar, Alert } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import '../styles/pages/Review.scss';
@@ -19,8 +21,8 @@ const Review = () => {
 
   // React Query - fetch
   const { data: post, isLoading, isError } = useReview(id);
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error!😢</div>;
+  if (isLoading) return <Loading />;
+  if (isError) return <Error />;
 
   // const posts = usePostStore((state) => state.posts);
   // const deletePost = usePostStore((state) => state.deletePost);
