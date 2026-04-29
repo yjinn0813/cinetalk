@@ -3,7 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { usePostStore } from '../store/usePostStore';
+import { useCreateReview } from '../hooks/useCreateReview';
 import useTitle from '../hooks/useTitle';
+import Error from '../components/common/Error';
 import { Box, TextField, Typography, Button, Snackbar, Alert, Rating } from '@mui/material';
 import '../styles/pages/Write.scss';
 
@@ -25,8 +27,11 @@ const Write = () => {
   const pageTitle = isEdit ? '리뷰 수정하기' : '리뷰 작성하기';
   useTitle(isEdit ? 'Edit' : 'Write');
 
-  const { addPost, updatePost, posts } = usePostStore();
-  const [open, setOpen] = useState(false);
+  const { mutate } = useCreateReview();
+
+  const { updatePost, posts } = usePostStore();
+  const [toastOpen, setToastOpen] = useState(false);
+  const [isErrorOpen, setIsErrorOpen] = useState(false);
   const [form, setForm] = useState<newPostProps>({
     title: '',
     body: '',
@@ -93,7 +98,7 @@ const Write = () => {
         ...form,
       });
 
-      setOpen(true);
+      setToastOpen(true);
       setTimeout(() => {
         navigate(`/Review/${numericId}`);
       }, 1200);
@@ -105,15 +110,24 @@ const Write = () => {
         poster: 'default_poster', // 디폴트 포스터
       };
 
-      const newId = addPost(newPost);
+      mutate(newPost, {
+        onSuccess: (data) => {
+          setToastOpen(true); // 토스트 오픈
 
-      setOpen(true); // 토스트 오픈
-
-      setTimeout(() => {
-        navigate(`/Review/${newId}`);
-      }, 1200);
+          setTimeout(() => {
+            navigate(`/Review/${data.id}`);
+          }, 1200)
+        },
+        onError: () => {
+          setIsErrorOpen(true);
+        }
+      });
     }
   };
+
+  if (isErrorOpen) {
+    return <Error />;
+  }
 
   return (
     <Box className="write-container">
@@ -307,9 +321,9 @@ const Write = () => {
 
       {/* Snackbar (토스트) */}
       <Snackbar
-        open={open}
+        open={toastOpen}
         autoHideDuration={1200}
-        onClose={() => setOpen(false)}
+        onClose={() => setToastOpen(false)}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
         <Alert severity="success" variant='filled'>

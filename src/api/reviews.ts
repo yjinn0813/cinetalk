@@ -1,8 +1,9 @@
 /* supabase 리뷰 데이터 CRUD */
 
 import { supabase } from '../lib/supabase';
+import { CreateReview } from '../types/reviewTypes';
 
-// 리스트 전체 불러오기
+// READ - 리스트 전체 불러오기
 export const getReviewLists = async () => {
   const { data, error } = await supabase
     .from('reviews')
@@ -12,7 +13,7 @@ export const getReviewLists = async () => {
   return data;
 };
 
-// 개별 리뷰 불러오기
+// READ - 개별 리뷰 불러오기
 export const getReview = async (id: string) => {
   const { data, error } = await supabase
     .from('reviews')
@@ -23,3 +24,15 @@ export const getReview = async (id: string) => {
   if (error) throw error;
   return data;
 };
+
+// CREATE - 개별 리뷰 추가하기
+export const createReview = async (newReview: CreateReview) => {
+  const { data, error } = await supabase
+    .from('reviews')
+    .insert([newReview])
+    .select()
+    .single();
+  
+    if (error) throw error;
+    return data;
+}
