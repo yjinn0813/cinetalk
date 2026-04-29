@@ -2,10 +2,12 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { usePostStore } from '../store/usePostStore';
+import { useReview } from '../hooks/useReview';
 import { useCreateReview } from '../hooks/useCreateReview';
+import { useUpdateReview } from '../hooks/useUpdateReview';
 import useTitle from '../hooks/useTitle';
 import Error from '../components/common/Error';
+import Loading from '../components/common/Loading';
 import { Box, TextField, Typography, Button, Snackbar, Alert, Rating } from '@mui/material';
 import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import '../styles/pages/Write.scss';
@@ -28,9 +30,10 @@ const Write = () => {
   const pageTitle = isEdit ? '리뷰 수정하기' : '리뷰 작성하기';
   useTitle(isEdit ? 'Edit' : 'Write');
 
-  const { mutate } = useCreateReview();
+  const { data: post, isLoading } = useReview(id!);
+  const { mutate: createMutate } = useCreateReview();
+  const { mutate: updateMutate } = useUpdateReview();
 
-  const { updatePost, posts } = usePostStore();
   const [toastOpen, setToastOpen] = useState(false);
   const [isErrorOpen, setIsErrorOpen] = useState(false);
   const [form, setForm] = useState<newPostProps>({
@@ -43,23 +46,22 @@ const Write = () => {
   });
 
   // 수정하기 모드
+  if (isEdit && isLoading) {
+    return <Loading />;
+  }
+
   useEffect(() => {
-    if (!id) return;
+    if (!post) return;
 
-    const numericId = Number(id);
-    const post = posts.find((p) => p.id === numericId);
-
-    if (post) {
-      setForm({
-        title: post.title,
-        body: post.body,
-        date: post.date,
-        rating: post.rating,
-        signal: post.signal || 'good',
-        type: post.type as 'movie' | 'drama' | 'animation',
-      })
-    }
-  }, [id, posts]);
+    setForm({
+      title: post.title,
+      body: post.body,
+      date: post.date,
+      rating: post.rating,
+      signal: post.signal || 'good',
+      type: post.type,
+    })
+  }, [post]);
 
   // 인풋 핸들러
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -89,21 +91,27 @@ const Write = () => {
 
     if (id){
       // 수정하기
-      const numericId = Number(id);
-      const existingPost = posts.find(p => p.id === numericId);
+      updateMutate(
+        {
+          id,
+          data: {
+            ...form,
+            poster: 'default_poster',
+          },
+        },
+        {
+          onSuccess: (data) => {
+            setToastOpen(true);
 
-      if (!existingPost) return;
-
-      updatePost(numericId, {
-        ...existingPost,
-        ...form,
-      });
-
-      setToastOpen(true);
-      setTimeout(() => {
-        navigate(`/Review/${numericId}`);
-      }, 1200);
-
+            setTimeout(() => {
+              navigate(`/Review/${data.id}`);
+            }, 1200);
+          },
+          onError: () => {
+            setIsErrorOpen(true);
+          },
+        }
+      );
     } else {
       // 신규 작성
       const newPost = {
@@ -111,7 +119,7 @@ const Write = () => {
         poster: 'default_poster', // 디폴트 포스터
       };
 
-      mutate(newPost, {
+      createMutate(newPost, {
         onSuccess: (data) => {
           setToastOpen(true); // 토스트 오픈
 
@@ -350,7 +358,7 @@ const Write = () => {
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
         <Alert severity="success" variant='filled'>
-          리뷰가 등록되었습니다!
+          {isEdit ? '리뷰가 수정되었습니다!' : '리뷰가 등록되었습니다!'}
         </Alert>
       </Snackbar>
     </Box>

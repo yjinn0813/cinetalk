@@ -12,4 +12,8 @@ export type Review = {
   created_at?: string; // DB 저장시간
 };
 
+// 추가하기
 export type CreateReview = Omit<Review, 'id' | 'created_at'>;
+
+// 수정하기
+export type UpdateReview = Omit<Review, 'id'>;
