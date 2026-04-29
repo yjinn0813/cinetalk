@@ -7,6 +7,7 @@ import { useCreateReview } from '../hooks/useCreateReview';
 import useTitle from '../hooks/useTitle';
 import Error from '../components/common/Error';
 import { Box, TextField, Typography, Button, Snackbar, Alert, Rating } from '@mui/material';
+import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import '../styles/pages/Write.scss';
 
 type newPostProps = {
@@ -150,11 +151,33 @@ const Write = () => {
           },
         }}
       >
+        {/* 타입 선택 */}
+        <Box sx={{ mb: 3 }}>
+          <FormControl fullWidth>
+            <InputLabel>콘텐츠 타입</InputLabel>
+            <Select
+              name="type"
+              value={form.type}
+              label="콘텐츠 타입"
+              onChange={(e) =>
+                setForm((prev) => ({
+                  ...prev,
+                  type: e.target.value as 'movie' | 'drama' | 'animation',
+                }))
+              }
+            >
+              <MenuItem value="movie">영화</MenuItem>
+              <MenuItem value="drama">드라마</MenuItem>
+              <MenuItem value="animation">애니메이션</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+
         {/* 제목 */}
         <Box sx={{ mb: 3 }}>
           <TextField
             fullWidth
-            label="영화 제목"
+            label="작품 제목"
             name="title"
             value={form.title}
             onChange={handleChange}
