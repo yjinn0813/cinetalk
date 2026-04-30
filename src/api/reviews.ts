@@ -49,3 +49,15 @@ export const updateReview = async (id: string, updatePost: UpdateReview) => {
   if (error) throw error;
   return data;
 }
+
+// DELETE - 개별 리뷰 삭제하기
+export const deleteReview = async (id: string) => {
+  const { data, error } = await supabase
+    .from('reviews')
+    .delete()
+    .eq('id', id)
+    .select().single();
+
+  if (error) throw error;
+  return data;
+}

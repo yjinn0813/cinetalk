@@ -155,10 +155,13 @@ https://github.com/yjinn0813/cinetalk
  ┃ ┃ ┃ ┣ 📜Header.tsx
  ┃ ┃ ┃ ┗ 📜Loading.tsx
  ┃ ┣ 📂hooks
+ ┃ ┃ ┣ 📜useCreateReview.ts
+ ┃ ┃ ┣ 📜useDeleteReview.ts
  ┃ ┃ ┣ 📜useReview.ts
  ┃ ┃ ┣ 📜useReviewLists.ts
  ┃ ┃ ┣ 📜useSearch.ts
- ┃ ┃ ┗ 📜useTitle.ts
+ ┃ ┃ ┣ 📜useTitle.ts
+ ┃ ┃ ┗ 📜useUpdateReview.ts
  ┃ ┣ 📂lib
  ┃ ┃ ┗ 📜supabase.ts
  ┃ ┣ 📂pages
@@ -190,6 +193,8 @@ https://github.com/yjinn0813/cinetalk
  ┃ ┃ ┃ ┣ 📜Search.scss
  ┃ ┃ ┃ ┗ 📜Write.scss
  ┃ ┃ ┗ 📜root.scss
+ ┃ ┣ 📂types
+ ┃ ┃ ┗ 📜reviewTypes.ts
  ┃ ┣ 📂utils
  ┃ ┃ ┣ 📜auth.ts
  ┃ ┃ ┣ 📜clipboard.ts
