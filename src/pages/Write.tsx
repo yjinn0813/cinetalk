@@ -2,9 +2,14 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { usePostStore } from '../store/usePostStore';
+import { useReview } from '../hooks/useReview';
+import { useCreateReview } from '../hooks/useCreateReview';
+import { useUpdateReview } from '../hooks/useUpdateReview';
 import useTitle from '../hooks/useTitle';
+import Error from '../components/common/Error';
+import Loading from '../components/common/Loading';
 import { Box, TextField, Typography, Button, Snackbar, Alert, Rating } from '@mui/material';
+import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import '../styles/pages/Write.scss';
 
 type newPostProps = {
@@ -25,8 +30,12 @@ const Write = () => {
   const pageTitle = isEdit ? '리뷰 수정하기' : '리뷰 작성하기';
   useTitle(isEdit ? 'Edit' : 'Write');
 
-  const { addPost, updatePost, posts } = usePostStore();
-  const [open, setOpen] = useState(false);
+  const { data: post, isLoading } = useReview(id!);
+  const { mutate: createMutate } = useCreateReview();
+  const { mutate: updateMutate } = useUpdateReview();
+
+  const [toastOpen, setToastOpen] = useState(false);
+  const [isErrorOpen, setIsErrorOpen] = useState(false);
   const [form, setForm] = useState<newPostProps>({
     title: '',
     body: '',
@@ -37,23 +46,22 @@ const Write = () => {
   });
 
   // 수정하기 모드
+  if (isEdit && isLoading) {
+    return <Loading />;
+  }
+
   useEffect(() => {
-    if (!id) return;
+    if (!post) return;
 
-    const numericId = Number(id);
-    const post = posts.find((p) => p.id === numericId);
-
-    if (post) {
-      setForm({
-        title: post.title,
-        body: post.body,
-        date: post.date,
-        rating: post.rating,
-        signal: post.signal || 'good',
-        type: post.type as 'movie' | 'drama' | 'animation',
-      })
-    }
-  }, [id, posts]);
+    setForm({
+      title: post.title,
+      body: post.body,
+      date: post.date,
+      rating: post.rating,
+      signal: post.signal || 'good',
+      type: post.type,
+    })
+  }, [post]);
 
   // 인풋 핸들러
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -83,21 +91,27 @@ const Write = () => {
 
     if (id){
       // 수정하기
-      const numericId = Number(id);
-      const existingPost = posts.find(p => p.id === numericId);
+      updateMutate(
+        {
+          id,
+          data: {
+            ...form,
+            poster: 'default_poster',
+          },
+        },
+        {
+          onSuccess: (data) => {
+            setToastOpen(true);
 
-      if (!existingPost) return;
-
-      updatePost(numericId, {
-        ...existingPost,
-        ...form,
-      });
-
-      setOpen(true);
-      setTimeout(() => {
-        navigate(`/Review/${numericId}`);
-      }, 1200);
-
+            setTimeout(() => {
+              navigate(`/Review/${data.id}`);
+            }, 1200);
+          },
+          onError: () => {
+            setIsErrorOpen(true);
+          },
+        }
+      );
     } else {
       // 신규 작성
       const newPost = {
@@ -105,15 +119,24 @@ const Write = () => {
         poster: 'default_poster', // 디폴트 포스터
       };
 
-      const newId = addPost(newPost);
+      createMutate(newPost, {
+        onSuccess: (data) => {
+          setToastOpen(true); // 토스트 오픈
 
-      setOpen(true); // 토스트 오픈
-
-      setTimeout(() => {
-        navigate(`/Review/${newId}`);
-      }, 1200);
+          setTimeout(() => {
+            navigate(`/Review/${data.id}`);
+          }, 1200)
+        },
+        onError: () => {
+          setIsErrorOpen(true);
+        }
+      });
     }
   };
+
+  if (isErrorOpen) {
+    return <Error />;
+  }
 
   return (
     <Box className="write-container">
@@ -136,11 +159,33 @@ const Write = () => {
           },
         }}
       >
+        {/* 타입 선택 */}
+        <Box sx={{ mb: 3 }}>
+          <FormControl fullWidth>
+            <InputLabel>콘텐츠 타입</InputLabel>
+            <Select
+              name="type"
+              value={form.type}
+              label="콘텐츠 타입"
+              onChange={(e) =>
+                setForm((prev) => ({
+                  ...prev,
+                  type: e.target.value as 'movie' | 'drama' | 'animation',
+                }))
+              }
+            >
+              <MenuItem value="movie">영화</MenuItem>
+              <MenuItem value="drama">드라마</MenuItem>
+              <MenuItem value="animation">애니메이션</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+
         {/* 제목 */}
         <Box sx={{ mb: 3 }}>
           <TextField
             fullWidth
-            label="영화 제목"
+            label="작품 제목"
             name="title"
             value={form.title}
             onChange={handleChange}
@@ -307,13 +352,13 @@ const Write = () => {
 
       {/* Snackbar (토스트) */}
       <Snackbar
-        open={open}
+        open={toastOpen}
         autoHideDuration={1200}
-        onClose={() => setOpen(false)}
+        onClose={() => setToastOpen(false)}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
         <Alert severity="success" variant='filled'>
-          리뷰가 등록되었습니다!
+          {isEdit ? '리뷰가 수정되었습니다!' : '리뷰가 등록되었습니다!'}
         </Alert>
       </Snackbar>
     </Box>

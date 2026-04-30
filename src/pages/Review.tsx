@@ -2,9 +2,12 @@
 
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { usePostStore } from '../store/usePostStore';
+import { useReview } from '../hooks/useReview';
+import { useDeleteReview } from '../hooks/useDeleteReview';
 import useTitle from '../hooks/useTitle';
 import ReadPosts from '../components/Review/ReadPosts';
+import Loading from '../components/common/Loading';
+import Error from '../components/common/Error';
 import { Box, Typography, IconButton, Snackbar, Alert } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import '../styles/pages/Review.scss';
@@ -13,13 +16,15 @@ import '../styles/pages/Review.scss';
 const Review = () => {
   useTitle('Review');
   const [openToast, setOpenToast] = useState(false);
+  const [isErrorOpen, setIsErrorOpen] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const posts = usePostStore((state) => state.posts);
-  const deletePost = usePostStore((state) => state.deletePost);
-  
-  const post = posts.find((post) => post.id === Number(id));
+  // React Query - fetch
+  const { data: post, isLoading, isError } = useReview(id!);
+  const { mutate: deleteMutate, isPending } = useDeleteReview();
+  if (isLoading) return <Loading />;
+  if (isError || isErrorOpen) return <Error />;
 
   if (!post && !openToast) {
     return (
@@ -31,12 +36,23 @@ const Review = () => {
 
   // 삭제 핸들러
   const handleDelete = () => {
-    setOpenToast(true);
-    
-    setTimeout(() => {
-      navigate('/watched');
-      deletePost(Number(id));
-    }, 1500);
+    if (!id) return;
+
+    // 삭제 전 확인
+    if (!window.confirm('정말 삭제하시겠습니까?')) return;
+
+    deleteMutate(id, {
+      onSuccess: () => {
+        setOpenToast(true);
+
+        setTimeout(() => {
+          navigate('/watched');
+        }, 1500);
+      },
+      onError: () => {
+        setIsErrorOpen(true);
+      }
+    });
   };
 
   return (
@@ -87,6 +103,7 @@ const Review = () => {
         signal={post.signal}
         rating={post.rating}
         onDelete={handleDelete}
+        isDeleting={isPending} // 삭제 중 중복 클릭 방지
       />
 
       {/* 삭제 토스트 */}

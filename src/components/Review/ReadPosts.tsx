@@ -19,10 +19,11 @@ type PostProps = {
   signal: 'good' | 'neutral' | 'bad';
   rating: number;
   onDelete: () => void;
+  isDeleting?: boolean; // 삭제 중 중복 클릭 방지
 };
 
 
-const ReadPosts = ({ poster, title, date, body, signal, rating, onDelete }: PostProps) => {
+const ReadPosts = ({ poster, title, date, body, signal, rating, onDelete, isDeleting }: PostProps) => {
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [openToast, setOpenToast] = useState(false);
@@ -175,7 +176,8 @@ const ReadPosts = ({ poster, title, date, body, signal, rating, onDelete }: Post
             variant="outlined"
             color="error"
             startIcon={<DeleteIcon />}
-            onClick={onDelete}
+            onClick={isDeleting ? undefined : onDelete}
+            disabled={isDeleting}
             sx={{ 
               minWidth: '82px',
               p: '8px 0',

@@ -2,9 +2,10 @@
 
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/useAuthStore';
-import { usePostStore } from '../store/usePostStore';
+import { useReviewLists } from '../hooks/useReviewLists';
 import useTitle from '../hooks/useTitle';
 import { Box, Card, CardContent, Divider} from '@mui/material';
+import Loading from '../components/common/Loading';
 import UserInfo from '../components/Profile/UserInfo';
 import MenuButtons from '../components/Profile/MenuButtons';
 import LogoutButton from '../components/Profile/LogoutButton';
@@ -22,7 +23,8 @@ const Profile = () => {
   const { logout, user } = useAuthStore();
   const navigate = useNavigate();
 
-  const posts = usePostStore((state) => state.posts);
+  // DB from supabase
+  const { data: posts = [], isLoading} = useReviewLists();
   const movieCount = posts.filter(p => p.type === 'movie').length;
   const dramaCount = posts.filter(p => p.type === 'drama').length;
   const aniCount = posts.filter(p => p.type === 'animation').length;
@@ -31,6 +33,8 @@ const Profile = () => {
     logout();
     navigate('/');
   };
+
+  if (isLoading) return <Loading />;
 
   return (
     <Box className="mypage-container"
