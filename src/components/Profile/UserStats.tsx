@@ -1,10 +1,11 @@
 /* 프로필 페이지 - user stats */
 
-import { usePostStore } from '../../store/usePostStore';
+import { useReviewLists } from '../../hooks/useReviewLists';
 import { Box, Typography, Divider } from '@mui/material';
+import Loading from '../common/Loading';
 
 const UserStats = () => {
-  const posts = usePostStore((state) => state.posts);
+  const { data: posts = [], isLoading} = useReviewLists();
 
   // 평점 계산
   const avgRating =
@@ -17,6 +18,8 @@ const UserStats = () => {
   
   // 활동일 계산
   const activeDays = new Set(posts.map(p => p.date)).size;
+
+  if (isLoading) return <Loading />;
 
   return (
     <Box

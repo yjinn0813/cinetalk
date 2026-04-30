@@ -176,7 +176,6 @@ https://github.com/yjinn0813/cinetalk
  ┃ ┃ ┗ 📜Write.tsx
  ┃ ┣ 📂store
  ┃ ┃ ┣ 📜useAuthStore.ts
- ┃ ┃ ┣ 📜usePostStore.ts
  ┃ ┃ ┗ 📜useUserStore.ts
  ┃ ┣ 📂styles
  ┃ ┃ ┣ 📂components
