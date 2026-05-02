@@ -22,7 +22,9 @@ https://github.com/yjinn0813/cinetalk
 
 - **기간**: 2024.07.01 ~ 08.08
 
-- **주요 작업**
+- **설명**: 서비스 MVP 구현, 핵심 기능 개발
+
+- **주요 작업**:
   - Swiper를 활용한 메인 페이지 카드 슬라이드 및 박스오피스/광고 자동 슬라이드 구현
   - Redux를 이용한 로그인/로그아웃 및 전역 사용자 상태 관리
   - 회원가입 시 실시간 입력값 기반 유효성 검사 및 이용약관 동의 로직 구현
@@ -31,18 +33,29 @@ https://github.com/yjinn0813/cinetalk
   - 모바일 환경 대응 (리뷰 리스트 Swiper 슬라이드 적용)
   - Vercel 배포
 
-### 2차 개선 (Migration & Enhancement)
+### 2차 개선 (Frontend Refactoring)
 
-- **기간**: 2026.03.22 ~
+- **기간**: 2026.03.22 ~ 04.21
 
-- **주요 작업**
+- **설명**: 프론트엔드 아키텍처 개선, 코드 구조 리팩토링
+
+- **주요 작업**:
   - CRA → Vite 마이그레이션 (빌드 환경 개선 및 성능 향상)
   - Redux → Zustand 전환 (전역 상태 관리 단순화)
-  - Supabase 도입을 통한 데이터 관리 구조 개선 (JSON → DB)
-  - Supabase의 인증(Auth) 및 API 자동 생성 기능을 활용하여 CRUD 기능 구현
   - JavaScript → TypeScript 전환 (타입 안정성 및 유지보수성 향상)
   - React Query 도입을 통한 API 로직 리팩토링 (데이터 fetching 및 캐싱 최적화)
-  - Mui를 활용한 UI 디자인 개선 및 컴포넌트 리팩토링
+  - MUI를 활용한 UI 디자인 개선 및 컴포넌트 리팩토링
+
+### 3차 개선 (Backend Integration & Data Layer)
+
+- **기간**: 2026.04.23 ~ (In Progress)
+
+- **설명**: 데이터 계층 개선, BaaS 기반 백엔드 기능 도입
+
+- **주요 작업**: 
+  - Supabase 도입을 통한 데이터 관리 구조 개선 (JSON → DB)
+  - Supabase API를 활용한 CRUD 기능 리팩토링
+  - Supabase Auth 기반 사용자 인증 기능 구현
 
 <br>
 
