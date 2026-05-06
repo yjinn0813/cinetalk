@@ -97,6 +97,7 @@ const Review = () => {
       {/* 본문 컴포넌트 */}
       <ReadPosts
         poster={post.poster}
+        type={post.type}
         title={post.title}
         date={post.date}
         body={post.body}
