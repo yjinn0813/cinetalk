@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { copyToClipboard } from '../../utils/clipboard';
-import { Box, Typography, Button, Snackbar, Alert } from '@mui/material';
+import { Box, Typography, Chip, Button, Snackbar, Alert } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShareIcon from '@mui/icons-material/Share';
@@ -12,6 +12,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 type PostProps = {
   id?: number;
+  type: 'movie' | 'animation' | 'drama';
   poster: string;
   title: string;
   date: string;
@@ -23,13 +24,32 @@ type PostProps = {
 };
 
 
-const ReadPosts = ({ poster, title, date, body, signal, rating, onDelete, isDeleting }: PostProps) => {
+const ReadPosts = ({ poster, type, title, date, body, signal, rating, onDelete, isDeleting }: PostProps) => {
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [openToast, setOpenToast] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
   const posterImage = `/images/Review/${poster}.jpeg`;
+
+  // types
+  const typeMap = {
+    movie: {
+      label: '영화', 
+      bgcolor: '#cee5fa',
+      color: '#174b75',
+    },
+    drama: {
+      label: '드라마', 
+      bgcolor: '#fbdbe4',
+      color: '#70314f'
+    },
+    animation: {
+      label: '애니메이션', 
+      bgcolor: '#ecdcf5',
+      color: '#624273'
+    },
+  }
 
   // 좋아요
   const handleLikeClick = () => {
@@ -75,6 +95,7 @@ const ReadPosts = ({ poster, title, date, body, signal, rating, onDelete, isDele
     }
   ];
 
+  // ====================
   return (
     <Box className="r-container">
       <Box sx={{
@@ -84,7 +105,7 @@ const ReadPosts = ({ poster, title, date, body, signal, rating, onDelete, isDele
       }}>
 
         {/* 상단 */}
-        <Box sx={{ display: 'flex', gap: '24px' }}>
+        <Box sx={{ display: 'flex', gap: '24px', mb:4 }}>
           <Box
             component="img"
             src={posterImage}
@@ -101,6 +122,17 @@ const ReadPosts = ({ poster, title, date, body, signal, rating, onDelete, isDele
             flexDirection: 'column',
             justifyContent: 'center',
           }}>
+            <Chip 
+              label={typeMap[type].label}
+              sx={{
+                backgroundColor: typeMap[type].bgcolor,
+                color: typeMap[type].color,
+                mb: 1,
+                width: 90,
+                borderRadius: '8px',
+              }}
+            />
+
             <Typography sx={{ 
               fontWeight: 600,
               fontSize: 24,
@@ -138,19 +170,26 @@ const ReadPosts = ({ poster, title, date, body, signal, rating, onDelete, isDele
         </Box>
 
         {/* 본문 */}
-        <Typography
-          sx={{
-            whiteSpace: 'pre-line',
-            mt: 3,
-            mb: 3,
-            lineHeight: 1.6,
-          }}
-        >
-          {body}
-        </Typography>
+        {body.split('\n').map((line, idx) => (
+          <Typography
+            key={idx}
+            sx={{
+              whiteSpace: 'pre-line',
+              mb: 2,
+              lineHeight: 1.6,
+            }}
+          >
+            {line}
+          </Typography>
+        ))}
 
         {/* 액션 버튼 */}
-        <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+        <Box sx={{ 
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: 1,
+          mt: 4 
+        }}>
           {buttons.map((btn, index) => (
             <Button
               key={index}
