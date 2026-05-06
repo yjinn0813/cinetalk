@@ -105,7 +105,7 @@ const ReadPosts = ({ poster, type, title, date, body, signal, rating, onDelete, 
       }}>
 
         {/* 상단 */}
-        <Box sx={{ display: 'flex', gap: '24px' }}>
+        <Box sx={{ display: 'flex', gap: '24px', mb:4 }}>
           <Box
             component="img"
             src={posterImage}
@@ -170,19 +170,26 @@ const ReadPosts = ({ poster, type, title, date, body, signal, rating, onDelete, 
         </Box>
 
         {/* 본문 */}
-        <Typography
-          sx={{
-            whiteSpace: 'pre-line',
-            mt: 3,
-            mb: 3,
-            lineHeight: 1.6,
-          }}
-        >
-          {body}
-        </Typography>
+        {body.split('\n').map((line, idx) => (
+          <Typography
+            key={idx}
+            sx={{
+              whiteSpace: 'pre-line',
+              mb: 2,
+              lineHeight: 1.6,
+            }}
+          >
+            {line}
+          </Typography>
+        ))}
 
         {/* 액션 버튼 */}
-        <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+        <Box sx={{ 
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: 1,
+          mt: 4 
+        }}>
           {buttons.map((btn, index) => (
             <Button
               key={index}
