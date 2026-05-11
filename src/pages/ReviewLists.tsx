@@ -35,6 +35,7 @@ const ReviewLists = () => {
                 title={card.title}
                 signal={card.signal}
                 rating={card.rating}
+                date={card.date}
               />
             </Link>
           ))
