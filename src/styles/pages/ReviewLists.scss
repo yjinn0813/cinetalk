@@ -7,10 +7,7 @@
 .library-title {
   font-size: 32px;
   font-weight: 700;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  text-align: center;
   padding: 1.75rem 0;
   margin: 1.75rem 0;
 }
@@ -20,6 +17,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: 14px; // 카드 간 간격 조절
+  margin: 28px 0 0 0;
 
   @media (max-width: 768px) {
     display: block;
