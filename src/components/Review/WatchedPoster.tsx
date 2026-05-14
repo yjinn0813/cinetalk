@@ -83,6 +83,10 @@ const WatchedPoster = ({ poster, title, signal, rating, date }: LibraryProps) =>
             my: '2px',
             display: 'flex',
             justifyContent: 'space-between',
+
+            '@media (max-width:768px)': {
+              flexDirection: 'column',
+            }
           }}>
             {/* 관람일자 */}
             <Typography sx={{
