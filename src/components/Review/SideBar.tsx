@@ -1,7 +1,7 @@
 /* filter sidebar for review lists */
 
-import { useState } from 'react';
-import { Drawer, Box, Typography, Button } from '@mui/material';
+import { Drawer, Box, Typography, Button, IconButton, Divider } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import TypeFilter from './TypeFilter';
 import SignalFilter from './SignalFilter';
 import RateFilter from './RateFilter';
@@ -9,38 +9,20 @@ import RateFilter from './RateFilter';
 type SideBarProps = {
   open: boolean;
   onClose: () => void;
+  onReset: () => void;
+  selectedTypes: string[];
+  selectedSignal: string[];
+  selectedRate: number[];
+  onTypeToggle: (value: string) => void;
+  onSignalToggle: (value: string) => void;
+  onRateToggle: (value: number) => void;
 };
 
-const SideBar = ({ open, onClose }: SideBarProps) => {
-  // type chip
-  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
-  const handleTypeClick = (value: string) => {
-    setSelectedTypes((prev) =>
-      prev.includes(value)
-        ? prev.filter((item) => item !== value)
-        : [...prev, value]
-    );
-  };
-
-  // signal chip
-  const [selectedSignals, setSelectedSignals] = useState<string[]>([]);
-  const handleSignalClick = (value: string) => {
-    setSelectedSignals((prev) =>
-      prev.includes(value)
-        ? prev.filter((item) => item !== value)
-        : [...prev, value]
-    );
-  }
-
-  // rating chip
-  const [selectedRate, setSelectedRate] = useState<number[]>([]);
-  const handleSelectedRate = (value: number) => {
-    setSelectedRate((prev) => 
-      prev.includes(value)
-      ? prev.filter((item) => item !== value)
-      : [...prev, value]
-    )
-  }
+const SideBar = ({ open, onClose, onReset,
+  selectedTypes, onTypeToggle, 
+  selectedSignal, onSignalToggle, 
+  selectedRate, onRateToggle
+}: SideBarProps) => {
 
   return (
     <Drawer
@@ -49,61 +31,65 @@ const SideBar = ({ open, onClose }: SideBarProps) => {
       onClose={onClose}
     >
       <Box sx={{
-        p: 3,
-        maxWidth: 300,
+        p: '24px 16px 24px 24px',
+        maxWidth: 260,
       }}>
-        <Typography sx={{
-          fontSize: 22,
-          fontWeight: 600,
-          mb: 3,
-        }}>필터</Typography>
+        <Box sx={{
+          mb: 2,
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}>
+          <Typography sx={{
+            fontSize: 22,
+            fontWeight: 600,
+          }}>필터</Typography>
 
-        <Box>
+          <IconButton onClick={onClose}>
+            <CloseIcon />
+          </IconButton>
+        </Box>
+
+        <Divider sx={{ my:1 }} />
+
+        <Box sx={{ my: 3 }}>
           {/* 타입 */}
           <TypeFilter
             selectedTypes={selectedTypes}
-            onToggle={handleTypeClick}
+            onToggle={onTypeToggle}
           />
 
           {/* 신호등 */}
           <SignalFilter 
-            selectedSignals={selectedSignals}
-            onToggle={handleSignalClick}
+            selectedSignals={selectedSignal}
+            onToggle={onSignalToggle}
           />
 
           {/* 평점 */}
           <RateFilter 
             selectedRatings={selectedRate}
-            onToggle={handleSelectedRate}
+            onToggle={onRateToggle}
           />
+        </Box>
+        
+        <Divider sx={{ my: 2 }}/>
+        
+        <Box sx={{ mt: 3 }}>
+          <Button
+            fullWidth
+            variant='text'
+            onClick={onReset}
+            sx={{
+              backgroundColor: 'rgba(0, 0, 0, 0.08)',
+              color: 'rgba(0, 0, 0, 0.87)',
+              py: 1,
 
-          {/* 버튼 */}
-          <Box sx={{
-            display: 'flex',
-            gap: 1,
-          }}>
-            <Button
-              fullWidth
-              variant="outlined"
-              onClick={onClose}
-              sx={{
-                p: '8px 0',
-                fontSize: 15,
-                color: '#1e90ff',
-                border: '1px solid #1e90ff'
-              }}
-            >취소</Button>
-            <Button
-              fullWidth
-              variant='contained'
-              sx={{
-                p: '8px 0',
-                fontSize: 15,
+              '&:hover': {
                 backgroundColor: '#1e90ff',
                 color: '#f0f0f0',
-              }}
-            >적용</Button>
-          </Box>
+              }
+            }}
+          >초기화</Button>
         </Box>
       </Box>
     </Drawer>
@@ -111,3 +97,10 @@ const SideBar = ({ open, onClose }: SideBarProps) => {
 };
 
 export default SideBar;
+
+/* 
+  MUI button variant
+  주요 액션 → contained
+  보조 액션 → outlined
+  가벼운 액션 → text
+*/ 
