@@ -1,0 +1,32 @@
+name: Supabase DB keep Alive
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # KST 09:00
+  workflow_dispatch:
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+        
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Run Keep Alive Script
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          echo "시작 시간: $(date)"
+          node scripts/supabase-ping.mjs
+    
