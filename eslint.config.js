@@ -9,7 +9,7 @@ export default [
 
   // 무시할 폴더
   {
-    ignores: ["dist", "node_modules"],
+    ignores: ["dist", "node_modules", 'scripts/**'],
   },
 
   // TS + React 룰
