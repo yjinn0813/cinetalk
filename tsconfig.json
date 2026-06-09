@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     /* Language and Environment */
-    "target": "ES5",
+    "target": "ES2020",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
 
     /* React */
@@ -10,7 +10,7 @@
 
     /* Module */
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
 

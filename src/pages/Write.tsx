@@ -325,8 +325,23 @@ const Write = () => {
           width: '100%',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          gap: 2
         }}>
+          {isEdit && (
+            <Button
+              variant="outlined"
+              onClick={() => navigate(`/review/${id}`)}
+              sx={{
+                color: '#1e90ff',
+                borderRadius: 2,
+                fontSize: 20,
+                fontWeight: 600,
+                p: '16px 0',
+                minWidth: '240px'
+              }}
+            >취소</Button>
+          )}
           <Button
             type="submit"
             variant="contained"
@@ -342,10 +357,10 @@ const Write = () => {
               fontSize: 20,
               fontWeight: 600,
               p: '16px 0',
-              minWidth: '360px',
+              minWidth: '240px',
             }}
           >
-            작성완료
+            {isEdit ? '수정완료' : '작성완료'}
           </Button>
         </Box>
       </Box>
