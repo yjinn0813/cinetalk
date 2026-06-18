@@ -30,3 +30,27 @@ jobs:
           echo "시작 시간: $(date)"
           node scripts/supabase-ping.mjs
     
+      - name: Discord Notify (Success)
+        if: success()
+        env: 
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          CURRENT_TIME=$(TZ='Asia/Seoul' date '+%Y-%m-%d %H:%M (KST)')
+          curl -H "Content-Type: application/json" \
+            -d "{
+              \"content\":\"✅ 에이든의 일일보고 [성공]\n\nCinetalk 레포지토리의 Supabase Keep-Alive 워크플로우가 정상 완료되었습니다.\n\n- 날짜: ${CURRENT_TIME}\n- 브랜치: ${{ github.ref_name }}\n- 상태: 성공\n\n현재 시스템은 정상 상태입니다.\"
+            }" \
+            $DISCORD_WEBHOOK_URL
+      
+      - name: Discord Notify (Failure)
+        if: failure()
+        env: 
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          CURRENT_TIME=$(TZ='Asia/Seoul' date '+%Y-%m-%d %H:%M (KST)')
+          curl -H "Content-Type: application/json" \
+            -d "{
+              \"content\":\"🚨 에이든의 일일보고 [실패]\n\nCinetalk 레포지토리의 Supabase Keep-Alive 워크플로우 실행에 실패했습니다.\n\n- 날짜: ${CURRENT_TIME}\n- 브랜치: ${{ github.ref_name }}\n- 상태: 실패\n\n확인이 필요한 이벤트가 발생했습니다.\nGitHub Actions 실행 로그를 확인해주세요.\"
+            }" \
+            $DISCORD_WEBHOOK_URL
+      
