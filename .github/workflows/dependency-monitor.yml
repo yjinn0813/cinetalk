@@ -1,0 +1,64 @@
+name: Dependency Monitor
+
+on:
+  schedule: 
+    - cron: '0 1 * * 1' #KST 월요일 10시
+  workflow_dispatch:
+
+jobs:
+  dependency-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run npm audit
+        id: audit
+        run: |
+          AUDIT_RESULT=$(npm audit --json || true)
+          
+          ISSUES=$(echo "$AUDIT_RESULT" | jq -r '
+            .vulnerabilities
+            | to_entries[]
+            | select(.value.severity == "high" or .value.severity == "critical")
+            | "- 패키지: \(.key)\n- 심각도: \(.value.severity | ascii_upcase)\n"
+          ')
+
+          {
+            echo "issues<<EOF"
+            echo "$ISSUES"
+            echo "EOF"
+          } >> $GITHUB_OUTPUT
+        
+        # ========================================
+        # 1. npm audit 결과를 JSON 형태로 저장한다
+        # >> 취약점이 발견되어도 워크플로우가 중단되지 않도록 || true 사용
+        # 2. vulnerabilities 객체에서 High / Critical 취약점만 추출
+        # >> Discord 보고서에 넣을 문자열 형태로 가공하여 ISSUES 변수에 저장
+        # 3. 다음 스텝(Discord Notify)에서
+        # steps.audit.outputs.issues 형태로 읽을 수 있도록
+        # issues 라는 이름의 GitHub Actions Output 등록
+        # ========================================
+      
+      - name: Discord Notify
+        if: steps.audit.outputs.issues != ''
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          CURRENT_TIME=$(TZ='Asia/Seoul' date '+%Y-%m-%d %H:%M (KST)')
+
+          curl -H "Content-Type: application/json" \
+            -d "{
+              \"content\":\"⚠️ 에이든의 의존성 경고\n\nCinetalk 프로젝트에서 보안 취약점이 발견되었습니다.\n\n${{ steps.audit.outputs.issues }}\n- 브랜치: ${{ github.ref_name }}\n- 날짜: ${CURRENT_TIME}\n\nGitHub Actions 실행 로그를 확인해주세요.\"
+            }" \
+            $DISCORD_WEBHOOK_URL
