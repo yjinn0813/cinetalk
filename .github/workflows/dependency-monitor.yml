@@ -1,8 +1,8 @@
-name: Dependency Monitor
+name: Dependency Monitor for cinetalk
 
 on:
   schedule: 
-    - cron: '0 1 * * 1' #KST 월요일 10시
+    - cron: '0 2 * * 1' #KST 월요일 11:00
   workflow_dispatch:
 
 jobs:
@@ -50,7 +50,20 @@ jobs:
         # issues 라는 이름의 GitHub Actions Output 등록
         # ========================================
       
-      - name: Discord Notify
+      - name: Discord Notify - OK
+        if: steps.audit.outputs.issues == ''
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          CURRENT_TIME=$(TZ='Asia/Seoul' date '+%Y-%m-%d %H:%M (KST)')
+
+          curl -H "Content-Type: application/json" \
+            -d "{
+              \"content\":\"✅ 에이든의 보안 점검 리포트 [성공]\n\nCinetalk 프로젝트의 보안 점검을 완료했습니다.\n현재 보안 취약점이 없습니다.\n\n- 브랜치: ${{ github.ref_name }}\n- 시간: ${CURRENT_TIME}\n\n모든 의존성은 안전한 상태입니다.\"
+            }" \
+            $DISCORD_WEBHOOK_URL
+
+      - name: Discord Notify - WARN
         if: steps.audit.outputs.issues != ''
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
@@ -59,6 +72,19 @@ jobs:
 
           curl -H "Content-Type: application/json" \
             -d "{
-              \"content\":\"⚠️ 에이든의 의존성 경고\n\nCinetalk 프로젝트에서 보안 취약점이 발견되었습니다.\n\n${{ steps.audit.outputs.issues }}\n- 브랜치: ${{ github.ref_name }}\n- 날짜: ${CURRENT_TIME}\n\nGitHub Actions 실행 로그를 확인해주세요.\"
+              \"content\":\"⚠️ 에이든의 보안 점검 리포트 [경고]\n\nCinetalk 프로젝트에서 보안 취약점이 발견되었습니다.\n\n${{ steps.audit.outputs.issues }}\n- 브랜치: ${{ github.ref_name }}\n- 시간: ${CURRENT_TIME}\n\n보안 취약점에 대한 추가 조치가 필요합니다.\"
+            }" \
+            $DISCORD_WEBHOOK_URL
+      
+      - name: Discord Notify - FAIL
+        if: failure()
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          CURRENT_TIME=$(TZ='Asia/Seoul' date '+%Y-%m-%d %H:%M (KST)')
+
+          curl -H "Content-Type: application/json" \
+            -d "{
+              \"content\":\"❌ 에이든의 보안 점검 리포트 [실패]\n\nCinetalk 프로젝트 점검 중 오류가 발생했습니다.\n\n- 브랜치: ${{ github.ref_name }}\n- 시간: ${CURRENT_TIME}\n\n점검이 정상적으로 완료되지 않았습니다.\n원인 확인이 필요합니다.\"
             }" \
             $DISCORD_WEBHOOK_URL
