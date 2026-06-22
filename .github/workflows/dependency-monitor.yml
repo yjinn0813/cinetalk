@@ -2,7 +2,7 @@ name: Dependency Monitor for cinetalk
 
 on:
   schedule: 
-    - cron: '0 2 * * 1' #KST 월요일 11:00
+    - cron: '0 20 * * 0' #KST 월요일 05:00
   workflow_dispatch:
 
 jobs:
