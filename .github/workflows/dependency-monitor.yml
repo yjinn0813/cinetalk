@@ -69,12 +69,23 @@ jobs:
           DISCORD_WEBHOOK_SECURITY: ${{ secrets.DISCORD_WEBHOOK_SECURITY }}
         run: |
           CURRENT_TIME=$(TZ='Asia/Seoul' date '+%Y-%m-%d %H:%M (KST)')
+          MESSAGE="⚠️ 오스틴의 보안 점검 리포트 [경고]
+          
+          Cinetalk 프로젝트에서 보안 취약점이 발견되었습니다.
+          
+          ${{ steps.audit.outputs.issues }}
+          - 브랜치: ${{ github.ref_name }}
+          - 시간: ${CURRENT_TIME}
+          
+          보안 취약점에 대한 추가 조치가 필요합니다.\"
 
-          curl -H "Content-Type: application/json" \
-            -d "{
-              \"content\":\"⚠️ 오스틴의 보안 점검 리포트 [경고]\n\nCinetalk 프로젝트에서 보안 취약점이 발견되었습니다.\n\n${{ steps.audit.outputs.issues }}\n- 브랜치: ${{ github.ref_name }}\n- 시간: ${CURRENT_TIME}\n\n보안 취약점에 대한 추가 조치가 필요합니다.\"
-            }" \
-            $DISCORD_WEBHOOK_SECURITY
+          jq -n \
+            --arg content "$MESSAGE" \
+            '{content: $content}' \
+          curl \ 
+            -H "Content-Type: application/json" \
+            -d @- \
+            "$DISCORD_WEBHOOK_SECURITY"
       
       - name: Discord Notify - FAIL
         if: failure()
