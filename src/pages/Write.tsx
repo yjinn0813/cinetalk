@@ -8,7 +8,10 @@ import { useUpdateReview } from '../hooks/useUpdateReview';
 import useTitle from '../hooks/useTitle';
 import Error from '../components/common/Error';
 import Loading from '../components/common/Loading';
-import { Box, TextField, Typography, Button, Snackbar, Alert, Rating } from '@mui/material';
+import RatingInput from '../components/Write/RatingInput';
+import SignalInput from '../components/Write/SignalInput';
+import PosterUploader from '../components/Write/PosterUploader';
+import { Box, TextField, Typography, Button, Snackbar, Alert } from '@mui/material';
 import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import '../styles/pages/Write.scss';
 
@@ -19,12 +22,14 @@ type newPostProps = {
   rating: number;
   signal: 'good' | 'neutral' | 'bad';
   type: 'movie' | 'drama' | 'animation';
+  poster: string;
 }
 
 // ====================
 const Write = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const defaultPosterUrl = import.meta.env.VITE_DEFAULT_POSTER_URL; // 디폴트 포스터 URL
   
   const isEdit = Boolean(id);
   const pageTitle = isEdit ? '리뷰 수정하기' : '리뷰 작성하기';
@@ -42,7 +47,8 @@ const Write = () => {
     date: '',
     rating: 0,
     signal: 'good',
-    type: 'movie'
+    type: 'movie',
+    poster: '',
   });
 
   // 수정하기 모드
@@ -60,6 +66,7 @@ const Write = () => {
       rating: post.rating,
       signal: post.signal || 'good',
       type: post.type,
+      poster: post.poster || defaultPosterUrl,
     })
   }, [post]);
 
@@ -70,14 +77,6 @@ const Write = () => {
     setForm((prev) => ({
       ...prev,
       [name]: value,
-    }));
-  };
-
-  // 별점 핸들러
-  const handleRatingChange = (_: React.SyntheticEvent, value: number | null) => {
-    setForm((prev) => ({
-      ...prev,
-      rating: value || 0,
     }));
   };
 
@@ -94,10 +93,7 @@ const Write = () => {
       updateMutate(
         {
           id,
-          data: {
-            ...form,
-            poster: 'default_poster',
-          },
+          data: { ...form, },
         },
         {
           onSuccess: (data) => {
@@ -114,12 +110,7 @@ const Write = () => {
       );
     } else {
       // 신규 작성
-      const newPost = {
-        ...form,
-        poster: 'default_poster', // 디폴트 포스터
-      };
-
-      createMutate(newPost, {
+      createMutate(form, {
         onSuccess: (data) => {
           setToastOpen(true); // 토스트 오픈
 
@@ -206,104 +197,26 @@ const Write = () => {
         </Box>
 
         {/* 평점 */}
-        <Box sx={{ mb: 3, display: 'flex', alignItems: 'center' }}>
-          <Typography sx={{ fontSize:18, mr:2, minWidth:'48px' }}>평점</Typography>
-          <Rating
-            precision={0.5}
-            value={form.rating}
-            onChange={handleRatingChange}
-            sx={{
-              color: '#1e90ff',
-              fontSize: '32px',
-            }}
-          />
-        </Box>
+        <RatingInput
+          value={form.rating}
+          onChange={(rating) =>
+            setForm((prev) => ({
+              ...prev,
+              rating,
+            }))
+          }
+        />
 
         {/* 신호등 */}
-        <Box sx={{ mb: 3, display: 'flex', alignItems: 'center' }}>
-          <Typography sx={{ fontSize:18, mr:2, minWidth:'48px' }}>신호등</Typography>
-
-          <Box sx={{ display: 'flex', gap: 1, ml:1 }}>
-            {/* 좋음 */}
-            <Box
-              onClick={() => setForm(prev => ({ ...prev, signal: 'good' }))}
-              sx={{
-                py: 1,
-                px: 2,
-                cursor: 'pointer',
-                border:'1px solid #ddd',
-                borderRadius: 2,
-                display:'flex',
-                alignItems: 'center',
-              }}
-            >
-              <Box
-                sx={{
-                  width: 20,
-                  height: 20,
-                  borderRadius: '50%',
-                  mr:1,
-                  backgroundColor:
-                    form.signal === 'good' ? '#4caf50' : '#ccc',
-                }}
-              />
-              <Typography fontSize={14}>좋음</Typography>
-            </Box>
-
-            {/* 보통 */}
-            <Box
-              onClick={() => setForm(prev => ({ ...prev, signal: 'neutral' }))}
-              sx={{
-                py: 1,
-                px: 2,
-                cursor: 'pointer',
-                border:'1px solid #ddd',
-                borderRadius: 2,
-                display:'flex',
-                alignItems: 'center',
-              }}
-            >
-              <Box
-                sx={{
-                  width: 20,
-                  height: 20,
-                  borderRadius: '50%',
-                  mr:1,
-                  backgroundColor:
-                    form.signal === 'neutral' ? '#fbc02d' : '#ccc',
-                }}
-              />
-              <Typography fontSize={14}>보통</Typography>
-            </Box>
-
-            {/* 별로 */}
-            <Box
-              onClick={() => setForm(prev => ({ ...prev, signal: 'bad' }))}
-              sx={{
-                py: 1,
-                px: 2,
-                cursor: 'pointer',
-                border:'1px solid #ddd',
-                borderRadius: 2,
-                display:'flex',
-                alignItems: 'center',
-              }}
-            >
-              <Box
-                sx={{
-                  width: 20,
-                  height: 20,
-                  borderRadius: '50%',
-                  mr:1,
-                  backgroundColor:
-                    form.signal === 'bad' ? '#f44336' : '#ccc',
-                }}
-              />
-              <Typography fontSize={14}>별로</Typography>
-            </Box>
-
-          </Box>
-        </Box>
+        <SignalInput
+          value={form.signal}
+          onChange={(signal) =>
+            setForm((prev) => ({
+              ...prev,
+              signal,
+            }))
+          }
+        />
 
         {/* 본문 */}
         <Box sx={{ mb: 3 }}>
@@ -317,6 +230,17 @@ const Write = () => {
             onChange={handleChange}
           />
         </Box>
+
+        {/* 이미지 첨부 */}
+        <PosterUploader
+          value={form.poster}
+          onChange={(poster) =>
+            setForm((prev) => ({
+              ...prev,
+              poster,
+            }))
+          }
+        />
 
         {/* 버튼 */}
         <Box sx={{

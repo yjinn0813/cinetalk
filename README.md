@@ -166,6 +166,10 @@ https://github.com/yjinn0813/cinetalk
  ┃ ┃ ┃ ┣ 📜SignalFilter.tsx
  ┃ ┃ ┃ ┣ 📜TypeFilter.tsx
  ┃ ┃ ┃ ┗ 📜WatchedPoster.tsx
+ ┃ ┃ ┣ 📂Write
+ ┃ ┃ ┃ ┣ 📜PosterUploader.tsx
+ ┃ ┃ ┃ ┣ 📜RatingInput.tsx
+ ┃ ┃ ┃ ┗ 📜SignalInput.tsx
  ┃ ┃ ┣ 📂common
  ┃ ┃ ┃ ┣ 📜Error.tsx
  ┃ ┃ ┃ ┣ 📜Footer.tsx
