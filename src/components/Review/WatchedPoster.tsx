@@ -12,6 +12,8 @@ type LibraryProps = {
 };
 
 const WatchedPoster = ({ poster, title, signal, rating, date }: LibraryProps) => {
+  const defaultPosterUrl = import.meta.env.VITE_DEFAULT_POSTER_URL; // 디폴트 포스터 URL
+  
   return (
     <Box className="w-container">
       <Box className="w-box" 
@@ -52,8 +54,8 @@ const WatchedPoster = ({ poster, title, signal, rating, date }: LibraryProps) =>
               borderRadius: '4px 0 0 4px',
             }
           }}
-          src={`/images/Review/${poster}.jpeg`}
-          alt={poster}
+          src={poster ? poster : defaultPosterUrl}
+          alt={title}
         />
 
         {/* 2.하단 영역 */}

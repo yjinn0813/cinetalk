@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { copyToClipboard } from '../../utils/clipboard';
+import type { Review } from '../../types/reviewTypes';
 import { Box, Typography, Chip, Button, Snackbar, Alert } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -10,15 +11,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-type PostProps = {
-  id?: number;
-  type: 'movie' | 'animation' | 'drama';
-  poster: string;
-  title: string;
-  date: string;
-  body: string;
-  signal: 'good' | 'neutral' | 'bad';
-  rating: number;
+type PostProps = Review & {
   onDelete: () => void;
   isDeleting?: boolean; // 삭제 중 중복 클릭 방지
 };
@@ -30,8 +23,9 @@ const ReadPosts = ({ poster, type, title, date, body, signal, rating, onDelete, 
   const [openToast, setOpenToast] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
-  const posterImage = `/images/Review/${poster}.jpeg`;
-
+  const posterImage = poster; // 업로드한 사진 DB에서 가져오기
+  const defaultPosterUrl = import.meta.env.VITE_DEFAULT_POSTER_URL; // 디폴트 포스터 URL
+  
   // types
   const typeMap = {
     movie: {
@@ -108,8 +102,8 @@ const ReadPosts = ({ poster, type, title, date, body, signal, rating, onDelete, 
         <Box sx={{ display: 'flex', gap: '24px', mb:4 }}>
           <Box
             component="img"
-            src={posterImage}
-            alt="poster"
+            src={posterImage ? posterImage : defaultPosterUrl}
+            alt={title}
             sx={{
               width: 120,
               borderRadius: 1,
