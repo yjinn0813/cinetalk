@@ -141,7 +141,8 @@ https://github.com/yjinn0813/cinetalk
  ┃ ┗ 📜userflow.png
  ┣ 📂src
  ┃ ┣ 📂api
- ┃ ┃ ┗ 📜reviews.ts
+ ┃ ┃ ┣ 📜reviews.ts
+ ┃ ┃ ┗ 📜storage.ts
  ┃ ┣ 📂assets
  ┃ ┃ ┗ 📜logo.png
  ┃ ┣ 📂components
@@ -182,7 +183,8 @@ https://github.com/yjinn0813/cinetalk
  ┃ ┃ ┣ 📜useReviewLists.ts
  ┃ ┃ ┣ 📜useSearch.ts
  ┃ ┃ ┣ 📜useTitle.ts
- ┃ ┃ ┗ 📜useUpdateReview.ts
+ ┃ ┃ ┣ 📜useUpdateReview.ts
+ ┃ ┃ ┗ 📜useUploadImg.ts
  ┃ ┣ 📂lib
  ┃ ┃ ┗ 📜supabase.ts
  ┃ ┣ 📂pages
@@ -218,6 +220,7 @@ https://github.com/yjinn0813/cinetalk
  ┃ ┣ 📂utils
  ┃ ┃ ┣ 📜auth.ts
  ┃ ┃ ┣ 📜clipboard.ts
+ ┃ ┃ ┣ 📜convertToWebp.ts
  ┃ ┃ ┗ 📜validation.ts
  ┃ ┣ 📜App.tsx
  ┃ ┣ 📜main.tsx
