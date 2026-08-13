@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { convertToWebp } from '../utils/convertToWebp';
+import { useUploadReviewImage } from '../hooks/useUploadImg';
 import { useReview } from '../hooks/useReview';
 import { useCreateReview } from '../hooks/useCreateReview';
 import { useUpdateReview } from '../hooks/useUpdateReview';
@@ -38,7 +40,9 @@ const Write = () => {
   const { data: post, isLoading } = useReview(id!);
   const { mutate: createMutate } = useCreateReview();
   const { mutate: updateMutate } = useUpdateReview();
+  const { mutateAsync: uploadImage } = useUploadReviewImage();
 
+  const [posterFile, setPosterFile] = useState<File | null>(null);
   const [toastOpen, setToastOpen] = useState(false);
   const [isErrorOpen, setIsErrorOpen] = useState(false);
   const [form, setForm] = useState<newPostProps>({
@@ -81,48 +85,72 @@ const Write = () => {
   };
 
   // 작성완료 핸들러
-  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!form.title || !form.body || !form.date || form.rating === 0){
       return;
     }
 
-    if (id){
-      // 수정하기
-      updateMutate(
-        {
-          id,
-          data: { ...form, },
-        },
-        {
+    // 이미지 첨부 여부 확인해서 CRUD 처리
+    try {
+      let submitData = { ...form }; // 제출용 데이터 복사해서 사용
+      
+      if (posterFile) {
+        // 이미지 변환 후, 변환된 파일을 스토리지에 업로드하고 링크 반환
+        const webpFile = await convertToWebp(posterFile);
+        const imageUrl = await uploadImage(webpFile); 
+        
+        // DB에 저장할 poster를 Supabase 이미지 URL로 변경
+        submitData = {
+          ...submitData,
+          poster: imageUrl,
+        }
+      } else if (!submitData.poster){
+        submitData.poster = defaultPosterUrl;
+        // TODO: 수정모드에서 이미지 삭제했을때 어떻게 처리할지?
+      }
+
+      if (id){
+        // 수정하기
+        updateMutate(
+          {
+            id,
+            data: submitData,
+          },
+          {
+            onSuccess: (data) => {
+              setToastOpen(true);
+
+              setTimeout(() => {
+                navigate(`/Review/${data.id}`);
+              }, 1200);
+            },
+            onError: () => {
+              setIsErrorOpen(true);
+            },
+          }
+        );
+      } else {
+        // 신규 작성
+        createMutate(submitData, {
           onSuccess: (data) => {
-            setToastOpen(true);
+            setToastOpen(true); // 토스트 오픈
 
             setTimeout(() => {
               navigate(`/Review/${data.id}`);
-            }, 1200);
+            }, 1200)
           },
           onError: () => {
             setIsErrorOpen(true);
-          },
-        }
-      );
-    } else {
-      // 신규 작성
-      createMutate(form, {
-        onSuccess: (data) => {
-          setToastOpen(true); // 토스트 오픈
-
-          setTimeout(() => {
-            navigate(`/Review/${data.id}`);
-          }, 1200)
-        },
-        onError: () => {
-          setIsErrorOpen(true);
-        }
-      });
-    }
+          }
+        });
+      }
+    } catch (error) {
+      console.error('이미지 업로드 실패:', error);
+      setIsErrorOpen(true);
+      return;
+    }    
   };
 
   if (isErrorOpen) {
@@ -234,12 +262,14 @@ const Write = () => {
         {/* 이미지 첨부 */}
         <PosterUploader
           value={form.poster}
-          onChange={(poster) =>
+          onChange={(poster, file) => {
             setForm((prev) => ({
               ...prev,
               poster,
-            }))
-          }
+            }));
+
+            setPosterFile(file);
+          }}
         />
 
         {/* 버튼 */}

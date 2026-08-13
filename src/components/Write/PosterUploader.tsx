@@ -5,8 +5,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
 type PosterUploaderProps = {
-  value: string;
-  onChange: (value: string) => void;
+  value: string; // 현재 선택된 이미지 미리보기용 URL
+  onChange: (value: string, file: File | null) => void;
 };
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
@@ -51,7 +51,8 @@ const PosterUploader = ({ value, onChange }: PosterUploaderProps) => {
     // 미리보기 URL 생성
     const previewUrl = URL.createObjectURL(file);
 
-    onChange(previewUrl);
+    // 미리보기 URL + 파일 객체를 부모에게 전달
+    onChange(previewUrl, file);
 
     // 같은 파일을 다시 선택할 수 있도록 초기화
     e.target.value = '';
@@ -62,7 +63,7 @@ const PosterUploader = ({ value, onChange }: PosterUploaderProps) => {
       URL.revokeObjectURL(value);
     }
 
-    onChange('');
+    onChange('', null); // 미리보기 + 실제 파일 제거
     setError('');
   };
 
