@@ -92,6 +92,12 @@ const Write = () => {
       return;
     }
 
+    // 미래 날짜 선택 방지
+    const today = new Date().toISOString().split('T')[0];
+    if (form.date > today) {
+      return;
+    }
+
     // 이미지 첨부 여부 확인해서 CRUD 처리
     try {
       let submitData = { ...form }; // 제출용 데이터 복사해서 사용
@@ -218,9 +224,16 @@ const Write = () => {
             type="date"
             name="date"
             label="관람일"
-            InputLabelProps={{ shrink: true }}
             value={form.date}
             onChange={handleChange}
+            slotProps={{
+              inputLabel: {
+                shrink: true,
+              },
+              htmlInput: {
+                max: new Date().toISOString().split('T')[0],
+              },
+            }}
           />
         </Box>
 
