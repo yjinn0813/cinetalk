@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useReview } from '../hooks/useReview';
 import { useDeleteReview } from '../hooks/useDeleteReview';
+import { useDeleteReviewImage } from '../hooks/useDeleteImg';
 import useTitle from '../hooks/useTitle';
 import ReadPosts from '../components/Review/ReadPosts';
 import Loading from '../components/common/Loading';
@@ -19,10 +20,12 @@ const Review = () => {
   const [isErrorOpen, setIsErrorOpen] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
+  const defaultPosterUrl = import.meta.env.VITE_DEFAULT_POSTER_URL; // 디폴트 포스터 URL
 
   // React Query - fetch
   const { data: post, isLoading, isError } = useReview(id!);
-  const { mutate: deleteMutate, isPending } = useDeleteReview();
+  const { mutateAsync: deleteMutate, isPending } = useDeleteReview();
+  const { mutateAsync: deleteImage } = useDeleteReviewImage();
   if (isLoading) return <Loading />;
   if (isError || isErrorOpen) return <Error />;
 
@@ -35,26 +38,37 @@ const Review = () => {
   }
 
   // 삭제 핸들러
-  const handleDelete = () => {
+  const handleDelete = async() => {
+    const posterData = post.poster;
     if (!id) return;
 
     // 삭제 전 확인
     if (!window.confirm('정말 삭제하시겠습니까?')) return;
 
-    deleteMutate(id, {
-      onSuccess: () => {
-        setOpenToast(true);
+    try {
+      await deleteMutate(id);
 
-        setTimeout(() => {
-          navigate('/watched');
-        }, 1500);
-      },
-      onError: () => {
-        setIsErrorOpen(true);
+      // DB 삭제 성공 후 Storage 이미지 삭제
+      if (posterData && posterData !== defaultPosterUrl) {
+        try {
+          await deleteImage(posterData);
+        } catch (error) {
+          console.error('이미지 삭제 실패:', error);
+        }
       }
-    });
+
+      setOpenToast(true);
+
+      setTimeout(() => {
+        navigate('/watched');
+      }, 1500);
+    } catch (error) {
+      console.error('리뷰 삭제 실패:', error);
+      setIsErrorOpen(true);
+    }
   };
 
+  // ====================
   return (
     <Box className="r-wrap" sx={{ 
       maxWidth: 900, mx: 'auto', px: 2,
