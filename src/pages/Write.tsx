@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { convertToWebp } from '../utils/convertToWebp';
 import { useUploadReviewImage } from '../hooks/useUploadImg';
+import { useDeleteReviewImage } from '../hooks/useDeleteImg';
 import { useReview } from '../hooks/useReview';
 import { useCreateReview } from '../hooks/useCreateReview';
 import { useUpdateReview } from '../hooks/useUpdateReview';
@@ -38,9 +39,10 @@ const Write = () => {
   useTitle(isEdit ? 'Edit' : 'Write');
 
   const { data: post, isLoading } = useReview(id!);
-  const { mutate: createMutate } = useCreateReview();
-  const { mutate: updateMutate } = useUpdateReview();
+  const { mutateAsync: createMutate } = useCreateReview();
+  const { mutateAsync: updateMutate } = useUpdateReview();
   const { mutateAsync: uploadImage } = useUploadReviewImage();
+  const { mutateAsync: deleteImage } = useDeleteReviewImage();
 
   const [posterFile, setPosterFile] = useState<File | null>(null);
   const [toastOpen, setToastOpen] = useState(false);
@@ -84,7 +86,7 @@ const Write = () => {
     }));
   };
 
-  // 작성완료 핸들러
+  /* 작성완료 핸들러 */
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -98,59 +100,63 @@ const Write = () => {
       return;
     }
 
-    // 이미지 첨부 여부 확인해서 CRUD 처리
+    /* 이미지 첨부 여부 확인해서 CRUD 처리 */
     try {
       let submitData = { ...form }; // 제출용 데이터 복사해서 사용
-      
-      if (posterFile) {
-        // 이미지 변환 후, 변환된 파일을 스토리지에 업로드하고 링크 반환
+
+      /* 1) 이미지 신규 등록 또는 기존 이미지 교체 */
+      if (posterFile) {  
+        // webp로 변환 후, 변환된 파일을 스토리지에 업로드하고 링크 반환
         const webpFile = await convertToWebp(posterFile);
         const imageUrl = await uploadImage(webpFile); 
-        
+
         // DB에 저장할 poster를 Supabase 이미지 URL로 변경
         submitData = {
           ...submitData,
           poster: imageUrl,
         }
-      } else if (!submitData.poster){
+      } else if (!submitData.poster) {
+        /* 2) 이미지 제거 또는 처음부터 이미지 없음 */
         submitData.poster = defaultPosterUrl;
-        // TODO: 수정모드에서 이미지 삭제했을때 어떻게 처리할지?
       }
 
-      if (id){
-        // 수정하기
-        updateMutate(
-          {
-            id,
-            data: submitData,
-          },
-          {
-            onSuccess: (data) => {
-              setToastOpen(true);
-
-              setTimeout(() => {
-                navigate(`/Review/${data.id}`);
-              }, 1200);
-            },
-            onError: () => {
-              setIsErrorOpen(true);
-            },
-          }
-        );
-      } else {
-        // 신규 작성
-        createMutate(submitData, {
-          onSuccess: (data) => {
-            setToastOpen(true); // 토스트 오픈
-
-            setTimeout(() => {
-              navigate(`/Review/${data.id}`);
-            }, 1200)
-          },
-          onError: () => {
-            setIsErrorOpen(true);
-          }
+      if (id) {
+        /* 수정 모드 */
+        const oldPosterUrl = post.poster;
+        
+        const data = await updateMutate({
+          id,
+          data: submitData,
         });
+
+        // DB 수정 성공 후 기존 이미지 삭제
+        if (
+          oldPosterUrl &&
+          oldPosterUrl !== defaultPosterUrl &&
+          oldPosterUrl !== submitData.poster
+        ) {
+          try {
+            await deleteImage(oldPosterUrl);
+          } catch (error) {
+            // DB 수정은 성공했으므로 Storage 삭제 실패는 별도로 처리
+            console.error('기존 이미지 삭제 실패:', error);
+          }
+        }
+
+        setToastOpen(true);
+
+        setTimeout(() => {
+          navigate(`/Review/${data.id}`);
+        }, 1200);
+      } else {
+        /* 신규 작성 모드 */
+        const data = await createMutate(submitData);
+
+        setToastOpen(true);
+
+        setTimeout(() => {
+          navigate(`/Review/${data.id}`);
+        }, 1200);
       }
     } catch (error) {
       console.error('이미지 업로드 실패:', error);
