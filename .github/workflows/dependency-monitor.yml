@@ -82,7 +82,7 @@ jobs:
           jq -n \
             --arg content "$MESSAGE" \
             '{content: $content}' \
-          curl \ 
+          | curl \
             -H "Content-Type: application/json" \
             -d @- \
             "$DISCORD_WEBHOOK_SECURITY"
