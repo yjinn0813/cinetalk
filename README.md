@@ -75,7 +75,7 @@ https://github.com/yjinn0813/cinetalk
 ### Backend (BaaS)
 | 기술 | 사용 목적 |
 | ----- | ----- |
-| ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white) | 인증(Auth), 데이터베이스(PostgreSQL), API 자동 생성 기반 CRUD 기능 구현 |
+| ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white) | 데이터베이스(PostgreSQL), API 자동 생성 기반 CRUD 기능 구현 |
 
 ### Tooling
 | 기술 | 사용 목적 |
@@ -111,17 +111,13 @@ https://github.com/yjinn0813/cinetalk
 
 <br>
 
-## [6. Trouble-shooting History (click to check)](https://github.com/yjinn0813/cinetalk/wiki/%F0%9F%9A%80-Trouble%E2%80%90shooting-History)
-
-<br>
-
-## 7. User Flow
+## 6. User Flow
 
 <p align=center><img src="https://github.com/yjinn0813/cinetalk/blob/main/public/userflow.png" width="800"></p>
 
 <br>
 
-## 8. 디렉토리 구조
+## 7. 디렉토리 구조
 
 ```bash
 📦cinetalk
