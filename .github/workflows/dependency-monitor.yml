@@ -32,6 +32,13 @@ jobs:
             | to_entries[]
             | select(.value.severity == "high" or .value.severity == "critical")
             | "- 패키지: \(.key)\n- 심각도: \(.value.severity | ascii_upcase)\n"
+              + (
+                  [.value.via[]
+                  | select(type == "object" and has("title"))
+                  | "  - 취약점: " + .title]
+                  | join("\n")
+                )
+              + "\n"
           ')
 
           {
