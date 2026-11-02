@@ -75,18 +75,22 @@ jobs:
         if: steps.audit.outputs.issues != '' && success()
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          ISSUES: ${{ steps.audit.outputs.issues }}
         run: |
           CURRENT_TIME=$(TZ='Asia/Seoul' date '+%Y-%m-%d %H:%M (KST)')
-          MESSAGE="⚠️ 오스틴의 보안 점검 리포트 [경고]
+          MESSAGE=$(cat << EOF
+          ⚠️ 오스틴의 보안 점검 리포트 [경고]
           
           Cinetalk 프로젝트에서 보안 취약점이 발견되었습니다.
           
-          ${{ steps.audit.outputs.issues }}
+          ${ISSUES}
           - 브랜치: ${{ github.ref_name }}
           - 시간: ${CURRENT_TIME}
           
-          보안 취약점에 대한 추가 조치가 필요합니다."
-
+          보안 취약점에 대한 추가 조치가 필요합니다.
+          EOF
+          )
+          
           jq -n \
             --arg text "$MESSAGE" \
             '{text: $text}' \
