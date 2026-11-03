@@ -32,11 +32,11 @@ const renderRankIcon = (rankChange: RankChangeType, rankDiff: number) => {
         <Box component="div" 
           sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}
         >
-          <ArrowDropUpIcon sx={{ fontSize: 32, fontWeight: 700 }} />
+          <ArrowDropUpIcon sx={{ fontSize: 28, fontWeight: 600 }} />
           <Typography component="div" 
             fontWeight="bold"
             sx={{
-              fontSize: 20,
+              fontSize: 18,
 
               '@media (max-width:420px)': {
                 fontSize: 16,
@@ -50,11 +50,11 @@ const renderRankIcon = (rankChange: RankChangeType, rankDiff: number) => {
         <Box component="div"
           sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}
         >
-          <ArrowDropDownIcon sx={{ fontSize: 32, fontWeight: 700 }} />
+          <ArrowDropDownIcon sx={{ fontSize: 28, fontWeight: 600 }} />
           <Typography component="div" 
             fontWeight="bold"
             sx={{
-              fontSize: 20,
+              fontSize: 18,
 
               '@media (max-width:420px)': {
                 fontSize: 16,
@@ -66,8 +66,8 @@ const renderRankIcon = (rankChange: RankChangeType, rankDiff: number) => {
     case 'equal':
       return <RemoveRoundedIcon 
         sx={{ 
-          fontSize: 40,
-          fontWeight: 900,
+          fontSize: 36,
+          fontWeight: 600,
           
           '@media (max-width:420px)': {
             fontSize: 32
@@ -77,8 +77,8 @@ const renderRankIcon = (rankChange: RankChangeType, rankDiff: number) => {
         case 'new':
           return <FiberNewOutlinedIcon 
           sx={{
-            fontSize: 40,
-            fontWeight: 700,
+            fontSize: 36,
+            fontWeight: 600,
 
             '@media (max-width:420px)': {
               fontSize: 32
@@ -95,7 +95,7 @@ const RankBox =({ rank, poster, name, rankChange, rankDiff }: RankProps) => {
         display: 'flex',
         alignItems: 'center',
         width: 'auto',
-        height: 110,
+        height: 80,
         border: '1px solid #1e90ff',
         borderRadius: 2,
         boxShadow: 3,
@@ -110,7 +110,7 @@ const RankBox =({ rank, poster, name, rankChange, rankDiff }: RankProps) => {
         },
 
         '@media (max-width:420px)': {
-          padding: '0 0 0 12px',
+          padding: '4px 4px 4px 12px',
         }
       }}
     >
@@ -121,12 +121,12 @@ const RankBox =({ rank, poster, name, rankChange, rankDiff }: RankProps) => {
         image={`images/Main/rank/${poster}`}
         alt={poster}
         sx={{
-          width: 80,
+          width: 56,
           height: '100%',
           objectFit: 'cover',
           
           '@media (max-width:420px)': {
-            width: 50,
+            width: 48,
             height: 'auto',
           }
         }}
@@ -146,8 +146,8 @@ const RankBox =({ rank, poster, name, rankChange, rankDiff }: RankProps) => {
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography variant="subtitle1" fontWeight="bold" 
             sx={{
-              fontSize: 20,
-              fontWeight: 700,
+              fontSize: 18,
+              fontWeight: 600,
               margin: '0 12px',
 
               '@media (max-width:420px)': {
@@ -160,7 +160,7 @@ const RankBox =({ rank, poster, name, rankChange, rankDiff }: RankProps) => {
           <Typography variant="body1"
             className='rank-name'
             sx={{
-              fontSize: 20,
+              fontSize: 18,
               margin: '0 8px',
 
               '@media (max-width:420px)': {

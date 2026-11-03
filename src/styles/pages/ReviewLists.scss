@@ -19,8 +19,8 @@
   gap: 14px; // 카드 간 간격 조절
   margin: 28px 0 0 0;
 
-  @media (max-width: 768px) {
-    display: block;
+  @media (max-width: 640px) {
+    justify-content: center;
   }
 }
 
@@ -30,14 +30,8 @@
   max-width: calc(33.33% - 14px);
   /* 최대 너비 설정 */
 
-  @media (max-width: 992px) {
-    /* 992 이하일때 2개씩 보이도록 설정 */
-    flex: 0 1 calc(50% - 14px);
-    max-width: calc(50% - 14px);
-  }
-
-  @media (max-width: 768px) {
-    /* 768 이하일때 1개씩 보이도록 설정 */
+  @media (max-width: 640px) {
+    /* 640 이하일때 1개씩 보이도록 설정 */
     flex: 0 1 calc(100% - 14px);
     max-width: calc(100% - 14px);
   }

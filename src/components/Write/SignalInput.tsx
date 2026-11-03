@@ -28,6 +28,12 @@ const SignalInput = ({ value, onChange }: SignalInputProps) => {
             borderRadius: 2,
             display: 'flex',
             alignItems: 'center',
+
+            '@media (max-width:480px)': {
+              flexDirection: 'column',
+              px: 2,
+              py: 1,
+            }
           }}
         >
           <Box
@@ -37,6 +43,11 @@ const SignalInput = ({ value, onChange }: SignalInputProps) => {
               borderRadius: '50%',
               mr: 1,
               backgroundColor: value === 'good' ? '#4caf50' : '#ccc',
+
+              '@media (max-width:480px)': {
+                mr: 0,
+                mb: 0.5,
+              }
             }}
           />
           <Typography fontSize={14}>좋음</Typography>
@@ -53,6 +64,12 @@ const SignalInput = ({ value, onChange }: SignalInputProps) => {
             borderRadius: 2,
             display: 'flex',
             alignItems: 'center',
+
+            '@media (max-width:480px)': {
+              flexDirection: 'column',
+              px: 2,
+              py: 1,
+            }
           }}
         >
           <Box
@@ -62,6 +79,11 @@ const SignalInput = ({ value, onChange }: SignalInputProps) => {
               borderRadius: '50%',
               mr: 1,
               backgroundColor: value === 'neutral' ? '#fbc02d' : '#ccc',
+
+              '@media (max-width:480px)': {
+                mr: 0,
+                mb: 0.5,
+              }
             }}
           />
           <Typography fontSize={14}>보통</Typography>
@@ -78,6 +100,12 @@ const SignalInput = ({ value, onChange }: SignalInputProps) => {
             borderRadius: 2,
             display: 'flex',
             alignItems: 'center',
+
+            '@media (max-width:480px)': {
+              flexDirection: 'column',
+              px: 2,
+              py: 1,
+            }
           }}
         >
           <Box
@@ -87,6 +115,11 @@ const SignalInput = ({ value, onChange }: SignalInputProps) => {
               borderRadius: '50%',
               mr: 1,
               backgroundColor: value === 'bad' ? '#f44336' : '#ccc',
+
+              '@media (max-width:480px)': {
+                mr: 0,
+                mb: 0.5,
+              }
             }}
           />
           <Typography fontSize={14}>별로</Typography>

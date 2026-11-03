@@ -71,7 +71,7 @@ const Review = () => {
   // ====================
   return (
     <Box className="r-wrap" sx={{ 
-      maxWidth: 900, mx: 'auto', px: 2,
+      maxWidth: 660, mx: 'auto', px: 2,
     }}>
       
       {/* 헤더 */}
