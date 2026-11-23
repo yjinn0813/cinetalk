@@ -57,7 +57,7 @@ const Main = () => {
           modules={[Pagination]}
           breakpoints={{
             0: {
-              slidesPerView: 1.3,
+              slidesPerView: 1.5,
               spaceBetween: 10,
             },
             480: {
@@ -69,16 +69,8 @@ const Main = () => {
               spaceBetween: 10,
             },
             768: {
-              slidesPerView: 2.5,
-              spaceBetween: 15,
-            },
-            992: {
-              slidesPerView: 3.2,
+              slidesPerView: 2.8,
               spaceBetween: 20,
-            },
-            1200: {
-              slidesPerView: 3.5,
-              spaceBetween: 25,
             },
           }}
           className="mySwiper"
@@ -105,23 +97,15 @@ const Main = () => {
           modules={[Pagination]}
           breakpoints={{
             0: {
-              slidesPerView: 1.2,
+              slidesPerView: 1.3,
               spaceBetween: 10,
             },
             576: {
-              slidesPerView: 2.2,
+              slidesPerView: 1.6,
               spaceBetween: 10,
             },
             768: {
-              slidesPerView: 2.5,
-              spaceBetween: 15,
-            },
-            992: {
-              slidesPerView: 2.8,
-              spaceBetween: 20,
-            },
-            1200: {
-              slidesPerView: 2.8,
+              slidesPerView: 2.2,
               spaceBetween: 25,
             },
           }}

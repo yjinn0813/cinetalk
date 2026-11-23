@@ -47,7 +47,7 @@ const ReviewBox = ({ movieName, trafficLight, poster, author }: ReviewProps) => 
           pb: '16px !important'
         }}
       >
-        <Typography variant="h6" sx={{ fontSize:'18px' }}>
+        <Typography variant="h6" sx={{ fontSize:'17px' }}>
           {movieName}
         </Typography>
 

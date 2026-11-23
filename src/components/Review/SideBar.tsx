@@ -29,6 +29,18 @@ const SideBar = ({ open, onClose, onReset,
       anchor="left"
       open={open}
       onClose={onClose}
+      ModalProps={{
+        container: document.querySelector('.app-container'), // 모달 범위를 app-container 내부로 제한
+        style: { position: 'absolute' }
+      }}
+      slotProps={{
+        paper: {
+          style: {
+            position: 'absolute', // app-container 기준 absolute 설정
+            height: '100%',
+          }
+        }
+      }}
     >
       <Box sx={{
         p: '24px 16px 24px 24px',

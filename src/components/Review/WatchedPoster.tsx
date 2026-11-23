@@ -18,14 +18,14 @@ const WatchedPoster = ({ poster, title, signal, rating, date }: LibraryProps) =>
     <Box className="w-container">
       <Box className="w-box" 
         sx={{ 
-          minHeight: 506,
+          minHeight: 360,
           border: '1px solid #ddd;',
           borderRadius: 2,
           m: '16px 0',
           display: 'flex',
           flexDirection: 'column',
 
-          '@media (max-width:768px)': {
+          '@media (max-width:640px)': {
             width: '100%',
             flexDirection: 'row',
             alignItems: 'center',
@@ -39,15 +39,15 @@ const WatchedPoster = ({ poster, title, signal, rating, date }: LibraryProps) =>
         <Box
           component="img"
           sx={{
-            width:280,
-            minHeight: 410,
-            maxHeight: 410,
+            width:192,
+            minHeight: 280,
+            maxHeight: 280,
             objectFit: 'cover',
             display: 'flex',
             justifyContent: 'center',
             borderRadius: '8px 8px 0 0',
 
-            '@media (max-width:768px)': {
+            '@media (max-width:640px)': {
               width: 96,
               minHeight: 140,
               maxHeight: 140,
@@ -67,14 +67,14 @@ const WatchedPoster = ({ poster, title, signal, rating, date }: LibraryProps) =>
           px:2,
           my:2,
 
-          '@media (max-width:768px)': {
+          '@media (max-width:640px)': {
             width: '100%',
           }
         }}>
           <Typography
             sx={{
               fontWeight: 600,
-              fontSize: 20,
+              fontSize: 18,
             }}
           >
             {title}
@@ -86,13 +86,13 @@ const WatchedPoster = ({ poster, title, signal, rating, date }: LibraryProps) =>
             display: 'flex',
             justifyContent: 'space-between',
 
-            '@media (max-width:768px)': {
+            '@media (max-width:640px)': {
               flexDirection: 'column',
             }
           }}>
             {/* 관람일자 */}
             <Typography sx={{
-              fontSize: 15,
+              fontSize: 14,
               color: '#6b6b6b'
             }}>{date}</Typography>
 
@@ -112,7 +112,7 @@ const WatchedPoster = ({ poster, title, signal, rating, date }: LibraryProps) =>
               />
 
               <Typography sx={{
-                fontSize: 15,
+                fontSize: 14,
                 fontWeight: 600,
                 color: '#6b6b6b'
               }}>{rating.toFixed(1)}</Typography>
